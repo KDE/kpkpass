@@ -48,3 +48,4 @@ install(EXPORT KPkPassTargets
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         FILE KPkPassTargets.cmake
 )
+install(FILES org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_CONFDIR})
