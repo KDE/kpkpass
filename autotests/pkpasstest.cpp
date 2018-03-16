@@ -27,10 +27,10 @@
 class PkPassTest : public QObject
 {
     Q_OBJECT
-private slots:
+private Q_SLOTS:
     void initTestCase()
     {
-        QLocale::setDefault(QLocale("de_DE"));
+        QLocale::setDefault(QLocale(QStringLiteral("de_DE")));
     }
 
     void testBoardingPass()
