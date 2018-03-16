@@ -20,6 +20,7 @@ set_target_properties(KPkPass PROPERTIES
     SOVERSION ${ITINERARY_SOVERSION}
     EXPORT_NAME KPkPass
 )
+target_include_directories(KPkPass INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}>")
 target_link_libraries(KPkPass
     PUBLIC
         Qt5::Gui
@@ -34,7 +35,6 @@ ecm_generate_headers(KPkPass_HEADERS
         Field
         Location
         Pass
-    PREFIX KPkPass
     REQUIRED_HEADERS KPkPass_HEADERS
 )
 
