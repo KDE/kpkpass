@@ -1,0 +1,4 @@
+# KPkPass
+
+Library to deal with Apple Wallet pass files.
+
