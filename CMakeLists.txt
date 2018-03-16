@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(itinerary VERSION 0.0.1)
+project(KPkPass VERSION 0.0.1)
 
 find_package(ECM 5.38 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_SOURCE_DIR}/cmake)
@@ -15,8 +15,8 @@ include(KDECMakeSettings)
 include(GenerateExportHeader)
 
 set(CMAKE_AUTOMOC ON)
-ecm_setup_version(PROJECT VARIABLE_PREFIX ITINERARY
-    VERSION_HEADER itinerary_version.h
+ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
+    VERSION_HEADER kpkpass_version.h
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPkPassConfigVersion.cmake"
 )
 

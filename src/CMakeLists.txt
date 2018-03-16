@@ -14,8 +14,8 @@ ecm_qt_declare_logging_category(pkpass_srcs
 add_library(KPkPass SHARED ${pkpass_srcs})
 generate_export_header(KPkPass BASE_NAME KPkPass)
 set_target_properties(KPkPass PROPERTIES
-    VERSION ${ITINERARY_VERSION_STRING}
-    SOVERSION ${ITINERARY_SOVERSION}
+    VERSION ${KPKPASS_VERSION_STRING}
+    SOVERSION ${KPKPASS_SOVERSION}
     EXPORT_NAME KPkPass
 )
 target_include_directories(KPkPass INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}>")
