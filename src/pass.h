@@ -72,6 +72,8 @@ class KPKPASS_EXPORT Pass : public QObject
     Q_PROPERTY(QVariantList headerFields READ headerFieldsVariant CONSTANT)
     Q_PROPERTY(QVariantList primaryFields READ primaryFieldsVariant CONSTANT)
     Q_PROPERTY(QVariantList secondaryFields READ secondaryFieldsVariant CONSTANT)
+    Q_PROPERTY(QVariantList locations READ locationsVariant CONSTANT)
+    Q_PROPERTY(QVariantMap field READ fieldsVariantMap CONSTANT)
 
 public:
     virtual ~Pass();
@@ -163,6 +165,8 @@ private:
     QVariantList primaryFieldsVariant() const;
     QVariantList secondaryFieldsVariant() const;
     QVariantList barcodesVariant() const;
+    QVariantList locationsVariant() const;
+    QVariantMap fieldsVariantMap() const;
 };
 
 }

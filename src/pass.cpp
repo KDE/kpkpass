@@ -522,4 +522,17 @@ QVariantList Pass::barcodesVariant() const
     return toVariantList(barcodes());
 }
 
+QVariantList Pass::locationsVariant() const
+{
+    return toVariantList(locations());
+}
+
+QVariantMap Pass::fieldsVariantMap() const
+{
+    QVariantMap m;
+    const auto elems = fields();
+    std::for_each(elems.begin(), elems.end(), [&m](const Field &f) { m.insert(f.key(), QVariant::fromValue(f)); });
+    return m;
+}
+
 #include "moc_pass.cpp"
