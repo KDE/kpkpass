@@ -23,17 +23,17 @@
 #include "kpkpass_export.h"
 #include "field.h"
 
-#include <QColor>
-#include <QDateTime>
 #include <QObject>
-#include <QVariant>
 #include <QVector>
 
 #include <memory>
 
 class QByteArray;
+class QColor;
+class QDateTime;
 class QString;
 class QUrl;
+class QVariant;
 
 namespace KPkPass {
 

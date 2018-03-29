@@ -521,3 +521,5 @@ QVariantList Pass::barcodesVariant() const
 {
     return toVariantList(barcodes());
 }
+
+#include "moc_pass.cpp"

@@ -105,3 +105,5 @@ Qt::Alignment Field::textAlignment() const
     }
     return QGuiApplication::layoutDirection() == Qt::LeftToRight ? Qt::AlignLeft : Qt::AlignRight;
 }
+
+#include "moc_field.cpp"
