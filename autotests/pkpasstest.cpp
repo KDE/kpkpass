@@ -20,7 +20,7 @@
 #include <location.h>
 
 #include <QLocale>
-#include <QtTest/qtest.h>
+#include <QTest>
 
 #include <cmath>
 
@@ -35,7 +35,8 @@ private Q_SLOTS:
 
     void testBoardingPass()
     {
-        std::unique_ptr<KPkPass::Pass> pass(KPkPass::Pass::fromFile(QLatin1String(SOURCE_DIR "/data/boardingpass-v1.pkpass")));
+        std::unique_ptr<KPkPass::Pass> pass(
+            KPkPass::Pass::fromFile(QLatin1String(SOURCE_DIR "/data/boardingpass-v1.pkpass")));
         QVERIFY(pass);
 
         QCOMPARE(pass->type(), KPkPass::Pass::BoardingPass);
@@ -55,7 +56,7 @@ private Q_SLOTS:
         QCOMPARE(headers.size(), 2);
         auto field = headers.at(0);
         QCOMPARE(field.label(), QLatin1String("Sitzplatz"));
-        QCOMPARE(field.value().toString(), QVariant(QLatin1String("10E")));
+        QCOMPARE(field.value().toString(), QLatin1String("10E"));
         QCOMPARE(field.valueDisplayString(), QLatin1String("10E"));
         QCOMPARE(field.key(), QLatin1String("seat"));
         QCOMPARE(field.changeMessage(), QStringLiteral("Sitzplatznummer geändert in 10E"));
