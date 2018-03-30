@@ -55,14 +55,14 @@ private Q_SLOTS:
         QCOMPARE(headers.size(), 2);
         auto field = headers.at(0);
         QCOMPARE(field.label(), QLatin1String("Sitzplatz"));
-        QCOMPARE(field.value(), QVariant(QLatin1String("10E")));
+        QCOMPARE(field.value().toString(), QVariant(QLatin1String("10E")));
         QCOMPARE(field.valueDisplayString(), QLatin1String("10E"));
         QCOMPARE(field.key(), QLatin1String("seat"));
         QCOMPARE(field.changeMessage(), QStringLiteral("Sitzplatznummer geändert in 10E"));
 
         field = pass->field(QLatin1String("boarding"));
         QCOMPARE(field.key(), QLatin1String("boarding"));
-        QCOMPARE(field.value(), QLatin1String("20:25"));
+        QCOMPARE(field.value().toString(), QLatin1String("20:25"));
         QCOMPARE(field.textAlignment(), Qt::AlignLeft);
 
         auto boardingPass = dynamic_cast<KPkPass::BoardingPass*>(pass.get());
