@@ -22,7 +22,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
 
 find_package(Qt5 REQUIRED COMPONENTS Test Gui)
 find_package(KF5 REQUIRED COMPONENTS Archive)
-find_package(SharedMimeInfo 1.0 REQUIRED)
+find_package(SharedMimeInfo 1.3 REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(autotests)
