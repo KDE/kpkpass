@@ -1,3 +1,4 @@
+set(KDE_INSTALL_INCLUDEDIR_PIM ${KDE_INSTALL_INCLUDEDIR}/KPim)
 set(pkpass_srcs
     barcode.cpp
     boardingpass.cpp
@@ -11,15 +12,16 @@ ecm_qt_declare_logging_category(pkpass_srcs
     CATEGORY_NAME org.kde.pkpass
 )
 
-add_library(KPkPass SHARED ${pkpass_srcs})
-generate_export_header(KPkPass BASE_NAME KPkPass)
-set_target_properties(KPkPass PROPERTIES
+add_library(KPimPkPass SHARED ${pkpass_srcs})
+add_library(KPim::PkPass ALIAS KPimPkPass)
+generate_export_header(KPimPkPass BASE_NAME KPkPass)
+set_target_properties(KPimPkPass PROPERTIES
     VERSION ${KPKPASS_VERSION_STRING}
     SOVERSION ${KPKPASS_SOVERSION}
-    EXPORT_NAME KPkPass
+    EXPORT_NAME PkPass
 )
-target_include_directories(KPkPass INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}>")
-target_link_libraries(KPkPass
+target_include_directories(KPimPkPass INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_PIM}>")
+target_link_libraries(KPimPkPass
     PUBLIC
         Qt5::Gui
     PRIVATE
@@ -36,11 +38,11 @@ ecm_generate_headers(KPkPass_HEADERS
     REQUIRED_HEADERS KPkPass_HEADERS
 )
 
-install(TARGETS KPkPass EXPORT KPkPassTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPimPkPass EXPORT KPimPkPassTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
     ${KPkPass_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/kpkpass_export.h
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KPkPass
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_PIM}/KPkPass
 )
 
 if (NOT ANDROID)

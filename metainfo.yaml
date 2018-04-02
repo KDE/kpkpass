@@ -12,9 +12,9 @@ portingAid: false
 deprecated: false
 release: true
 libraries:
- - qmake: KPkPass
-   cmake: KPkPass
-cmakename: KPkPass
+ - qmake: KPimPkPass
+   cmake: "KPim::PkPass"
+cmakename: KPimPkPass
 
 public_lib: true
 group: kdepim

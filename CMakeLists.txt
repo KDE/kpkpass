@@ -18,7 +18,7 @@ include(GenerateExportHeader)
 set(CMAKE_AUTOMOC ON)
 ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
     VERSION_HEADER kpkpass_version.h
-    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPkPassConfigVersion.cmake"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPimPkPassConfigVersion.cmake"
 )
 
 find_package(Qt5 REQUIRED COMPONENTS Test Gui)
@@ -31,22 +31,23 @@ add_subdirectory(autotests)
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KPkPass")
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KPimPkPass")
 
 configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/KPkPassConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/KPkPassConfig.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/KPimPkPassConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/KPimPkPassConfig.cmake"
     INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
 )
 
 install(FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/KPkPassConfig.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/KPkPassConfigVersion.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/KPimPkPassConfig.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/KPimPkPassConfigVersion.cmake"
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel)
 
-install(EXPORT KPkPassTargets
+install(EXPORT KPimPkPassTargets
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        FILE KPkPassTargets.cmake
+        FILE KPimPkPassTargets.cmake
+        NAMESPACE KPim::
 )
 install(FILES org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_CONFDIR})
