@@ -15,7 +15,6 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(GenerateExportHeader)
 
-set(CMAKE_AUTOMOC ON)
 ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
     VERSION_HEADER kpkpass_version.h
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPimPkPassConfigVersion.cmake"
