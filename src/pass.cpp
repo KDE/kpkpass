@@ -447,7 +447,7 @@ Field Pass::field(const QString& key) const
 {
     for (unsigned int i = 0; i < fieldNameCount; ++i) {
         const auto fs = d->fields(QLatin1String(fieldNames[i]), this);
-        for (const auto f : fs) {
+        for (const auto &f : fs) {
             if (f.key() == key) {
                 return f;
             }
