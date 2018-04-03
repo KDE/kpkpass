@@ -208,7 +208,7 @@ Pass *PassPrivate::fromData(std::unique_ptr<QIODevice> device, QObject *parent)
     int passTypeIdx = -1;
     for (unsigned int i = 0; i < passTypesCount; ++i) {
         if (passObj.contains(QLatin1String(passTypes[i]))) {
-            passTypeIdx = i;
+            passTypeIdx = static_cast<int>(i);
             break;
         }
     }
