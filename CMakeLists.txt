@@ -25,6 +25,12 @@ find_package(Qt5 REQUIRED COMPONENTS Test Gui)
 find_package(KF5 REQUIRED COMPONENTS Archive)
 find_package(SharedMimeInfo 1.3 REQUIRED)
 
+add_definitions("-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII")
+add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+
 add_subdirectory(src)
 add_subdirectory(autotests)
 
