@@ -45,13 +45,13 @@ public:
     ~Location();
 
     /** Altitude in meters, NaN if not set. */
-    double altitude() const;
+    Q_REQUIRED_RESULT double altitude() const;
     /** Latitude in degree. */
-    double latitude() const;
+    Q_REQUIRED_RESULT double latitude() const;
     /** Longitude in degree. */
-    double longitude() const;
+    Q_REQUIRED_RESULT double longitude() const;
     /** Text to display when location is reached. */
-    QString relevantText() const;
+    Q_REQUIRED_RESULT QString relevantText() const;
 private:
     friend class Pass;
     explicit Location(const QJsonObject &obj);

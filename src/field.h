@@ -56,25 +56,25 @@ public:
     Field& operator=(const Field&);
 
     /** Field key, unique in the pass but not meant for display. */
-    QString key() const;
+    Q_REQUIRED_RESULT QString key() const;
     /** Localized label for display describing this field. */
-    QString label() const;
+    Q_REQUIRED_RESULT QString label() const;
 
     /** Value of this field.
      *  This can either be a localized string (most common), a date/time value or a number.
      *  Use this for data extraction, prefer valueDisplayString() for displaying data.
      */
-    QVariant value() const;
+    Q_REQUIRED_RESULT QVariant value() const;
     /** Value of this field, as a localized string for display.
      *  Use this rather than value() for display.
      */
-    QString valueDisplayString() const;
+    Q_REQUIRED_RESULT QString valueDisplayString() const;
 
     /** The localized change message for this value. */
-    QString changeMessage() const;
+    Q_REQUIRED_RESULT QString changeMessage() const;
 
     /** Text alignment. */
-    Qt::Alignment textAlignment() const;
+    Q_REQUIRED_RESULT Qt::Alignment textAlignment() const;
 
 private:
     friend class PassPrivate;

@@ -87,33 +87,33 @@ public:
         StoreCard
     };
     Q_ENUM(Type)
-    Type type() const;
+    Q_REQUIRED_RESULT Type type() const;
 
     // standard keys
-    QString description() const;
-    QString organizationName() const;
-    QString passTypeIdentifier() const;
-    QString serialNumber() const;
+    Q_REQUIRED_RESULT QString description() const;
+    Q_REQUIRED_RESULT QString organizationName() const;
+    Q_REQUIRED_RESULT QString passTypeIdentifier() const;
+    Q_REQUIRED_RESULT QString serialNumber() const;
 
     // expiration keys
-    QDateTime expirationDate() const;
-    bool isVoided() const;
+    Q_REQUIRED_RESULT QDateTime expirationDate() const;
+    Q_REQUIRED_RESULT bool isVoided() const;
 
     // relevance keys
     /** Locations associated with this pass. */
-    QVector<Location> locations() const;
+    Q_REQUIRED_RESULT QVector<Location> locations() const;
     /** Distance in meters to any of the pass locations before this pass becomes relevant. */
-    int maximumDistance() const;
-    QDateTime relevantDate() const;
+    Q_REQUIRED_RESULT int maximumDistance() const;
+    Q_REQUIRED_RESULT QDateTime relevantDate() const;
 
     // visual appearance keys
     /** Returns all barcodes defined in the pass. */
-    QVector<Barcode> barcodes() const;
-    QColor backgroundColor() const;
-    QColor foregroundColor() const;
-    QString groupingIdentifier() const;
-    QColor labelColor() const;
-    QString logoText() const;
+    Q_REQUIRED_RESULT QVector<Barcode> barcodes() const;
+    Q_REQUIRED_RESULT QColor backgroundColor() const;
+    Q_REQUIRED_RESULT QColor foregroundColor() const;
+    Q_REQUIRED_RESULT QString groupingIdentifier() const;
+    Q_REQUIRED_RESULT QColor labelColor() const;
+    Q_REQUIRED_RESULT QString logoText() const;
 
     /** Returns an image asset of this pass.
      *  @param baseName The name of the asset, without the file name extension.
@@ -126,12 +126,12 @@ public:
     QImage logo(unsigned int devicePixelRatio = 1) const;
 
     // web service keys
-    QString authenticationToken() const;
-    QUrl webServiceUrl() const;
+    Q_REQUIRED_RESULT QString authenticationToken() const;
+    Q_REQUIRED_RESULT QUrl webServiceUrl() const;
     /** Pass update URL.
      * @see https://developer.apple.com/library/content/documentation/PassKit/Reference/PassKit_WebService/WebService.html
      */
-    QUrl passUpdateUrl() const;
+    Q_REQUIRED_RESULT QUrl passUpdateUrl() const;
 
     QVector<Field> auxiliaryFields() const;
     QVector<Field> backFields() const;
