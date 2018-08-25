@@ -12,7 +12,7 @@ ecm_qt_declare_logging_category(pkpass_srcs
     CATEGORY_NAME org.kde.pkpass
 )
 
-add_library(KPimPkPass SHARED ${pkpass_srcs})
+add_library(KPimPkPass ${pkpass_srcs})
 add_library(KPim::PkPass ALIAS KPimPkPass)
 generate_export_header(KPimPkPass BASE_NAME KPkPass)
 set_target_properties(KPimPkPass PROPERTIES
