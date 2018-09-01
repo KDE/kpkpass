@@ -42,6 +42,7 @@ class Location;
 class PassPrivate;
 
 /** Base class for a pkpass file.
+ *  @see https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/PassKit_PG/index.html
  *  @see https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/TopLevel.html
  */
 class KPKPASS_EXPORT Pass : public QObject
@@ -124,6 +125,8 @@ public:
     QImage icon(unsigned int devicePixelRatio = 1) const;
     /** Returns the pass logo. */
     QImage logo(unsigned int devicePixelRatio = 1) const;
+    /** Returns the strip image if present. */
+    QImage strip(unsigned int devicePixelRatio = 1) const;
 
     // web service keys
     Q_REQUIRED_RESULT QString authenticationToken() const;

@@ -369,6 +369,11 @@ QImage Pass::logo(unsigned int devicePixelRatio) const
     return image(QStringLiteral("logo"), devicePixelRatio);
 }
 
+QImage Pass::strip(unsigned int devicePixelRatio) const
+{
+    return image(QStringLiteral("strip"), devicePixelRatio);
+}
+
 QString Pass::authenticationToken() const
 {
     return d->passObj.value(QLatin1String("authenticationToken")).toString();
