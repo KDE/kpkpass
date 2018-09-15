@@ -127,6 +127,10 @@ public:
     QImage logo(unsigned int devicePixelRatio = 1) const;
     /** Returns the strip image if present. */
     QImage strip(unsigned int devicePixelRatio = 1) const;
+    /** Returns the background image if present. */
+    QImage background(unsigned int devicePixelRatio = 1) const;
+    /** Returns the footer image if present. */
+    QImage footer(unsigned int devicePixelRatio = 1) const;
 
     // web service keys
     Q_REQUIRED_RESULT QString authenticationToken() const;

@@ -373,6 +373,16 @@ QImage Pass::strip(unsigned int devicePixelRatio) const
     return image(QStringLiteral("strip"), devicePixelRatio);
 }
 
+QImage Pass::background(unsigned int devicePixelRatio) const
+{
+    return image(QStringLiteral("background"), devicePixelRatio);
+}
+
+QImage KPkPass::Pass::footer(unsigned int devicePixelRatio) const
+{
+    return image(QStringLiteral("footer"), devicePixelRatio);
+}
+
 QString Pass::authenticationToken() const
 {
     return d->passObj.value(QLatin1String("authenticationToken")).toString();
