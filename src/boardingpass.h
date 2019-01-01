@@ -28,7 +28,7 @@ namespace KPkPass {
 class KPKPASS_EXPORT BoardingPass : public Pass
 {
     Q_OBJECT
-    Q_PROPERTY(TransitType transitType READ transitType)
+    Q_PROPERTY(TransitType transitType READ transitType CONSTANT)
 public:
     enum TransitType {
         Air,
