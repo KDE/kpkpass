@@ -36,7 +36,7 @@ private Q_SLOTS:
     void testBoardingPass()
     {
         std::unique_ptr<KPkPass::Pass> pass(
-            KPkPass::Pass::fromFile(QLatin1String(SOURCE_DIR "/data/boardingpass-v1.pkpass")));
+            KPkPass::Pass::fromFile(QStringLiteral(SOURCE_DIR "/data/boardingpass-v1.pkpass")));
         QVERIFY(pass);
 
         QCOMPARE(pass->type(), KPkPass::Pass::BoardingPass);
@@ -61,7 +61,7 @@ private Q_SLOTS:
         QCOMPARE(field.key(), QLatin1String("seat"));
         QCOMPARE(field.changeMessage(), QStringLiteral("Sitzplatznummer geändert in 10E"));
 
-        field = pass->field(QLatin1String("boarding"));
+        field = pass->field(QStringLiteral("boarding"));
         QCOMPARE(field.key(), QLatin1String("boarding"));
         QCOMPARE(field.value().toString(), QLatin1String("20:25"));
         QCOMPARE(field.textAlignment(), Qt::AlignLeft);
@@ -89,7 +89,7 @@ private Q_SLOTS:
 
         auto img = pass->logo(3);
         QVERIFY(!img.isNull());
-        img = pass->image(QLatin1String("I don't exist"));
+        img = pass->image(QStringLiteral("I don't exist"));
         QVERIFY(img.isNull());
     }
 };
