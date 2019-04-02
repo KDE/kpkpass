@@ -35,6 +35,8 @@ if (${Qt5Core_VERSION} STRGREATER "5.13")
 else()
    add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
 endif()
+add_definitions(-DQT_NO_FOREACH)
+
 
 add_subdirectory(src)
 add_subdirectory(autotests)

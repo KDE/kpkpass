@@ -173,7 +173,7 @@ QVector<Field> PassPrivate::fields(const QLatin1String &fieldType, const Pass *q
     const auto a = passData().value(fieldType).toArray();
     QVector<Field> f;
     f.reserve(a.size());
-    foreach (const auto &v, a) {
+    for (const auto &v : a) {
         f.push_back(Field{v.toObject(), q});
     }
     return f;
