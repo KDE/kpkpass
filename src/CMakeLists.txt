@@ -47,5 +47,7 @@ install(FILES
 
 if (NOT ANDROID)
     install(FILES application-vnd-apple-pkpass.xml DESTINATION ${XDG_MIME_INSTALL_DIR})
-    update_xdg_mimetypes(${XDG_MIME_INSTALL_DIR})
+    if (NOT NO_REGENERATE_MIME)
+       update_xdg_mimetypes(${XDG_MIME_INSTALL_DIR})
+    endif()
 endif()

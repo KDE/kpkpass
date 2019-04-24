@@ -27,7 +27,7 @@ set(QT_REQUIRED_VERSION "5.10.0")
 find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Test Gui)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive)
 find_package(SharedMimeInfo 1.3 REQUIRED)
-
+option(NO_REGENERATE_MIME "Don't regenerate mime file (only for developper)" FALSE )
 
 # workaround for https://bugreports.qt.io/browse/QTBUG-74665 (bug in qt5.13 reevaluate it)
 if (${Qt5Core_VERSION} STREQUAL "5.13.0")
