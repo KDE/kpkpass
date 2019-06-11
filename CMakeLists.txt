@@ -58,4 +58,8 @@ install(EXPORT KPimPkPassTargets
         FILE KPimPkPassTargets.cmake
         NAMESPACE KPim::
 )
-install(FILES org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_CONFDIR})
+if (${ECM_VERSION} STRGREATER "5.58.0")
+    install(FILES org_kde_kpkpass.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
+else()
+    install(FILES org_kde_kpkpass.categories  DESTINATION ${KDE_INSTALL_CONFDIR})
+endif()
