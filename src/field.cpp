@@ -89,7 +89,7 @@ QString Field::changeMessage() const
         return {};
     }
     auto msg = d->pass->d->message(d->obj.value(QLatin1String("changeMessage")).toString());
-    msg = msg.replace(QLatin1String("%@"), valueDisplayString());
+    msg.replace(QLatin1String("%@"), valueDisplayString());
     return msg;
 }
 
