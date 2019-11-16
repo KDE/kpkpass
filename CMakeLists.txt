@@ -24,7 +24,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
 
 set(QT_REQUIRED_VERSION "5.11.0")
 
-find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Test Gui)
+find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive)
 find_package(SharedMimeInfo 1.3 REQUIRED)
 option(NO_REGENERATE_MIME "Don't regenerate mime file (only for developper)" FALSE )
@@ -38,7 +38,9 @@ add_definitions(-DQT_NO_FOREACH)
 
 
 add_subdirectory(src)
-add_subdirectory(autotests)
+if (BUILD_TESTING)
+    add_subdirectory(autotests)
+endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
