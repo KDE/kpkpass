@@ -6,11 +6,22 @@ set(pkpass_srcs
     location.cpp
     pass.cpp
 )
-ecm_qt_declare_logging_category(pkpass_srcs
-    HEADER logging.h
-    IDENTIFIER KPkPass::Log
-    CATEGORY_NAME org.kde.pkpass
-)
+
+if (ECM_VERSION VERSION_LESS "5.68.0")
+    ecm_qt_declare_logging_category(pkpass_srcs
+        HEADER logging.h
+        IDENTIFIER KPkPass::Log
+        CATEGORY_NAME org.kde.pkpass
+    )
+else()
+    ecm_qt_declare_logging_category(pkpass_srcs
+        HEADER logging.h
+        IDENTIFIER KPkPass::Log
+        CATEGORY_NAME org.kde.pkpass
+        DESCRIPTION "KPkPass" EXPORT KPKPASS)
+endif()
+
+
 
 add_library(KPimPkPass ${pkpass_srcs})
 add_library(KPim::PkPass ALIAS KPimPkPass)
@@ -50,4 +61,8 @@ if (NOT ANDROID)
     if (NOT NO_REGENERATE_MIME)
        update_xdg_mimetypes(${XDG_MIME_INSTALL_DIR})
     endif()
+endif()
+
+if (NOT ECM_VERSION VERSION_LESS "5.68.0")
+   ecm_qt_install_logging_categories(EXPORT KPKPASS FILE org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 endif()
