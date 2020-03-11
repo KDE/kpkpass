@@ -7,19 +7,11 @@ set(pkpass_srcs
     pass.cpp
 )
 
-if (ECM_VERSION VERSION_LESS "5.68.0")
-    ecm_qt_declare_logging_category(pkpass_srcs
-        HEADER logging.h
-        IDENTIFIER KPkPass::Log
-        CATEGORY_NAME org.kde.pkpass
-    )
-else()
-    ecm_qt_declare_logging_category(pkpass_srcs
+ecm_qt_declare_logging_category(pkpass_srcs
         HEADER logging.h
         IDENTIFIER KPkPass::Log
         CATEGORY_NAME org.kde.pkpass
         DESCRIPTION "KPkPass" EXPORT KPKPASS)
-endif()
 
 
 
@@ -63,6 +55,4 @@ if (NOT ANDROID)
     endif()
 endif()
 
-if (NOT ECM_VERSION VERSION_LESS "5.68.0")
-   ecm_qt_install_logging_categories(EXPORT KPKPASS FILE org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
-endif()
+ecm_qt_install_logging_categories(EXPORT KPKPASS FILE org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
