@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-set(PIM_VERSION "5.13.80")
+set(PIM_VERSION "5.13.90")
 project(KPkPass VERSION ${PIM_VERSION})
 
 set(KF5_MIN_VERSION "5.68.0")
