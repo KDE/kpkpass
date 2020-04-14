@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 set(PIM_VERSION "5.14.40")
 project(KPkPass VERSION ${PIM_VERSION})
 
-set(KF5_MIN_VERSION "5.68.0")
+set(KF5_MIN_VERSION "5.69.0")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
