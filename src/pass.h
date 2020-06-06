@@ -131,6 +131,8 @@ public:
     QImage background(unsigned int devicePixelRatio = 1) const;
     /** Returns the footer image if present. */
     QImage footer(unsigned int devicePixelRatio = 1) const;
+    /** Returns the thumbnail image if present. */
+    QImage thumbnail(unsigned int devicePixelRatio = 1) const;
 
     // web service keys
     Q_REQUIRED_RESULT QString authenticationToken() const;

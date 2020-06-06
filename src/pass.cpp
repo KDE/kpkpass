@@ -378,9 +378,14 @@ QImage Pass::background(unsigned int devicePixelRatio) const
     return image(QStringLiteral("background"), devicePixelRatio);
 }
 
-QImage KPkPass::Pass::footer(unsigned int devicePixelRatio) const
+QImage Pass::footer(unsigned int devicePixelRatio) const
 {
     return image(QStringLiteral("footer"), devicePixelRatio);
+}
+
+QImage Pass::thumbnail(unsigned int devicePixelRatio) const
+{
+    return image(QStringLiteral("thumbnail"), devicePixelRatio);
 }
 
 QString Pass::authenticationToken() const
