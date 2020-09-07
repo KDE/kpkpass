@@ -155,7 +155,7 @@ bool PassPrivate::parseMessages(const QString &lang)
     return !messages.isEmpty();
 }
 
-QVector<Field> PassPrivate::fields(const QLatin1String &fieldType, const Pass *q) const
+QVector<Field> PassPrivate::fields(QLatin1String fieldType, const Pass *q) const
 {
     const auto a = passData().value(fieldType).toArray();
     QVector<Field> f;
