@@ -30,7 +30,7 @@ find_package(SharedMimeInfo 1.3 REQUIRED)
 option(NO_REGENERATE_MIME "Don't regenerate mime file (only for developper)" FALSE )
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054A00)
+add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054B00)
 
 add_definitions(-DQT_NO_FOREACH)
 add_definitions(-DQT_NO_KEYWORDS)
