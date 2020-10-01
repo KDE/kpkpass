@@ -27,7 +27,6 @@ set(QT_REQUIRED_VERSION "5.13.0")
 find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive)
 find_package(SharedMimeInfo 1.3 REQUIRED)
-option(NO_REGENERATE_MIME "Don't regenerate mime file (only for developper)" FALSE )
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
 add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054B00)

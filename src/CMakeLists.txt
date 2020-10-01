@@ -50,9 +50,7 @@ install(FILES
 
 if (NOT ANDROID)
     install(FILES application-vnd-apple-pkpass.xml DESTINATION ${XDG_MIME_INSTALL_DIR})
-    if (NOT NO_REGENERATE_MIME)
-       update_xdg_mimetypes(${XDG_MIME_INSTALL_DIR})
-    endif()
+    update_xdg_mimetypes(${XDG_MIME_INSTALL_DIR})
 endif()
 
 ecm_qt_install_logging_categories(EXPORT KPKPASS FILE org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
