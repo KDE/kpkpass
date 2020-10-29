@@ -23,6 +23,7 @@
 #include <QTextCodec>
 #include <QImage>
 #include <QUrl>
+#include <QRegularExpression>
 
 using namespace KPkPass;
 
@@ -180,10 +181,20 @@ Pass *PassPrivate::fromData(std::unique_ptr<QIODevice> device, QObject *parent)
     }
     std::unique_ptr<QIODevice> dev(file->createDevice());
     QJsonParseError error;
-    const auto passObj = QJsonDocument::fromJson(dev->readAll(), &error).object();
+    const auto data = dev->readAll();
+    auto passObj = QJsonDocument::fromJson(data, &error).object();
     if (error.error != QJsonParseError::NoError) {
-        qCWarning(Log) << "Error parsing pass.json:" << error.errorString();
-        return nullptr;
+        qCWarning(Log) << "Error parsing pass.json:" << error.errorString() << error.offset;
+
+        // try to fix some known JSON syntax errors
+        auto s = QString::fromUtf8(data);
+        s.replace(QRegularExpression(QStringLiteral(R"(\}[\s\n]*,[\s\n]*\})")), QStringLiteral("}}"));
+        s.replace(QRegularExpression(QStringLiteral(R"(\][\s\n]*,[\s\n]*\})")), QStringLiteral("]}"));
+        passObj = QJsonDocument::fromJson(s.toUtf8(), &error).object();
+        if (error.error != QJsonParseError::NoError) {
+            qCWarning(Log) << "JSON syntax workarounds didn't help either:" << error.errorString() << error.offset;
+            return nullptr;
+        }
     }
     if (passObj.value(QLatin1String("formatVersion")).toInt() > 1) {
         qCWarning(Log) << "pass.json has unsupported format version!";
