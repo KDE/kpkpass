@@ -29,7 +29,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive)
 find_package(SharedMimeInfo 1.3 REQUIRED)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054D00)
+add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054E00)
 
 add_definitions(-DQT_NO_FOREACH)
 add_definitions(-DQT_NO_KEYWORDS)
