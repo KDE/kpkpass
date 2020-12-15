@@ -31,6 +31,10 @@ target_link_libraries(KPimPkPass
         KF5::Archive
 )
 
+if (COMPILE_WITH_CMAKE_SUPPORT)
+    set_target_properties(KPimPkPass PROPERTIES UNITY_BUILD ON)
+endif()
+
 ecm_generate_headers(KPkPass_HEADERS
     HEADER_NAMES
         Barcode
