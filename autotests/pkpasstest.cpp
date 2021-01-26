@@ -24,8 +24,7 @@ private Q_SLOTS:
 
     void testBoardingPass()
     {
-        std::unique_ptr<KPkPass::Pass> pass(
-            KPkPass::Pass::fromFile(QStringLiteral(SOURCE_DIR "/data/boardingpass-v1.pkpass")));
+        std::unique_ptr<KPkPass::Pass> pass(KPkPass::Pass::fromFile(QStringLiteral(SOURCE_DIR "/data/boardingpass-v1.pkpass")));
         QVERIFY(pass);
 
         QCOMPARE(pass->type(), KPkPass::Pass::BoardingPass);
@@ -55,7 +54,7 @@ private Q_SLOTS:
         QCOMPARE(field.value().toString(), QLatin1String("20:25"));
         QCOMPARE(field.textAlignment(), Qt::AlignLeft);
 
-        auto boardingPass = dynamic_cast<KPkPass::BoardingPass*>(pass.get());
+        auto boardingPass = dynamic_cast<KPkPass::BoardingPass *>(pass.get());
         QVERIFY(boardingPass);
         QCOMPARE(boardingPass->transitType(), KPkPass::BoardingPass::Air);
 

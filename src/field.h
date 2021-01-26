@@ -16,8 +16,8 @@
 
 class QJsonObject;
 
-namespace KPkPass {
-
+namespace KPkPass
+{
 class Pass;
 class PassPrivate;
 class FieldPrivate;
@@ -37,10 +37,10 @@ class KPKPASS_EXPORT Field
 
 public:
     Field();
-    Field(const Field&);
-    Field(Field&&);
+    Field(const Field &);
+    Field(Field &&);
     ~Field();
-    Field& operator=(const Field&);
+    Field &operator=(const Field &);
 
     /** Field key, unique in the pass but not meant for display. */
     Q_REQUIRED_RESULT QString key() const;

@@ -12,8 +12,10 @@
 
 using namespace KPkPass;
 
-namespace KPkPass {
-class LocationPrivate {
+namespace KPkPass
+{
+class LocationPrivate
+{
 public:
     QJsonObject obj;
 };

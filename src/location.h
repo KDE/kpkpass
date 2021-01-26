@@ -15,8 +15,8 @@
 
 class QJsonObject;
 
-namespace KPkPass {
-
+namespace KPkPass
+{
 class LocationPrivate;
 
 /** A pass location element.
@@ -41,6 +41,7 @@ public:
     Q_REQUIRED_RESULT double longitude() const;
     /** Text to display when location is reached. */
     Q_REQUIRED_RESULT QString relevantText() const;
+
 private:
     friend class Pass;
     explicit Location(const QJsonObject &obj);

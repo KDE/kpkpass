@@ -13,8 +13,10 @@
 
 using namespace KPkPass;
 
-namespace KPkPass {
-class FieldPrivate {
+namespace KPkPass
+{
+class FieldPrivate
+{
 public:
     const Pass *pass = nullptr;
     QJsonObject obj;
@@ -26,10 +28,10 @@ Field::Field()
 {
 }
 
-Field::Field(const Field&) = default;
-Field::Field(Field&&) = default;
+Field::Field(const Field &) = default;
+Field::Field(Field &&) = default;
 Field::~Field() = default;
-Field& Field::operator=(const Field&) = default;
+Field &Field::operator=(const Field &) = default;
 
 Field::Field(const QJsonObject &obj, const Pass *pass)
     : d(new FieldPrivate)

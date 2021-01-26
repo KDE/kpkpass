@@ -9,21 +9,15 @@
 
 #include "pass.h"
 
-namespace KPkPass {
-
+namespace KPkPass
+{
 /** Boarding pass */
 class KPKPASS_EXPORT BoardingPass : public Pass
 {
     Q_OBJECT
     Q_PROPERTY(TransitType transitType READ transitType CONSTANT)
 public:
-    enum TransitType {
-        Air,
-        Boat,
-        Bus,
-        Train,
-        Generic
-    };
+    enum TransitType { Air, Boat, Bus, Train, Generic };
     Q_ENUM(TransitType)
 
     explicit BoardingPass(QObject *parent = nullptr);

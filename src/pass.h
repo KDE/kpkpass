@@ -7,8 +7,8 @@
 #ifndef KPKPASS_PASS_H
 #define KPKPASS_PASS_H
 
-#include "kpkpass_export.h"
 #include "field.h"
+#include "kpkpass_export.h"
 
 #include <QObject>
 #include <QVector>
@@ -22,8 +22,8 @@ class QString;
 class QUrl;
 class QVariant;
 
-namespace KPkPass {
-
+namespace KPkPass
+{
 class Barcode;
 class Location;
 class PassPrivate;
@@ -67,13 +67,7 @@ public:
     virtual ~Pass();
 
     /** Type of the pass. */
-    enum Type {
-        BoardingPass,
-        Coupon,
-        EventTicket,
-        Generic,
-        StoreCard
-    };
+    enum Type { BoardingPass, Coupon, EventTicket, Generic, StoreCard };
     Q_ENUM(Type)
     Q_REQUIRED_RESULT Type type() const;
 
@@ -150,7 +144,7 @@ protected:
     friend class Barcode;
     friend class Field;
     friend class PassPrivate;
-    explicit Pass (Type passType, QObject *parent = nullptr);
+    explicit Pass(Type passType, QObject *parent = nullptr);
     std::unique_ptr<PassPrivate> d;
     ///@endcond
 

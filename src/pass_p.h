@@ -16,8 +16,10 @@
 class KZip;
 class QIODevice;
 
-namespace KPkPass {
-class PassPrivate {
+namespace KPkPass
+{
+class PassPrivate
+{
 public:
     /** The pass data structure of the pass.json file. */
     QJsonObject passData() const;
@@ -40,4 +42,3 @@ public:
 }
 
 #endif // KPKPASS_PASS_H
-

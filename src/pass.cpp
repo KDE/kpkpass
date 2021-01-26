@@ -5,29 +5,29 @@
 */
 
 #include "pass.h"
-#include "pass_p.h"
 #include "barcode.h"
 #include "boardingpass.h"
 #include "location.h"
 #include "logging.h"
+#include "pass_p.h"
 
 #include <KZip>
 
 #include <QBuffer>
 #include <QColor>
 #include <QFile>
+#include <QImage>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLocale>
-#include <QTextCodec>
-#include <QImage>
-#include <QUrl>
 #include <QRegularExpression>
+#include <QTextCodec>
+#include <QUrl>
 
 using namespace KPkPass;
 
-static const char * const passTypes[] = { "boardingPass", "coupon", "eventTicket", "generic", "storeCard" };
+static const char *const passTypes[] = {"boardingPass", "coupon", "eventTicket", "generic", "storeCard"};
 static const auto passTypesCount = sizeof(passTypes) / sizeof(passTypes[0]);
 
 QJsonObject PassPrivate::passData() const
@@ -216,12 +216,12 @@ Pass *PassPrivate::fromData(std::unique_ptr<QIODevice> device, QObject *parent)
 
     Pass *pass = nullptr;
     switch (passTypeIdx) {
-        case Pass::BoardingPass:
-            pass = new KPkPass::BoardingPass(parent);
-            break;
-        default:
-            pass = new Pass(static_cast<Pass::Type>(passTypeIdx), parent);
-            break;
+    case Pass::BoardingPass:
+        pass = new KPkPass::BoardingPass(parent);
+        break;
+    default:
+        pass = new Pass(static_cast<Pass::Type>(passTypeIdx), parent);
+        break;
     }
 
     pass->d->buffer = std::move(device);
@@ -230,7 +230,6 @@ Pass *PassPrivate::fromData(std::unique_ptr<QIODevice> device, QObject *parent)
     pass->d->parse();
     return pass;
 }
-
 
 Pass::Pass(Type passType, QObject *parent)
     : QObject(parent)
@@ -338,7 +337,7 @@ QString Pass::logoText() const
     return d->message(d->passObj.value(QLatin1String("logoText")).toString());
 }
 
-QImage Pass::image(const QString& baseName, unsigned int devicePixelRatio) const
+QImage Pass::image(const QString &baseName, unsigned int devicePixelRatio) const
 {
     const KArchiveFile *file = nullptr;
     for (; devicePixelRatio > 1; --devicePixelRatio) {
@@ -426,13 +425,7 @@ QVector<Barcode> Pass::barcodes() const
     return codes;
 }
 
-static const char * const fieldNames[] = {
-    "auxiliaryFields",
-    "backFields",
-    "headerFields",
-    "primaryFields",
-    "secondaryFields"
-};
+static const char *const fieldNames[] = {"auxiliaryFields", "backFields", "headerFields", "primaryFields", "secondaryFields"};
 static const auto fieldNameCount = sizeof(fieldNames) / sizeof(fieldNames[0]);
 
 QVector<Field> Pass::auxiliaryFields() const
@@ -460,7 +453,7 @@ QVector<Field> Pass::secondaryFields() const
     return d->fields(QLatin1String(fieldNames[4]), this);
 }
 
-Field Pass::field(const QString& key) const
+Field Pass::field(const QString &key) const
 {
     for (unsigned int i = 0; i < fieldNameCount; ++i) {
         const auto fs = d->fields(QLatin1String(fieldNames[i]), this);
@@ -500,12 +493,13 @@ Pass *Pass::fromFile(const QString &fileName, QObject *parent)
     return nullptr;
 }
 
-template <typename T>
-static QVariantList toVariantList(const QVector<T> &elems)
+template<typename T> static QVariantList toVariantList(const QVector<T> &elems)
 {
     QVariantList l;
     l.reserve(elems.size());
-    std::for_each(elems.begin(), elems.end(), [&l](const T &e) { l.push_back(QVariant::fromValue(e)); });
+    std::for_each(elems.begin(), elems.end(), [&l](const T &e) {
+        l.push_back(QVariant::fromValue(e));
+    });
     return l;
 }
 
@@ -548,7 +542,9 @@ QVariantMap Pass::fieldsVariantMap() const
 {
     QVariantMap m;
     const auto elems = fields();
-    std::for_each(elems.begin(), elems.end(), [&m](const Field &f) { m.insert(f.key(), QVariant::fromValue(f)); });
+    std::for_each(elems.begin(), elems.end(), [&m](const Field &f) {
+        m.insert(f.key(), QVariant::fromValue(f));
+    });
     return m;
 }
 

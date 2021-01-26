@@ -12,7 +12,8 @@
 
 using namespace KPkPass;
 
-namespace KPkPass {
+namespace KPkPass
+{
 class BarcodePrivate
 {
 public:
