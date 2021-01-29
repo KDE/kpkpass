@@ -45,7 +45,7 @@ ecm_generate_headers(KPkPass_HEADERS
     REQUIRED_HEADERS KPkPass_HEADERS
 )
 
-install(TARGETS KPimPkPass EXPORT KPimPkPassTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPimPkPass EXPORT KPimPkPassTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
     ${KPkPass_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/kpkpass_export.h
