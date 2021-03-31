@@ -4,8 +4,7 @@
    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KPKPASS_BOARDINGPASS_H
-#define KPKPASS_BOARDINGPASS_H
+#pragma once
 
 #include "pass.h"
 
@@ -28,4 +27,3 @@ public:
 
 }
 
-#endif // KPKPASS_BOARDINGPASS_H

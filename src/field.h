@@ -4,8 +4,7 @@
    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KPKPASS_FIELD_H
-#define KPKPASS_FIELD_H
+#pragma once
 
 #include "kpkpass_export.h"
 
@@ -74,4 +73,3 @@ private:
 
 Q_DECLARE_METATYPE(KPkPass::Field)
 
-#endif // KPKPASS_FIELD_H

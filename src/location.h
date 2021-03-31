@@ -4,8 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KPKPASS_LOCATION_H
-#define KPKPASS_LOCATION_H
+#pragma once
 
 #include "kpkpass_export.h"
 
@@ -52,4 +51,3 @@ private:
 
 Q_DECLARE_METATYPE(KPkPass::Location)
 
-#endif // KPKPASS_LOCATION_H

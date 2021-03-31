@@ -4,8 +4,7 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KPKPASS_BARCODE_H
-#define KPKPASS_BARCODE_H
+#pragma once
 
 #include "kpkpass_export.h"
 
@@ -58,4 +57,3 @@ private:
 
 Q_DECLARE_METATYPE(KPkPass::Barcode)
 
-#endif // KPKPASS_BARCODE_H

@@ -4,8 +4,7 @@
    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KPKPASS_PASS_P_H
-#define KPKPASS_PASS_P_H
+#pragma once
 
 #include <QHash>
 #include <QJsonObject>
@@ -41,4 +40,3 @@ public:
 };
 }
 
-#endif // KPKPASS_PASS_H

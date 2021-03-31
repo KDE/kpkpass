@@ -4,8 +4,7 @@
    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KPKPASS_PASS_H
-#define KPKPASS_PASS_H
+#pragma once
 
 #include "field.h"
 #include "kpkpass_export.h"
@@ -161,4 +160,3 @@ private:
 
 }
 
-#endif // KPKPASS_PASS_H
