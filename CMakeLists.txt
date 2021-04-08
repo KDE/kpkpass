@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 set(PIM_VERSION "5.17.40")
 project(KPkPass VERSION ${PIM_VERSION})
 
@@ -23,27 +23,23 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPimPkPassConfigVersion.cmake"
 )
 
-set(QT_REQUIRED_VERSION "5.14.0")
+set(QT_REQUIRED_VERSION "5.15.0")
 
 find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive)
 find_package(SharedMimeInfo 1.3 REQUIRED)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055100)
+add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055200)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" FALSE)
+option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 
-set(COMPILE_WITH_UNITY_CMAKE_SUPPORT false)
+set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
 if (USE_UNITY_CMAKE_SUPPORT)
-    if(${CMAKE_VERSION} VERSION_LESS "3.16.0")
-        message(STATUS "CMAKE version is less than 3.16.0 . We can't use cmake unify build support")
-    else()
-        set(COMPILE_WITH_UNITY_CMAKE_SUPPORT true)
-    endif()
+    set(COMPILE_WITH_UNITY_CMAKE_SUPPORT ON)
 endif()
 
 add_subdirectory(src)
