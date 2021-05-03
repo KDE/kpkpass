@@ -19,7 +19,7 @@ add_library(KPimPkPass ${pkpass_srcs})
 add_library(KPim::PkPass ALIAS KPimPkPass)
 generate_export_header(KPimPkPass BASE_NAME KPkPass)
 set_target_properties(KPimPkPass PROPERTIES
-    VERSION ${KPKPASS_VERSION_STRING}
+    VERSION ${KPKPASS_VERSION}
     SOVERSION ${KPKPASS_SOVERSION}
     EXPORT_NAME PkPass
 )
