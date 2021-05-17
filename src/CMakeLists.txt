@@ -26,7 +26,7 @@ set_target_properties(KPimPkPass PROPERTIES
 target_include_directories(KPimPkPass INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_PIM}>")
 target_link_libraries(KPimPkPass
     PUBLIC
-        Qt5::Gui
+        Qt::Gui
     PRIVATE
         KF5::Archive
 )
