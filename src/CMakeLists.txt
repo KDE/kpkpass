@@ -1,5 +1,8 @@
 set(KDE_INSTALL_INCLUDEDIR_PIM ${KDE_INSTALL_INCLUDEDIR}/KPim)
-set(pkpass_srcs
+add_library(KPimPkPass)
+add_library(KPim::PkPass ALIAS KPimPkPass)
+
+target_sources(KPimPkPass PRIVATE
     barcode.cpp
     boardingpass.cpp
     field.cpp
@@ -7,16 +10,13 @@ set(pkpass_srcs
     pass.cpp
 )
 
-ecm_qt_declare_logging_category(pkpass_srcs
+ecm_qt_declare_logging_category(KPimPkPass
         HEADER logging.h
         IDENTIFIER KPkPass::Log
         CATEGORY_NAME org.kde.pkpass
         DESCRIPTION "KPkPass" EXPORT KPKPASS)
 
 
-
-add_library(KPimPkPass ${pkpass_srcs})
-add_library(KPim::PkPass ALIAS KPimPkPass)
 generate_export_header(KPimPkPass BASE_NAME KPkPass)
 set_target_properties(KPimPkPass PROPERTIES
     VERSION ${KPKPASS_VERSION}
