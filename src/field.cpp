@@ -85,7 +85,7 @@ QString Field::valueDisplayString() const
     }
 
     // TODO respect number formatting options
-    return value().toString();
+    return value().toString().trimmed();
 }
 
 QString Field::changeMessage() const
