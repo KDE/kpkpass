@@ -1,5 +1,5 @@
 /*
-   SPDX-FileCopyrightText: 2017-2018 Volker Krause <vkrause@kde.org>
+   SPDX-FileCopyrightText: 2017-2021 Volker Krause <vkrause@kde.org>
 
    SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -62,13 +62,29 @@ QVariant Field::value() const
     if (v.isEmpty()) {
         v = d->pass->d->message(d->obj.value(QLatin1String("value")).toString());
     }
-    // TODO number and date/time detection
+
+    const auto dt = QDateTime::fromString(v, Qt::ISODate);
+    if (dt.isValid()) {
+        return dt;
+    }
+
+    // TODO number detection
     return v;
 }
 
 QString Field::valueDisplayString() const
 {
-    // TODO respect number and date/time formatting options
+    const auto v = value();
+    if (v.type() == QVariant::DateTime) {
+        auto fmt = QLocale::ShortFormat;
+        const auto dtStyle = d->obj.value(QLatin1String("dateStyle")).toString();
+        if (dtStyle == QLatin1String("PKDateStyleLong") || dtStyle == QLatin1String("PKDateStyleFull")) {
+            fmt = QLocale::LongFormat;
+        }
+        return QLocale().toString(v.toDateTime(), fmt);
+    }
+
+    // TODO respect number formatting options
     return value().toString();
 }
 

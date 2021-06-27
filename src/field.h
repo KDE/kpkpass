@@ -20,6 +20,7 @@ namespace KPkPass
 class Pass;
 class PassPrivate;
 class FieldPrivate;
+class FieldTest;
 
 /** Field element in a KPkPass::Pass.
  * @see https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/FieldDictionary.html
@@ -64,6 +65,7 @@ public:
 
 private:
     friend class PassPrivate;
+    friend class FieldTest;
     explicit Field(const QJsonObject &obj, const Pass *pass);
 
     std::shared_ptr<FieldPrivate> d;
