@@ -44,6 +44,12 @@ private Q_SLOTS:
         QCOMPARE(f.value(), QDateTime({2021, 6, 27}, {14, 30}, Qt::OffsetFromUTC, 7200));
         QCOMPARE(f.valueDisplayString(), QLatin1String("27/06/2021 14:30"));
 
+        obj = QJsonDocument::fromJson(R"({"key":"valid-date","label":"Datum","dateStyle":"PKDateStyleShort","value":"2021-06-27T00:00:00+02:00"})").object();
+        f = KPkPass::Field(obj, pass.get());
+        QCOMPARE(f.value().type(), QVariant::DateTime);
+        QCOMPARE(f.value().toDateTime().date(), QDate({2021, 6, 27}));
+        QCOMPARE(f.valueDisplayString(), QLatin1String("27/06/2021"));
+
         obj = QJsonDocument::fromJson(R"({"key":"valid-locations","label":"Ort","value":"Freibad Killesberg\n"})").object();
         f = KPkPass::Field(obj, pass.get());
 

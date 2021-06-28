@@ -75,13 +75,22 @@ QVariant Field::value() const
 QString Field::valueDisplayString() const
 {
     const auto v = value();
+    // see
+    // https://developer.apple.com/library/archive/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/FieldDictionary.html#//apple_ref/doc/uid/TP40012026-CH4-SW6
+    // however, real-world data doesn't strictly follow that, so we have to guess a bit here...
     if (v.type() == QVariant::DateTime) {
+        const auto dt = v.toDateTime();
         auto fmt = QLocale::ShortFormat;
         const auto dtStyle = d->obj.value(QLatin1String("dateStyle")).toString();
         if (dtStyle == QLatin1String("PKDateStyleLong") || dtStyle == QLatin1String("PKDateStyleFull")) {
             fmt = QLocale::LongFormat;
         }
-        return QLocale().toString(v.toDateTime(), fmt);
+        const auto timeStyle = d->obj.value(QLatin1String("timeStyle")).toString();
+        if (timeStyle == QLatin1String("PKDateStyleNone") || (timeStyle.isEmpty() && !dtStyle.isEmpty() && dt.time() == QTime(0, 0))) {
+            return QLocale().toString(dt.date(), fmt);
+        }
+
+        return QLocale().toString(dt, fmt);
     }
 
     // TODO respect number formatting options
