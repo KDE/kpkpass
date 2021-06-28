@@ -14,6 +14,13 @@
 
 #include <cmath>
 
+void initLocale()
+{
+    qputenv("TZ", "UTC");
+}
+
+Q_CONSTRUCTOR_FUNCTION(initLocale)
+
 namespace KPkPass
 {
 class FieldTest : public QObject
@@ -34,7 +41,7 @@ private Q_SLOTS:
             QJsonDocument::fromJson(R"({"key":"valid-date","label":"Datum","dateStyle":"PKDateStyleShort","value":"2021-06-27T14:30:00+02:00"})").object();
         KPkPass::Field f(obj, pass.get());
         QCOMPARE(f.value().type(), QVariant::DateTime);
-        QCOMPARE(f.value(), QDateTime({2021, 6, 27}, {14, 30}));
+        QCOMPARE(f.value(), QDateTime({2021, 6, 27}, {14, 30}, Qt::OffsetFromUTC, 7200));
         QCOMPARE(f.valueDisplayString(), QLatin1String("27/06/2021 14:30"));
 
         obj = QJsonDocument::fromJson(R"({"key":"valid-locations","label":"Ort","value":"Freibad Killesberg\n"})").object();
