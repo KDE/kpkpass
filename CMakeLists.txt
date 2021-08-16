@@ -21,6 +21,11 @@ include(KDEGitCommitHooks)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(GenerateExportHeader)
+include(ECMAddQch)
+
+
+option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
+add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
     VERSION_HEADER kpkpass_version.h
@@ -72,3 +77,13 @@ install(EXPORT KPimPkPassTargets
         FILE KPimPkPassTargets.cmake
         NAMESPACE KPim::
 )
+
+if (BUILD_QCH)
+    ecm_install_qch_export(
+        TARGETS KPimPkPass_QCH
+        FILE KPimPkPassQchTargets.cmake
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        COMPONENT Devel
+    )
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPimPkPassQchTargets.cmake\")")
+endif()
