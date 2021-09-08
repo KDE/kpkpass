@@ -73,7 +73,7 @@ static int indexOfUnquoted(const QString &catalog, QLatin1Char c, int start)
     return -1;
 }
 
-static QString unquote(const QStringRef &str)
+static QString unquote(QStringView str)
 {
     QString res;
     res.reserve(str.size());
@@ -148,7 +148,7 @@ bool PassPrivate::parseMessages(const QString &lang)
         }
 
         const auto key = catalog.mid(keyBegin, keyEnd - keyBegin);
-        const auto value = unquote(catalog.midRef(valueBegin, valueEnd - valueBegin));
+        const auto value = unquote(QStringView(catalog).mid(valueBegin, valueEnd - valueBegin));
         messages.insert(key, value);
         idx = valueEnd + 1; // there's at least the linebreak and/or a ';'
     }
@@ -300,7 +300,7 @@ QDateTime Pass::relevantDate() const
 static QColor parseColor(const QString &s)
 {
     if (s.startsWith(QLatin1String("rgb("), Qt::CaseInsensitive)) {
-        const auto l = s.midRef(4, s.length() - 5).split(QLatin1Char(','));
+        const auto l = QStringView(s).mid(4, s.length() - 5).split(QLatin1Char(','));
         if (l.size() != 3)
             return {};
         return QColor(l[0].trimmed().toInt(), l[1].trimmed().toInt(), l[2].trimmed().toInt());
