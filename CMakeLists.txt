@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 set(PIM_VERSION "5.18.40")
 project(KPkPass VERSION ${PIM_VERSION})
 
-set(KF5_MIN_VERSION "5.86.0")
+set(KF5_MIN_VERSION "5.87.0")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
@@ -42,7 +42,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive)
 find_package(SharedMimeInfo 1.3 REQUIRED)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055700)
+add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055800)
 
 
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
