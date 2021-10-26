@@ -20,7 +20,7 @@ public:
     Q_ENUM(TransitType)
 
     explicit BoardingPass(QObject *parent = nullptr);
-    ~BoardingPass();
+    ~BoardingPass() override;
 
     Q_REQUIRED_RESULT TransitType transitType() const;
 };

@@ -63,7 +63,7 @@ class KPKPASS_EXPORT Pass : public QObject
     Q_PROPERTY(QVariantMap field READ fieldsVariantMap CONSTANT)
 
 public:
-    virtual ~Pass();
+    ~Pass() override;
 
     /** Type of the pass. */
     enum Type { BoardingPass, Coupon, EventTicket, Generic, StoreCard };
