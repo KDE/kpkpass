@@ -12,6 +12,12 @@ target_sources(KPimPkPass PRIVATE
     field.cpp
     location.cpp
     pass.cpp
+    pass.h
+    pass_p.h
+    location.h
+    field.h
+    boardingpass.h
+    barcode.h
 )
 
 ecm_qt_declare_logging_category(KPimPkPass
