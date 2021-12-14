@@ -62,7 +62,7 @@ install(FILES
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_PIM}/KPkPass
 )
 
-if (NOT ANDROID)
+if (NOT ANDROID AND SharedMimeInfo_VERSION_STRING VERSION_LESS 2.2)
     install(FILES application-vnd-apple-pkpass.xml DESTINATION ${KDE_INSTALL_MIMEDIR})
     update_xdg_mimetypes(${KDE_INSTALL_MIMEDIR})
 endif()
