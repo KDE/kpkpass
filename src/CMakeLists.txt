@@ -36,10 +36,14 @@ set_target_properties(KPimPkPass PROPERTIES
 target_include_directories(KPimPkPass INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_PIM}>")
 target_link_libraries(KPimPkPass
     PUBLIC
-        Qt::Gui
+        Qt${QT_MAJOR_VERSION}::Gui
     PRIVATE
         KF5::Archive
 )
+
+if (TARGET Qt6::Core5Compat)
+    target_link_libraries(KPimPkPass PRIVATE Qt6::Core5Compat) # QTextCodec
+endif()
 
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KPimPkPass PROPERTIES UNITY_BUILD ON)
