@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2018 Volker Krause <vkrause@kde.org>
-# SPDX-FileCopyrightText: 2019-2021 Laurent Montel <montel@kde.org>
+# SPDX-FileCopyrightText: 2019-2022 Laurent Montel <montel@kde.org>
 # SPDX-License-Identifier: BSD-3-Clause
 
 set(KDE_INSTALL_INCLUDEDIR_PIM ${KDE_INSTALL_INCLUDEDIR}/KPim)
