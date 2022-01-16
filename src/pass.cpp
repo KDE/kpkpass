@@ -22,7 +22,11 @@
 #include <QJsonObject>
 #include <QLocale>
 #include <QRegularExpression>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QTextCodec>
+#else
+#include <QStringDecoder>
+#endif
 #include <QUrl>
 
 using namespace KPkPass;
@@ -121,8 +125,13 @@ bool PassPrivate::parseMessages(const QString &lang)
     if (rawData.at(0) == '"') {
         catalog = QString::fromUtf8(rawData);
     } else {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         auto codec = QTextCodec::codecForName("UTF-16BE");
         catalog = codec->toUnicode(rawData);
+#else
+        auto codec = QStringDecoder(QStringDecoder::Utf16BE);
+        catalog = codec(rawData);
+#endif
     }
 
     int idx = 0;

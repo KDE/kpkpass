@@ -41,10 +41,6 @@ target_link_libraries(KPimPkPass
         KF5::Archive
 )
 
-if (TARGET Qt6::Core5Compat)
-    target_link_libraries(KPimPkPass PRIVATE Qt6::Core5Compat) # QTextCodec
-endif()
-
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KPimPkPass PROPERTIES UNITY_BUILD ON)
 endif()

@@ -38,9 +38,6 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
 set(QT_REQUIRED_VERSION "5.15.2")
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
-if (QT_MAJOR_VERSION STREQUAL "6")
-    find_package(Qt6Core5Compat)
-endif()
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive)
 find_package(SharedMimeInfo 1.3 REQUIRED)
 
