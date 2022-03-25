@@ -39,4 +39,3 @@ public:
     Pass::Type passType;
 };
 }
-

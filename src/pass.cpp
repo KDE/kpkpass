@@ -502,7 +502,8 @@ Pass *Pass::fromFile(const QString &fileName, QObject *parent)
     return nullptr;
 }
 
-template<typename T> static QVariantList toVariantList(const QVector<T> &elems)
+template<typename T>
+static QVariantList toVariantList(const QVector<T> &elems)
 {
     QVariantList l;
     l.reserve(elems.size());
