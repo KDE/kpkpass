@@ -40,7 +40,9 @@ set(QT_REQUIRED_VERSION "5.15.2")
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive)
-find_package(SharedMimeInfo 1.3 REQUIRED)
+if (NOT ANDROID)
+    find_package(SharedMimeInfo 1.3 REQUIRED)
+endif()
 
 ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.92.0)
 
