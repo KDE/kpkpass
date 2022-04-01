@@ -44,7 +44,7 @@ if (NOT ANDROID)
     find_package(SharedMimeInfo 1.3 REQUIRED)
 endif()
 
-ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.92.0)
+ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.93.0)
 
 
 
