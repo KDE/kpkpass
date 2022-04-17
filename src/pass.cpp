@@ -558,4 +558,13 @@ QVariantMap Pass::fieldsVariantMap() const
     return m;
 }
 
+QByteArray Pass::rawData() const
+{
+    const auto prevPos = d->buffer->pos();
+    d->buffer->seek(0);
+    const auto data = d->buffer->readAll();
+    d->buffer->seek(prevPos);
+    return data;
+}
+
 #include "moc_pass.cpp"

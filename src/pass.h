@@ -138,6 +138,13 @@ public:
     /** Create a appropriate sub-class based on the pkpass file type. */
     static Pass *fromFile(const QString &fileName, QObject *parent = nullptr);
 
+    /** The raw data of this pass.
+     *  That is the binary representation of the ZIP archive which contains
+     *  all the pass data.
+     *  @since 5.20.41
+     */
+    QByteArray rawData() const;
+
 protected:
     ///@cond internal
     friend class Barcode;

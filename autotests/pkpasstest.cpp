@@ -79,6 +79,10 @@ private Q_SLOTS:
         QVERIFY(!img.isNull());
         img = pass->image(QStringLiteral("I don't exist"));
         QVERIFY(img.isNull());
+
+        auto sourceFile = QFile(QStringLiteral(SOURCE_DIR "/data/boardingpass-v1.pkpass"));
+        QVERIFY(sourceFile.open(QFile::ReadOnly));
+        QCOMPARE(pass->rawData(), sourceFile.readAll());
     }
 };
 
