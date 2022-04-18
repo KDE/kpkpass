@@ -52,6 +52,13 @@ class KPKPASS_EXPORT Pass : public QObject
     Q_PROPERTY(QColor labelColor READ labelColor CONSTANT)
     Q_PROPERTY(QString logoText READ logoText CONSTANT)
 
+    Q_PROPERTY(bool hasIcon READ hasIcon CONSTANT)
+    Q_PROPERTY(bool hasLogo READ hasLogo CONSTANT)
+    Q_PROPERTY(bool hasStrip READ hasStrip CONSTANT)
+    Q_PROPERTY(bool hasBackground READ hasBackground CONSTANT)
+    Q_PROPERTY(bool hasFooter READ hasFooter CONSTANT)
+    Q_PROPERTY(bool hasThumbnail READ hasThumbnail CONSTANT)
+
     // needs to be QVariantList just for QML (Grantlee would also work with QVector<Field>
     Q_PROPERTY(QVariantList barcodes READ barcodesVariant CONSTANT)
     Q_PROPERTY(QVariantList auxiliaryFields READ auxiliaryFieldsVariant CONSTANT)
@@ -95,6 +102,18 @@ public:
     Q_REQUIRED_RESULT QString groupingIdentifier() const;
     Q_REQUIRED_RESULT QColor labelColor() const;
     Q_REQUIRED_RESULT QString logoText() const;
+
+    /** Returns @c true if an image asset with the given base name exists.
+     *  @param baseName The name of the asset, without the file type and high dpi extensions.
+     *  @since 5.20.41
+     */
+    bool hasImage(const QString &baseName) const;
+    bool hasIcon() const;
+    bool hasLogo() const;
+    bool hasStrip() const;
+    bool hasBackground() const;
+    bool hasFooter() const;
+    bool hasThumbnail() const;
 
     /** Returns an image asset of this pass.
      *  @param baseName The name of the asset, without the file name extension.

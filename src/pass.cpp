@@ -346,6 +346,49 @@ QString Pass::logoText() const
     return d->message(d->passObj.value(QLatin1String("logoText")).toString());
 }
 
+bool Pass::hasImage(const QString &baseName) const
+{
+    const auto entries = d->zip->directory()->entries();
+    for (const auto &entry : entries) {
+        if (entry.startsWith(baseName)
+            && (QStringView(entry).mid(baseName.size()).startsWith(QLatin1Char('@')) || QStringView(entry).mid(baseName.size()).startsWith(QLatin1Char('.')))
+            && entry.endsWith(QLatin1String(".png"))) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Pass::hasIcon() const
+{
+    return hasImage(QStringLiteral("icon"));
+}
+
+bool Pass::hasLogo() const
+{
+    return hasImage(QStringLiteral("logo"));
+}
+
+bool Pass::hasStrip() const
+{
+    return hasImage(QStringLiteral("strip"));
+}
+
+bool Pass::hasBackground() const
+{
+    return hasImage(QStringLiteral("background"));
+}
+
+bool Pass::hasFooter() const
+{
+    return hasImage(QStringLiteral("footer"));
+}
+
+bool Pass::hasThumbnail() const
+{
+    return hasImage(QStringLiteral("thumbnail"));
+}
+
 QImage Pass::image(const QString &baseName, unsigned int devicePixelRatio) const
 {
     const KArchiveFile *file = nullptr;

@@ -75,6 +75,8 @@ private Q_SLOTS:
         QCOMPARE(loc.relevantText(), QLatin1String("LX962 Boarding 20:25"));
         QCOMPARE(pass->maximumDistance(), 500);
 
+        QCOMPARE(pass->hasIcon(), false);
+        QCOMPARE(pass->hasLogo(), true);
         auto img = pass->logo(3);
         QVERIFY(!img.isNull());
         img = pass->image(QStringLiteral("I don't exist"));
