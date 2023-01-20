@@ -8,7 +8,7 @@
 include(CMakeFindDependencyMacro)
 
 find_package(Qt@QT_MAJOR_VERSION@ "@QT_REQUIRED_VERSION@" NO_MODULE REQUIRED COMPONENTS Core Gui)
-find_dependency(KF5Archive "@KF5_MIN_VERSION@")
+find_dependency(KF5Archive "@KF_MIN_VERSION@")
 
 include("${CMAKE_CURRENT_LIST_DIR}/KPimPkPassTargets.cmake")
 @PACKAGE_INCLUDE_QCHTARGETS@
