@@ -78,7 +78,11 @@ QString Field::valueDisplayString() const
     // see
     // https://developer.apple.com/library/archive/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/FieldDictionary.html#//apple_ref/doc/uid/TP40012026-CH4-SW6
     // however, real-world data doesn't strictly follow that, so we have to guess a bit here...
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if (v.type() == QVariant::DateTime) {
+#else
+    if (v.userType() == QMetaType::QDateTime) {
+#endif
         const auto dt = v.toDateTime();
         auto fmt = QLocale::ShortFormat;
         const auto dtStyle = d->obj.value(QLatin1String("dateStyle")).toString();
