@@ -38,7 +38,7 @@ target_link_libraries(KPimPkPass
     PUBLIC
         Qt::Gui
     PRIVATE
-        KF5::Archive
+        KF${KF_MAJOR_VERSION}::Archive
 )
 
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)

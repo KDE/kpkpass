@@ -37,9 +37,16 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
 )
 
 set(QT_REQUIRED_VERSION "5.15.2")
+if (QT_MAJOR_VERSION STREQUAL "6")
+    set(QT_MIN_VERSION "6.4.0")
+    set(KF_MIN_VERSION "5.240.0")
+    set(KF_MAJOR_VERSION "6")
+else()
+    set(KF_MAJOR_VERSION "5")
+endif()
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
-find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive)
+find_package(KF${KF_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive)
 if (NOT ANDROID)
     find_package(SharedMimeInfo 1.3 REQUIRED)
 endif()
