@@ -2,11 +2,11 @@
 # SPDX-FileCopyrightText: 2019-2023 Laurent Montel <montel@kde.org>
 # SPDX-License-Identifier: BSD-3-Clause
 
-set(KDE_INSTALL_INCLUDEDIR_PIM ${KDE_INSTALL_INCLUDEDIR}/KPim)
-add_library(KPimPkPass)
-add_library(KPim::PkPass ALIAS KPimPkPass)
+set(KDE_INSTALL_INCLUDEDIR_PIM ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION})
+add_library(KPim${KF_MAJOR_VERSION}PkPass)
+add_library(KPim${KF_MAJOR_VERSION}::PkPass ALIAS KPim${KF_MAJOR_VERSION}PkPass)
 
-target_sources(KPimPkPass PRIVATE
+target_sources(KPim${KF_MAJOR_VERSION}PkPass PRIVATE
     barcode.cpp
     boardingpass.cpp
     field.cpp
@@ -20,21 +20,21 @@ target_sources(KPimPkPass PRIVATE
     barcode.h
 )
 
-ecm_qt_declare_logging_category(KPimPkPass
+ecm_qt_declare_logging_category(KPim${KF_MAJOR_VERSION}PkPass
         HEADER logging.h
         IDENTIFIER KPkPass::Log
         CATEGORY_NAME org.kde.pkpass
         DESCRIPTION "KPkPass" EXPORT KPKPASS)
 
 
-generate_export_header(KPimPkPass BASE_NAME KPkPass)
-set_target_properties(KPimPkPass PROPERTIES
+generate_export_header(KPim${KF_MAJOR_VERSION}PkPass BASE_NAME KPkPass)
+set_target_properties(KPim${KF_MAJOR_VERSION}PkPass PROPERTIES
     VERSION ${KPKPASS_VERSION}
     SOVERSION ${KPKPASS_SOVERSION}
     EXPORT_NAME PkPass
 )
-target_include_directories(KPimPkPass INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_PIM}>")
-target_link_libraries(KPimPkPass
+target_include_directories(KPim${KF_MAJOR_VERSION}PkPass INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_PIM}>")
+target_link_libraries(KPim${KF_MAJOR_VERSION}PkPass
     PUBLIC
         Qt::Gui
     PRIVATE
@@ -42,7 +42,7 @@ target_link_libraries(KPimPkPass
 )
 
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KPimPkPass PROPERTIES UNITY_BUILD ON)
+    set_target_properties(KPim${KF_MAJOR_VERSION}PkPass PROPERTIES UNITY_BUILD ON)
 endif()
 
 ecm_generate_headers(KPkPass_HEADERS
@@ -55,7 +55,7 @@ ecm_generate_headers(KPkPass_HEADERS
     REQUIRED_HEADERS KPkPass_HEADERS
 )
 
-install(TARGETS KPimPkPass EXPORT KPimPkPassTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPim${KF_MAJOR_VERSION}PkPass EXPORT KPim${KF_MAJOR_VERSION}PkPassTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
     ${KPkPass_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/kpkpass_export.h
@@ -70,9 +70,9 @@ endif()
 
 if (BUILD_QCH)
     ecm_add_qch(
-        KPimPkPass_QCH
-        NAME KPimPkPass
-        BASE_NAME KPimPkPass
+        KPim${KF_MAJOR_VERSION}PkPass_QCH
+        NAME KPim${KF_MAJOR_VERSION}PkPass
+        BASE_NAME KPim${KF_MAJOR_VERSION}PkPass
         VERSION ${PIM_VERSION}
         ORG_DOMAIN org.kde
         SOURCES # using only public headers, to cover only public API
