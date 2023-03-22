@@ -74,6 +74,16 @@ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAG
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim${KF_MAJOR_VERSION}PkPass")
 set(KPKPASS_KF5_COMPAT FALSE)
+if (BUILD_QCH)
+    ecm_install_qch_export(
+        TARGETS KPim${KF_MAJOR_VERSION}PkPass_QCH
+        FILE KPim${KF_MAJOR_VERSION}PkPassQchTargets.cmake
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        COMPONENT Devel
+    )
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim${KF_MAJOR_VERSION}PkPassQchTargets.cmake\")")
+endif()
+
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KPimPkPassConfig.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}PkPassConfig.cmake"
@@ -92,15 +102,6 @@ install(EXPORT KPim${KF_MAJOR_VERSION}PkPassTargets
         NAMESPACE KPim${KF_MAJOR_VERSION}::
 )
 
-if (BUILD_QCH)
-    ecm_install_qch_export(
-        TARGETS KPim${KF_MAJOR_VERSION}PkPass_QCH
-        FILE KPim${KF_MAJOR_VERSION}PkPassQchTargets.cmake
-        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        COMPONENT Devel
-    )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim${KF_MAJOR_VERSION}PkPassQchTargets.cmake\")")
-endif()
 
 #if (QT_MAJOR_VERSION STREQUAL "5")
 ##
