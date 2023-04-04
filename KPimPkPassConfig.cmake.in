@@ -7,18 +7,8 @@
 
 include(CMakeFindDependencyMacro)
 
-find_package(Qt@QT_MAJOR_VERSION@ "@QT_REQUIRED_VERSION@" NO_MODULE REQUIRED COMPONENTS Core Gui)
-find_dependency(KF@KF_MAJOR_VERSION@Archive "@KF_MIN_VERSION@")
+find_package(Qt6 "@QT_REQUIRED_VERSION@" NO_MODULE REQUIRED COMPONENTS Core Gui)
+find_dependency(KF6Archive "@KF_MIN_VERSION@")
 
-if (@KPKPASS_KF5_COMPAT@)
-    message(WARNING "\n"
-                    "************* DEPRECATION WARNING *************\n"
-                    "Using find_package(KPimPkPass) and KPimPkPass targets is deprecated. "
-                    "Please use find_package(KPim@KF_MAJOR_VERSION@PkPass) and KPim@KF_MAJOR_VERSION@::PkPass instead. This backwards "
-                    "compatibility will be removed in the next major version.\n"
-                    "***********************************************\n")
-endif()
-
-
-include("${CMAKE_CURRENT_LIST_DIR}/KPim@KF_MAJOR_VERSION@PkPassTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/KPim6PkPassTargets.cmake")
 @PACKAGE_INCLUDE_QCHTARGETS@
