@@ -28,7 +28,7 @@ public:
     void parse();
     bool parseMessages(const QString &lang);
 
-    QVector<Field> fields(QLatin1String fieldType, const Pass *q) const;
+    QList<Field> fields(QLatin1String fieldType, const Pass *q) const;
 
     static Pass *fromData(std::unique_ptr<QIODevice> device, QObject *parent);
 

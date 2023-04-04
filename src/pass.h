@@ -9,8 +9,8 @@
 #include "field.h"
 #include "kpkpass_export.h"
 
+#include <QList>
 #include <QObject>
-#include <QVector>
 
 #include <memory>
 
@@ -59,7 +59,7 @@ class KPKPASS_EXPORT Pass : public QObject
     Q_PROPERTY(bool hasFooter READ hasFooter CONSTANT)
     Q_PROPERTY(bool hasThumbnail READ hasThumbnail CONSTANT)
 
-    // needs to be QVariantList just for QML (Grantlee would also work with QVector<Field>
+    // needs to be QVariantList just for QML (Grantlee would also work with QList<Field>
     Q_PROPERTY(QVariantList barcodes READ barcodesVariant CONSTANT)
     Q_PROPERTY(QVariantList auxiliaryFields READ auxiliaryFieldsVariant CONSTANT)
     Q_PROPERTY(QVariantList backFields READ backFieldsVariant CONSTANT)
@@ -89,14 +89,14 @@ public:
 
     // relevance keys
     /** Locations associated with this pass. */
-    Q_REQUIRED_RESULT QVector<Location> locations() const;
+    Q_REQUIRED_RESULT QList<Location> locations() const;
     /** Distance in meters to any of the pass locations before this pass becomes relevant. */
     Q_REQUIRED_RESULT int maximumDistance() const;
     Q_REQUIRED_RESULT QDateTime relevantDate() const;
 
     // visual appearance keys
     /** Returns all barcodes defined in the pass. */
-    Q_REQUIRED_RESULT QVector<Barcode> barcodes() const;
+    Q_REQUIRED_RESULT QList<Barcode> barcodes() const;
     Q_REQUIRED_RESULT QColor backgroundColor() const;
     Q_REQUIRED_RESULT QColor foregroundColor() const;
     Q_REQUIRED_RESULT QString groupingIdentifier() const;
@@ -141,16 +141,16 @@ public:
      */
     Q_REQUIRED_RESULT QUrl passUpdateUrl() const;
 
-    QVector<Field> auxiliaryFields() const;
-    QVector<Field> backFields() const;
-    QVector<Field> headerFields() const;
-    QVector<Field> primaryFields() const;
-    QVector<Field> secondaryFields() const;
+    QList<Field> auxiliaryFields() const;
+    QList<Field> backFields() const;
+    QList<Field> headerFields() const;
+    QList<Field> primaryFields() const;
+    QList<Field> secondaryFields() const;
 
     /** Returns the field with key @p key. */
     Field field(const QString &key) const;
     /** Returns all fields found in this pass. */
-    QVector<Field> fields() const;
+    QList<Field> fields() const;
 
     /** Create a appropriate sub-class based on the pkpass file type. */
     static Pass *fromData(const QByteArray &data, QObject *parent = nullptr);

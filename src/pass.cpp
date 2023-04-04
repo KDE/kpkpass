@@ -156,10 +156,10 @@ bool PassPrivate::parseMessages(const QString &lang)
     return !messages.isEmpty();
 }
 
-QVector<Field> PassPrivate::fields(QLatin1String fieldType, const Pass *q) const
+QList<Field> PassPrivate::fields(QLatin1String fieldType, const Pass *q) const
 {
     const auto a = passData().value(fieldType).toArray();
-    QVector<Field> f;
+    QList<Field> f;
     f.reserve(a.size());
     for (const auto &v : a) {
         f.push_back(Field{v.toObject(), q});
@@ -275,9 +275,9 @@ bool Pass::isVoided() const
     return d->passObj.value(QLatin1String("voided")).toString() == QLatin1String("true");
 }
 
-QVector<Location> Pass::locations() const
+QList<Location> Pass::locations() const
 {
-    QVector<Location> locs;
+    QList<Location> locs;
     const auto a = d->passObj.value(QLatin1String("locations")).toArray();
     locs.reserve(a.size());
     for (const auto &loc : a) {
@@ -448,9 +448,9 @@ QUrl Pass::passUpdateUrl() const
     return url;
 }
 
-QVector<Barcode> Pass::barcodes() const
+QList<Barcode> Pass::barcodes() const
 {
-    QVector<Barcode> codes;
+    QList<Barcode> codes;
 
     // barcodes array
     const auto a = d->passObj.value(QLatin1String("barcodes")).toArray();
@@ -471,27 +471,27 @@ QVector<Barcode> Pass::barcodes() const
 static const char *const fieldNames[] = {"auxiliaryFields", "backFields", "headerFields", "primaryFields", "secondaryFields"};
 static const auto fieldNameCount = sizeof(fieldNames) / sizeof(fieldNames[0]);
 
-QVector<Field> Pass::auxiliaryFields() const
+QList<Field> Pass::auxiliaryFields() const
 {
     return d->fields(QLatin1String(fieldNames[0]), this);
 }
 
-QVector<Field> Pass::backFields() const
+QList<Field> Pass::backFields() const
 {
     return d->fields(QLatin1String(fieldNames[1]), this);
 }
 
-QVector<Field> Pass::headerFields() const
+QList<Field> Pass::headerFields() const
 {
     return d->fields(QLatin1String(fieldNames[2]), this);
 }
 
-QVector<Field> Pass::primaryFields() const
+QList<Field> Pass::primaryFields() const
 {
     return d->fields(QLatin1String(fieldNames[3]), this);
 }
 
-QVector<Field> Pass::secondaryFields() const
+QList<Field> Pass::secondaryFields() const
 {
     return d->fields(QLatin1String(fieldNames[4]), this);
 }
@@ -509,9 +509,9 @@ Field Pass::field(const QString &key) const
     return {};
 }
 
-QVector<Field> Pass::fields() const
+QList<Field> Pass::fields() const
 {
-    QVector<Field> fs;
+    QList<Field> fs;
     for (unsigned int i = 0; i < fieldNameCount; ++i) {
         fs += d->fields(QLatin1String(fieldNames[i]), this);
     }
@@ -537,7 +537,7 @@ Pass *Pass::fromFile(const QString &fileName, QObject *parent)
 }
 
 template<typename T>
-static QVariantList toVariantList(const QVector<T> &elems)
+static QVariantList toVariantList(const QList<T> &elems)
 {
     QVariantList l;
     l.reserve(elems.size());
