@@ -65,7 +65,7 @@ install(TARGETS KPim6PkPass EXPORT KPim6PkPassTargets ${KDE_INSTALL_TARGETS_DEFA
 install(FILES
     ${KPkPass_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/kpkpass_export.h
-    ${CMAKE_BINARY_DIR}/kpkpass_version.h
+    ${CMAKE_BINARY_DIR}/src/kpkpass_version.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_PIM}/KPkPass
 )
 
