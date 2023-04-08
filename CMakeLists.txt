@@ -24,7 +24,7 @@ file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(GenerateExportHeader)
+include(ECMGenerateExportHeader)
 include(ECMAddQch)
 
 
@@ -33,7 +33,7 @@ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt 
 
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
-    VERSION_HEADER kpkpass_version.h
+    VERSION_HEADER src/kpkpass_version.h
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim6PkPassConfigVersion.cmake"
 )
 

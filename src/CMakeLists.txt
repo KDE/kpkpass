@@ -26,8 +26,14 @@ ecm_qt_declare_logging_category(KPim6PkPass
         CATEGORY_NAME org.kde.pkpass
         DESCRIPTION "KPkPass" EXPORT KPKPASS)
 
+ecm_generate_export_header(KPim6PkPass
+    BASE_NAME KPkPass
+    VERSION ${KPKPASS_VERSION}
+    DEPRECATED_BASE_VERSION 0
+    USE_VERSION_HEADER
+)
 
-generate_export_header(KPim6PkPass BASE_NAME KPkPass)
+
 set_target_properties(KPim6PkPass PROPERTIES
     VERSION ${KPKPASS_VERSION}
     SOVERSION ${KPKPASS_SOVERSION}
