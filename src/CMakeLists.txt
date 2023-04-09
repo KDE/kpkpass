@@ -30,7 +30,7 @@ ecm_generate_export_header(KPim6PkPass
     BASE_NAME KPkPass
     VERSION ${KPKPASS_VERSION}
     DEPRECATED_BASE_VERSION 0
-    USE_VERSION_HEADER
+    USE_VERSION_HEADER \"kpkpass_version.h\"
 )
 
 
