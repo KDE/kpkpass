@@ -35,6 +35,7 @@ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
     VERSION_HEADER src/kpkpass_version.h
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim6PkPassConfigVersion.cmake"
+    SOVERSION 6
 )
 
 find_package(Qt6 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
