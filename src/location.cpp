@@ -53,3 +53,5 @@ QString Location::relevantText() const
 {
     return d->obj.value(QLatin1String("relevantText")).toString();
 }
+
+#include "moc_location.cpp"

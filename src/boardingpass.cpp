@@ -30,3 +30,5 @@ BoardingPass::TransitType BoardingPass::transitType() const
     }
     return Generic;
 }
+
+#include "moc_boardingpass.cpp"

@@ -68,3 +68,5 @@ QString Barcode::messageEncoding() const
 {
     return d->obj.value(QLatin1String("messageEncoding")).toString();
 }
+
+#include "moc_barcode.cpp"
