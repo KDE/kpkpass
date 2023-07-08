@@ -50,16 +50,21 @@ QString PassPrivate::message(const QString &key) const
 
 void PassPrivate::parse()
 {
-    // find the message catalog
-    auto lang = QLocale().name();
-    auto idx = lang.indexOf(QLatin1Char('_'));
-    if (idx > 0) {
-        lang = lang.left(idx);
+    // find the first matching message catalog
+    const auto langs = QLocale().uiLanguages();
+    for (auto lang : langs) {
+        auto idx = lang.indexOf(QLatin1Char('-'));
+        if (idx > 0) {
+            lang = lang.left(idx);
+        }
+        lang += QLatin1String(".lproj");
+        if (parseMessages(lang)) {
+            return;
+        }
     }
-    lang += QLatin1String(".lproj");
-    if (!parseMessages(lang)) {
-        parseMessages(QStringLiteral("en.lproj"));
-    }
+
+    // fallback to Englis if we didn't find anything better
+    parseMessages(QStringLiteral("en.lproj"));
 }
 
 static int indexOfUnquoted(const QString &catalog, QLatin1Char c, int start)
