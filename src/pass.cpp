@@ -152,7 +152,7 @@ bool PassPrivate::parseMessages(const QString &lang)
             break;
         }
         const auto valueEnd = indexOfUnquoted(catalog, QLatin1Char('"'), valueBegin);
-        if (valueEnd <= valueBegin) {
+        if (valueEnd < valueBegin) {
             break;
         }
 
