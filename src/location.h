@@ -48,5 +48,3 @@ private:
 };
 
 }
-
-Q_DECLARE_METATYPE(KPkPass::Location)
