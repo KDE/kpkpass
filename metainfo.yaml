@@ -12,8 +12,7 @@ portingAid: false
 deprecated: false
 release: true
 libraries:
- - qmake: KPim6PkPass
-   cmake: "KPim6::PkPass"
+ - cmake: "KPim6::PkPass"
 cmakename: KPim6PkPass
 
 public_lib: true
