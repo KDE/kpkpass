@@ -39,13 +39,13 @@ public:
     ~Barcode();
 
     /** A human readable version of the barcode data. */
-    Q_REQUIRED_RESULT QString alternativeText() const;
+    [[nodiscard]] QString alternativeText() const;
     /** The barcode type. */
-    Q_REQUIRED_RESULT Format format() const;
+    [[nodiscard]] Format format() const;
     /** The message encoded in the barcode. */
-    Q_REQUIRED_RESULT QString message() const;
+    [[nodiscard]] QString message() const;
     /** Encoding used for the message() content. */
-    Q_REQUIRED_RESULT QString messageEncoding() const;
+    [[nodiscard]] QString messageEncoding() const;
 
 private:
     friend class Pass;

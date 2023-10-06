@@ -33,13 +33,13 @@ public:
     ~Location();
 
     /** Altitude in meters, NaN if not set. */
-    Q_REQUIRED_RESULT double altitude() const;
+    [[nodiscard]] double altitude() const;
     /** Latitude in degree. */
-    Q_REQUIRED_RESULT double latitude() const;
+    [[nodiscard]] double latitude() const;
     /** Longitude in degree. */
-    Q_REQUIRED_RESULT double longitude() const;
+    [[nodiscard]] double longitude() const;
     /** Text to display when location is reached. */
-    Q_REQUIRED_RESULT QString relevantText() const;
+    [[nodiscard]] QString relevantText() const;
 
 private:
     friend class Pass;

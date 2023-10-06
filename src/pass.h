@@ -75,33 +75,33 @@ public:
     /** Type of the pass. */
     enum Type { BoardingPass, Coupon, EventTicket, Generic, StoreCard };
     Q_ENUM(Type)
-    Q_REQUIRED_RESULT Type type() const;
+    [[nodiscard]] Type type() const;
 
     // standard keys
-    Q_REQUIRED_RESULT QString description() const;
-    Q_REQUIRED_RESULT QString organizationName() const;
-    Q_REQUIRED_RESULT QString passTypeIdentifier() const;
-    Q_REQUIRED_RESULT QString serialNumber() const;
+    [[nodiscard]] QString description() const;
+    [[nodiscard]] QString organizationName() const;
+    [[nodiscard]] QString passTypeIdentifier() const;
+    [[nodiscard]] QString serialNumber() const;
 
     // expiration keys
-    Q_REQUIRED_RESULT QDateTime expirationDate() const;
-    Q_REQUIRED_RESULT bool isVoided() const;
+    [[nodiscard]] QDateTime expirationDate() const;
+    [[nodiscard]] bool isVoided() const;
 
     // relevance keys
     /** Locations associated with this pass. */
-    Q_REQUIRED_RESULT QList<Location> locations() const;
+    [[nodiscard]] QList<Location> locations() const;
     /** Distance in meters to any of the pass locations before this pass becomes relevant. */
-    Q_REQUIRED_RESULT int maximumDistance() const;
-    Q_REQUIRED_RESULT QDateTime relevantDate() const;
+    [[nodiscard]] int maximumDistance() const;
+    [[nodiscard]] QDateTime relevantDate() const;
 
     // visual appearance keys
     /** Returns all barcodes defined in the pass. */
-    Q_REQUIRED_RESULT QList<Barcode> barcodes() const;
-    Q_REQUIRED_RESULT QColor backgroundColor() const;
-    Q_REQUIRED_RESULT QColor foregroundColor() const;
-    Q_REQUIRED_RESULT QString groupingIdentifier() const;
-    Q_REQUIRED_RESULT QColor labelColor() const;
-    Q_REQUIRED_RESULT QString logoText() const;
+    [[nodiscard]] QList<Barcode> barcodes() const;
+    [[nodiscard]] QColor backgroundColor() const;
+    [[nodiscard]] QColor foregroundColor() const;
+    [[nodiscard]] QString groupingIdentifier() const;
+    [[nodiscard]] QColor labelColor() const;
+    [[nodiscard]] QString logoText() const;
 
     /** Returns @c true if an image asset with the given base name exists.
      *  @param baseName The name of the asset, without the file type and high dpi extensions.
@@ -134,12 +134,12 @@ public:
     QImage thumbnail(unsigned int devicePixelRatio = 1) const;
 
     // web service keys
-    Q_REQUIRED_RESULT QString authenticationToken() const;
-    Q_REQUIRED_RESULT QUrl webServiceUrl() const;
+    [[nodiscard]] QString authenticationToken() const;
+    [[nodiscard]] QUrl webServiceUrl() const;
     /** Pass update URL.
      * @see https://developer.apple.com/library/content/documentation/PassKit/Reference/PassKit_WebService/WebService.html
      */
-    Q_REQUIRED_RESULT QUrl passUpdateUrl() const;
+    [[nodiscard]] QUrl passUpdateUrl() const;
 
     QList<Field> auxiliaryFields() const;
     QList<Field> backFields() const;

@@ -22,7 +22,7 @@ public:
     explicit BoardingPass(QObject *parent = nullptr);
     ~BoardingPass() override;
 
-    Q_REQUIRED_RESULT TransitType transitType() const;
+    [[nodiscard]] TransitType transitType() const;
 };
 
 }
