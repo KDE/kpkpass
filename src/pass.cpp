@@ -25,6 +25,8 @@
 #include <QStringDecoder>
 #include <QUrl>
 
+#include <cctype>
+
 using namespace KPkPass;
 
 static const char *const passTypes[] = {"boardingPass", "coupon", "eventTicket", "generic", "storeCard"};
@@ -119,11 +121,14 @@ bool PassPrivate::parseMessages(const QString &lang)
 
     std::unique_ptr<QIODevice> dev(file->createDevice());
     const auto rawData = dev->readAll();
+    if (rawData.size() < 4) {
+        return false;
+    }
     // this should be UTF-16BE, but that doesn't stop Eurowings from using UTF-8,
     // so do a primitive auto-detection here. UTF-16's first byte would either be the BOM
     // or \0.
     QString catalog;
-    if (rawData.at(0) == '"') {
+    if (std::ispunct((unsigned char)rawData.at(0))) {
         catalog = QString::fromUtf8(rawData);
     } else {
         auto codec = QStringDecoder(QStringDecoder::Utf16BE);
