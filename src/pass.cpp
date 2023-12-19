@@ -546,52 +546,6 @@ Pass *Pass::fromFile(const QString &fileName, QObject *parent)
     return nullptr;
 }
 
-template<typename T>
-static QVariantList toVariantList(const QList<T> &elems)
-{
-    QVariantList l;
-    l.reserve(elems.size());
-    std::for_each(elems.begin(), elems.end(), [&l](const T &e) {
-        l.push_back(QVariant::fromValue(e));
-    });
-    return l;
-}
-
-QVariantList Pass::auxiliaryFieldsVariant() const
-{
-    return toVariantList(auxiliaryFields());
-}
-
-QVariantList Pass::backFieldsVariant() const
-{
-    return toVariantList(backFields());
-}
-
-QVariantList Pass::headerFieldsVariant() const
-{
-    return toVariantList(headerFields());
-}
-
-QVariantList Pass::primaryFieldsVariant() const
-{
-    return toVariantList(primaryFields());
-}
-
-QVariantList Pass::secondaryFieldsVariant() const
-{
-    return toVariantList(secondaryFields());
-}
-
-QVariantList Pass::barcodesVariant() const
-{
-    return toVariantList(barcodes());
-}
-
-QVariantList Pass::locationsVariant() const
-{
-    return toVariantList(locations());
-}
-
 QVariantMap Pass::fieldsVariantMap() const
 {
     QVariantMap m;

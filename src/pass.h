@@ -60,13 +60,13 @@ class KPKPASS_EXPORT Pass : public QObject
     Q_PROPERTY(bool hasThumbnail READ hasThumbnail CONSTANT)
 
     // needs to be QVariantList just for QML (Grantlee would also work with QList<Field>
-    Q_PROPERTY(QVariantList barcodes READ barcodesVariant CONSTANT)
-    Q_PROPERTY(QVariantList auxiliaryFields READ auxiliaryFieldsVariant CONSTANT)
-    Q_PROPERTY(QVariantList backFields READ backFieldsVariant CONSTANT)
-    Q_PROPERTY(QVariantList headerFields READ headerFieldsVariant CONSTANT)
-    Q_PROPERTY(QVariantList primaryFields READ primaryFieldsVariant CONSTANT)
-    Q_PROPERTY(QVariantList secondaryFields READ secondaryFieldsVariant CONSTANT)
-    Q_PROPERTY(QVariantList locations READ locationsVariant CONSTANT)
+    Q_PROPERTY(QList<KPkPass::Barcode> barcodes READ barcodes CONSTANT)
+    Q_PROPERTY(QList<KPkPass::Field> auxiliaryFields READ auxiliaryFields CONSTANT)
+    Q_PROPERTY(QList<KPkPass::Field> backFields READ backFields CONSTANT)
+    Q_PROPERTY(QList<KPkPass::Field> headerFields READ headerFields CONSTANT)
+    Q_PROPERTY(QList<KPkPass::Field> primaryFields READ primaryFields CONSTANT)
+    Q_PROPERTY(QList<KPkPass::Field> secondaryFields READ secondaryFields CONSTANT)
+    Q_PROPERTY(QList<KPkPass::Location> locations READ locations CONSTANT)
     Q_PROPERTY(QVariantMap field READ fieldsVariantMap CONSTANT)
 
 public:
@@ -174,13 +174,6 @@ protected:
     ///@endcond
 
 private:
-    QVariantList auxiliaryFieldsVariant() const;
-    QVariantList backFieldsVariant() const;
-    QVariantList headerFieldsVariant() const;
-    QVariantList primaryFieldsVariant() const;
-    QVariantList secondaryFieldsVariant() const;
-    QVariantList barcodesVariant() const;
-    QVariantList locationsVariant() const;
     QVariantMap fieldsVariantMap() const;
 };
 
