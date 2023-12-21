@@ -119,19 +119,19 @@ public:
      *  @param baseName The name of the asset, without the file name extension.
      *  @param devicePixelRatio The device pixel ration, for loading highdpi assets.
      */
-    QImage image(const QString &baseName, unsigned int devicePixelRatio = 1) const;
+    [[nodiscard]] QImage image(const QString &baseName, unsigned int devicePixelRatio = 1) const;
     /** Returns the pass icon. */
-    QImage icon(unsigned int devicePixelRatio = 1) const;
+    Q_INVOKABLE [[nodiscard]] QImage icon(unsigned int devicePixelRatio = 1) const;
     /** Returns the pass logo. */
-    QImage logo(unsigned int devicePixelRatio = 1) const;
+    Q_INVOKABLE [[nodiscard]] QImage logo(unsigned int devicePixelRatio = 1) const;
     /** Returns the strip image if present. */
-    QImage strip(unsigned int devicePixelRatio = 1) const;
+    Q_INVOKABLE [[nodiscard]] QImage strip(unsigned int devicePixelRatio = 1) const;
     /** Returns the background image if present. */
-    QImage background(unsigned int devicePixelRatio = 1) const;
+    Q_INVOKABLE [[nodiscard]] QImage background(unsigned int devicePixelRatio = 1) const;
     /** Returns the footer image if present. */
-    QImage footer(unsigned int devicePixelRatio = 1) const;
+    Q_INVOKABLE [[nodiscard]] QImage footer(unsigned int devicePixelRatio = 1) const;
     /** Returns the thumbnail image if present. */
-    QImage thumbnail(unsigned int devicePixelRatio = 1) const;
+    Q_INVOKABLE [[nodiscard]] QImage thumbnail(unsigned int devicePixelRatio = 1) const;
 
     // web service keys
     [[nodiscard]] QString authenticationToken() const;
