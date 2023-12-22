@@ -11,6 +11,7 @@
 #include <QJsonObject>
 #include <QLocale>
 #include <QTest>
+#include <QTimeZone>
 
 #include <cmath>
 
@@ -41,7 +42,7 @@ private Q_SLOTS:
             QJsonDocument::fromJson(R"({"key":"valid-date","label":"Datum","dateStyle":"PKDateStyleShort","value":"2021-06-27T14:30:00+02:00"})").object();
         KPkPass::Field f(obj, pass.get());
         QCOMPARE(f.value().userType(), QMetaType::QDateTime);
-        QCOMPARE(f.value(), QDateTime({2021, 6, 27}, {14, 30}, Qt::OffsetFromUTC, 7200));
+        QCOMPARE(f.value(), QDateTime({2021, 6, 27}, {14, 30}, QTimeZone::fromSecondsAheadOfUtc(7200)));
         QCOMPARE(f.valueDisplayString(), QLatin1String("27/06/2021 14:30"));
 
         obj = QJsonDocument::fromJson(R"({"key":"valid-date","label":"Datum","dateStyle":"PKDateStyleShort","value":"2021-06-27T00:00:00+02:00"})").object();

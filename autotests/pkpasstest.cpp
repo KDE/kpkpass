@@ -10,6 +10,7 @@
 
 #include <QLocale>
 #include <QTest>
+#include <QTimeZone>
 
 #include <cmath>
 
@@ -34,8 +35,8 @@ private Q_SLOTS:
 
         QCOMPARE(pass->logoText(), QLatin1String("Boarding Pass"));
         QCOMPARE(pass->backgroundColor(), QColor(61, 174, 233));
-        QCOMPARE(pass->relevantDate(), QDateTime(QDate(2017, 9, 17), QTime(0, 4, 0), Qt::UTC));
-        QCOMPARE(pass->expirationDate(), QDateTime(QDate(2017, 9, 18), QTime(0, 0, 36), Qt::UTC));
+        QCOMPARE(pass->relevantDate(), QDateTime(QDate(2017, 9, 17), QTime(0, 4, 0), QTimeZone::UTC));
+        QCOMPARE(pass->expirationDate(), QDateTime(QDate(2017, 9, 18), QTime(0, 0, 36), QTimeZone::UTC));
         QCOMPARE(pass->isVoided(), false);
         QCOMPARE(pass->groupingIdentifier(), QLatin1String(""));
 
