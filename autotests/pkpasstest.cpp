@@ -80,6 +80,11 @@ private Q_SLOTS:
         QCOMPARE(pass->hasLogo(), true);
         auto img = pass->logo(3);
         QVERIFY(!img.isNull());
+        img = pass->logo(3);
+        QVERIFY(!img.isNull());
+        img = pass->logo(1);
+        QVERIFY(!img.isNull());
+
         img = pass->image(QStringLiteral("I don't exist"));
         QVERIFY(img.isNull());
 

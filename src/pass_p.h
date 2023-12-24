@@ -11,9 +11,27 @@
 #include <QString>
 
 #include <memory>
+#include <unordered_map>
 
 class KZip;
 class QIODevice;
+
+namespace KPkPass
+{
+struct ImageCacheKey {
+    QString name;
+    unsigned int dpr;
+    bool operator==(const ImageCacheKey &) const = default;
+};
+}
+
+template<>
+struct std::hash<KPkPass::ImageCacheKey> {
+    std::size_t operator()(const KPkPass::ImageCacheKey &key) const noexcept
+    {
+        return std::hash<QString>{}(key.name) ^ std::hash<unsigned int>{}(key.dpr);
+    }
+};
 
 namespace KPkPass
 {
@@ -37,5 +55,6 @@ public:
     QJsonObject passObj;
     QHash<QString, QString> messages;
     Pass::Type passType;
+    std::unordered_map<ImageCacheKey, QImage> m_images;
 };
 }

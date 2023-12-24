@@ -393,18 +393,38 @@ bool Pass::hasThumbnail() const
 QImage Pass::image(const QString &baseName, unsigned int devicePixelRatio) const
 {
     const KArchiveFile *file = nullptr;
-    for (; devicePixelRatio > 1; --devicePixelRatio) {
-        file = d->zip->directory()->file(baseName + QLatin1Char('@') + QString::number(devicePixelRatio) + QLatin1String("x.png"));
+    QImage img;
+
+    auto dpr = devicePixelRatio;
+    for (; dpr > 0; --dpr) {
+        const auto it = d->m_images.find(ImageCacheKey{baseName, dpr});
+        if (it != d->m_images.end()) {
+            img = (*it).second;
+            break;
+        }
+        if (dpr > 1) {
+            file = d->zip->directory()->file(baseName + QLatin1Char('@') + QString::number(dpr) + QLatin1String("x.png"));
+        } else {
+            file = d->zip->directory()->file(baseName + QLatin1String(".png"));
+        }
         if (file)
             break;
     }
-    if (!file)
-        file = d->zip->directory()->file(baseName + QLatin1String(".png"));
-    if (!file)
+    if (!img.isNull()) { // cache hit
+        return img;
+    }
+
+    if (!file) {
         return {};
+    }
+
     std::unique_ptr<QIODevice> dev(file->createDevice());
-    auto img = QImage::fromData(dev->readAll());
-    img.setDevicePixelRatio(devicePixelRatio);
+    img = QImage::fromData(dev->readAll());
+    img.setDevicePixelRatio(dpr);
+    d->m_images[ImageCacheKey{baseName, dpr}] = img;
+    if (dpr != devicePixelRatio) {
+        d->m_images[ImageCacheKey{baseName, devicePixelRatio}] = img;
+    }
     return img;
 }
 
