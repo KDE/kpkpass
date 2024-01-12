@@ -16,7 +16,6 @@
 #include <QBuffer>
 #include <QColor>
 #include <QFile>
-#include <QImage>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
