@@ -17,6 +17,7 @@ include(ECMAddTests)
 include(ECMGenerateHeaders)
 include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
+include(ECMFeatureSummary)
 include(ECMSetupVersion)
 include(FeatureSummary)
 include(KDEGitCommitHooks)
@@ -63,7 +64,7 @@ if (BUILD_TESTING)
 endif()
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
-feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+ecm_feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6PkPass")
