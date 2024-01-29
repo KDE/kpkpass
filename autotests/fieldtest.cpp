@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include <field.h>
-#include <pass.h>
+#include "field.h"
+#include "pass.h"
 
 #include <QJsonDocument>
 #include <QJsonObject>

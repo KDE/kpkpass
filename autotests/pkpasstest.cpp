@@ -4,9 +4,9 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include <barcode.h>
-#include <boardingpass.h>
-#include <location.h>
+#include "barcode.h"
+#include "boardingpass.h"
+#include "location.h"
 
 #include <QLocale>
 #include <QTest>
