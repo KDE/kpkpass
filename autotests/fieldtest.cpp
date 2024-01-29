@@ -43,20 +43,20 @@ private Q_SLOTS:
         KPkPass::Field f(obj, pass.get());
         QCOMPARE(f.value().userType(), QMetaType::QDateTime);
         QCOMPARE(f.value(), QDateTime({2021, 6, 27}, {14, 30}, QTimeZone::fromSecondsAheadOfUtc(7200)));
-        QCOMPARE(f.valueDisplayString(), QLatin1String("27/06/2021 14:30"));
+        QCOMPARE(f.valueDisplayString(), QLatin1StringView("27/06/2021 14:30"));
 
         obj = QJsonDocument::fromJson(R"({"key":"valid-date","label":"Datum","dateStyle":"PKDateStyleShort","value":"2021-06-27T00:00:00+02:00"})").object();
         f = KPkPass::Field(obj, pass.get());
         QCOMPARE(f.value().userType(), QMetaType::QDateTime);
         QCOMPARE(f.value().toDateTime().date(), QDate({2021, 6, 27}));
-        QCOMPARE(f.valueDisplayString(), QLatin1String("27/06/2021"));
+        QCOMPARE(f.valueDisplayString(), QLatin1StringView("27/06/2021"));
 
         obj = QJsonDocument::fromJson(R"({"key":"valid-locations","label":"Ort","value":"Freibad Killesberg\n"})").object();
         f = KPkPass::Field(obj, pass.get());
 
         QCOMPARE(f.value().userType(), QMetaType::QString);
-        QCOMPARE(f.value(), QLatin1String("Freibad Killesberg\n"));
-        QCOMPARE(f.valueDisplayString(), QLatin1String("Freibad Killesberg"));
+        QCOMPARE(f.value(), QLatin1StringView("Freibad Killesberg\n"));
+        QCOMPARE(f.valueDisplayString(), QLatin1StringView("Freibad Killesberg"));
     }
 };
 }

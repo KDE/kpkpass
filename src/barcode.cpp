@@ -39,21 +39,21 @@ Barcode::~Barcode() = default;
 QString Barcode::alternativeText() const
 {
     if (d->pass) {
-        return d->pass->d->message(d->obj.value(QLatin1String("altText")).toString());
+        return d->pass->d->message(d->obj.value(QLatin1StringView("altText")).toString());
     }
     return {};
 }
 
 Barcode::Format KPkPass::Barcode::format() const
 {
-    const auto format = d->obj.value(QLatin1String("format")).toString();
-    if (format == QLatin1String("PKBarcodeFormatQR")) {
+    const auto format = d->obj.value(QLatin1StringView("format")).toString();
+    if (format == QLatin1StringView("PKBarcodeFormatQR")) {
         return QR;
-    } else if (format == QLatin1String("PKBarcodeFormatPDF417")) {
+    } else if (format == QLatin1StringView("PKBarcodeFormatPDF417")) {
         return PDF417;
-    } else if (format == QLatin1String("PKBarcodeFormatAztec")) {
+    } else if (format == QLatin1StringView("PKBarcodeFormatAztec")) {
         return Aztec;
-    } else if (format == QLatin1String("PKBarcodeFormatCode128")) {
+    } else if (format == QLatin1StringView("PKBarcodeFormatCode128")) {
         return Code128;
     }
     return Invalid;
@@ -61,12 +61,12 @@ Barcode::Format KPkPass::Barcode::format() const
 
 QString Barcode::message() const
 {
-    return d->obj.value(QLatin1String("message")).toString();
+    return d->obj.value(QLatin1StringView("message")).toString();
 }
 
 QString Barcode::messageEncoding() const
 {
-    return d->obj.value(QLatin1String("messageEncoding")).toString();
+    return d->obj.value(QLatin1StringView("messageEncoding")).toString();
 }
 
 #include "moc_barcode.cpp"

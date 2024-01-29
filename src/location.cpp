@@ -36,22 +36,22 @@ Location::~Location() = default;
 
 double Location::altitude() const
 {
-    return d->obj.value(QLatin1String("altitude")).toDouble(NAN);
+    return d->obj.value(QLatin1StringView("altitude")).toDouble(NAN);
 }
 
 double Location::latitude() const
 {
-    return d->obj.value(QLatin1String("latitude")).toDouble(NAN);
+    return d->obj.value(QLatin1StringView("latitude")).toDouble(NAN);
 }
 
 double Location::longitude() const
 {
-    return d->obj.value(QLatin1String("longitude")).toDouble(NAN);
+    return d->obj.value(QLatin1StringView("longitude")).toDouble(NAN);
 }
 
 QString Location::relevantText() const
 {
-    return d->obj.value(QLatin1String("relevantText")).toString();
+    return d->obj.value(QLatin1StringView("relevantText")).toString();
 }
 
 #include "moc_location.cpp"

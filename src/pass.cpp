@@ -33,7 +33,7 @@ static const auto passTypesCount = sizeof(passTypes) / sizeof(passTypes[0]);
 
 QJsonObject PassPrivate::passData() const
 {
-    return passObj.value(QLatin1String(passTypes[passType])).toObject();
+    return passObj.value(QLatin1StringView(passTypes[passType])).toObject();
 }
 
 QString PassPrivate::message(const QString &key) const
@@ -54,7 +54,7 @@ void PassPrivate::parse()
         if (idx > 0) {
             lang = lang.left(idx);
         }
-        lang += QLatin1String(".lproj");
+        lang += QLatin1StringView(".lproj");
         if (parseMessages(lang)) {
             return;
         }
@@ -165,7 +165,7 @@ bool PassPrivate::parseMessages(const QString &lang)
     return !messages.isEmpty();
 }
 
-QList<Field> PassPrivate::fields(QLatin1String fieldType, const Pass *q) const
+QList<Field> PassPrivate::fields(QLatin1StringView fieldType, const Pass *q) const
 {
     const auto a = passData().value(fieldType).toArray();
     QList<Field> f;
@@ -205,7 +205,7 @@ Pass *PassPrivate::fromData(std::unique_ptr<QIODevice> device, QObject *parent)
             return nullptr;
         }
     }
-    if (passObj.value(QLatin1String("formatVersion")).toInt() > 1) {
+    if (passObj.value(QLatin1StringView("formatVersion")).toInt() > 1) {
         qCWarning(Log) << "pass.json has unsupported format version!";
         return nullptr;
     }
@@ -213,7 +213,7 @@ Pass *PassPrivate::fromData(std::unique_ptr<QIODevice> device, QObject *parent)
     // determine pass type
     int passTypeIdx = -1;
     for (unsigned int i = 0; i < passTypesCount; ++i) {
-        if (passObj.contains(QLatin1String(passTypes[i]))) {
+        if (passObj.contains(QLatin1StringView(passTypes[i]))) {
             passTypeIdx = static_cast<int>(i);
             break;
         }
@@ -256,38 +256,38 @@ Pass::Type Pass::type() const
 
 QString Pass::description() const
 {
-    return d->passObj.value(QLatin1String("description")).toString();
+    return d->passObj.value(QLatin1StringView("description")).toString();
 }
 
 QString Pass::organizationName() const
 {
-    return d->passObj.value(QLatin1String("organizationName")).toString();
+    return d->passObj.value(QLatin1StringView("organizationName")).toString();
 }
 
 QString Pass::passTypeIdentifier() const
 {
-    return d->passObj.value(QLatin1String("passTypeIdentifier")).toString();
+    return d->passObj.value(QLatin1StringView("passTypeIdentifier")).toString();
 }
 
 QString Pass::serialNumber() const
 {
-    return d->passObj.value(QLatin1String("serialNumber")).toString();
+    return d->passObj.value(QLatin1StringView("serialNumber")).toString();
 }
 
 QDateTime Pass::expirationDate() const
 {
-    return QDateTime::fromString(d->passObj.value(QLatin1String("expirationDate")).toString(), Qt::ISODate);
+    return QDateTime::fromString(d->passObj.value(QLatin1StringView("expirationDate")).toString(), Qt::ISODate);
 }
 
 bool Pass::isVoided() const
 {
-    return d->passObj.value(QLatin1String("voided")).toString() == QLatin1String("true");
+    return d->passObj.value(QLatin1StringView("voided")).toString() == QLatin1String("true");
 }
 
 QList<Location> Pass::locations() const
 {
     QList<Location> locs;
-    const auto a = d->passObj.value(QLatin1String("locations")).toArray();
+    const auto a = d->passObj.value(QLatin1StringView("locations")).toArray();
     locs.reserve(a.size());
     for (const auto &loc : a) {
         locs.push_back(Location(loc.toObject()));
@@ -298,17 +298,17 @@ QList<Location> Pass::locations() const
 
 int Pass::maximumDistance() const
 {
-    return d->passObj.value(QLatin1String("maxDistance")).toInt(500);
+    return d->passObj.value(QLatin1StringView("maxDistance")).toInt(500);
 }
 
 QDateTime Pass::relevantDate() const
 {
-    return QDateTime::fromString(d->passObj.value(QLatin1String("relevantDate")).toString(), Qt::ISODate);
+    return QDateTime::fromString(d->passObj.value(QLatin1StringView("relevantDate")).toString(), Qt::ISODate);
 }
 
 static QColor parseColor(const QString &s)
 {
-    if (s.startsWith(QLatin1String("rgb("), Qt::CaseInsensitive)) {
+    if (s.startsWith(QLatin1StringView("rgb("), Qt::CaseInsensitive)) {
         const auto l = QStringView(s).mid(4, s.length() - 5).split(QLatin1Char(','));
         if (l.size() != 3)
             return {};
@@ -319,22 +319,22 @@ static QColor parseColor(const QString &s)
 
 QColor Pass::backgroundColor() const
 {
-    return parseColor(d->passObj.value(QLatin1String("backgroundColor")).toString());
+    return parseColor(d->passObj.value(QLatin1StringView("backgroundColor")).toString());
 }
 
 QColor Pass::foregroundColor() const
 {
-    return parseColor(d->passObj.value(QLatin1String("foregroundColor")).toString());
+    return parseColor(d->passObj.value(QLatin1StringView("foregroundColor")).toString());
 }
 
 QString Pass::groupingIdentifier() const
 {
-    return d->passObj.value(QLatin1String("groupingIdentifier")).toString();
+    return d->passObj.value(QLatin1StringView("groupingIdentifier")).toString();
 }
 
 QColor Pass::labelColor() const
 {
-    const auto c = parseColor(d->passObj.value(QLatin1String("labelColor")).toString());
+    const auto c = parseColor(d->passObj.value(QLatin1StringView("labelColor")).toString());
     if (c.isValid()) {
         return c;
     }
@@ -343,7 +343,7 @@ QColor Pass::labelColor() const
 
 QString Pass::logoText() const
 {
-    return d->message(d->passObj.value(QLatin1String("logoText")).toString());
+    return d->message(d->passObj.value(QLatin1StringView("logoText")).toString());
 }
 
 bool Pass::hasImage(const QString &baseName) const
@@ -352,7 +352,7 @@ bool Pass::hasImage(const QString &baseName) const
     for (const auto &entry : entries) {
         if (entry.startsWith(baseName)
             && (QStringView(entry).mid(baseName.size()).startsWith(QLatin1Char('@')) || QStringView(entry).mid(baseName.size()).startsWith(QLatin1Char('.')))
-            && entry.endsWith(QLatin1String(".png"))) {
+            && entry.endsWith(QLatin1StringView(".png"))) {
             return true;
         }
     }
@@ -402,9 +402,9 @@ QImage Pass::image(const QString &baseName, unsigned int devicePixelRatio) const
             break;
         }
         if (dpr > 1) {
-            file = d->zip->directory()->file(baseName + QLatin1Char('@') + QString::number(dpr) + QLatin1String("x.png"));
+            file = d->zip->directory()->file(baseName + QLatin1Char('@') + QString::number(dpr) + QLatin1StringView("x.png"));
         } else {
-            file = d->zip->directory()->file(baseName + QLatin1String(".png"));
+            file = d->zip->directory()->file(baseName + QLatin1StringView(".png"));
         }
         if (file)
             break;
@@ -459,12 +459,12 @@ QImage Pass::thumbnail(unsigned int devicePixelRatio) const
 
 QString Pass::authenticationToken() const
 {
-    return d->passObj.value(QLatin1String("authenticationToken")).toString();
+    return d->passObj.value(QLatin1StringView("authenticationToken")).toString();
 }
 
 QUrl Pass::webServiceUrl() const
 {
-    return QUrl(d->passObj.value(QLatin1String("webServiceURL")).toString());
+    return QUrl(d->passObj.value(QLatin1StringView("webServiceURL")).toString());
 }
 
 QUrl Pass::passUpdateUrl() const
@@ -473,7 +473,7 @@ QUrl Pass::passUpdateUrl() const
     if (!url.isValid()) {
         return {};
     }
-    url.setPath(url.path() + QLatin1String("/v1/passes/") + passTypeIdentifier() + QLatin1Char('/') + serialNumber());
+    url.setPath(url.path() + QLatin1StringView("/v1/passes/") + passTypeIdentifier() + QLatin1Char('/') + serialNumber());
     return url;
 }
 
@@ -482,14 +482,14 @@ QList<Barcode> Pass::barcodes() const
     QList<Barcode> codes;
 
     // barcodes array
-    const auto a = d->passObj.value(QLatin1String("barcodes")).toArray();
+    const auto a = d->passObj.value(QLatin1StringView("barcodes")).toArray();
     codes.reserve(a.size());
     for (const auto &bc : a)
         codes.push_back(Barcode(bc.toObject(), this));
 
     // just a single barcode
     if (codes.isEmpty()) {
-        const auto bc = d->passObj.value(QLatin1String("barcode")).toObject();
+        const auto bc = d->passObj.value(QLatin1StringView("barcode")).toObject();
         if (!bc.isEmpty())
             codes.push_back(Barcode(bc, this));
     }
@@ -502,33 +502,33 @@ static const auto fieldNameCount = sizeof(fieldNames) / sizeof(fieldNames[0]);
 
 QList<Field> Pass::auxiliaryFields() const
 {
-    return d->fields(QLatin1String(fieldNames[0]), this);
+    return d->fields(QLatin1StringView(fieldNames[0]), this);
 }
 
 QList<Field> Pass::backFields() const
 {
-    return d->fields(QLatin1String(fieldNames[1]), this);
+    return d->fields(QLatin1StringView(fieldNames[1]), this);
 }
 
 QList<Field> Pass::headerFields() const
 {
-    return d->fields(QLatin1String(fieldNames[2]), this);
+    return d->fields(QLatin1StringView(fieldNames[2]), this);
 }
 
 QList<Field> Pass::primaryFields() const
 {
-    return d->fields(QLatin1String(fieldNames[3]), this);
+    return d->fields(QLatin1StringView(fieldNames[3]), this);
 }
 
 QList<Field> Pass::secondaryFields() const
 {
-    return d->fields(QLatin1String(fieldNames[4]), this);
+    return d->fields(QLatin1StringView(fieldNames[4]), this);
 }
 
 Field Pass::field(const QString &key) const
 {
     for (unsigned int i = 0; i < fieldNameCount; ++i) {
-        const auto fs = d->fields(QLatin1String(fieldNames[i]), this);
+        const auto fs = d->fields(QLatin1StringView(fieldNames[i]), this);
         for (const auto &f : fs) {
             if (f.key() == key) {
                 return f;
@@ -542,7 +542,7 @@ QList<Field> Pass::fields() const
 {
     QList<Field> fs;
     for (unsigned int i = 0; i < fieldNameCount; ++i) {
-        fs += d->fields(QLatin1String(fieldNames[i]), this);
+        fs += d->fields(QLatin1StringView(fieldNames[i]), this);
     }
     return fs;
 }

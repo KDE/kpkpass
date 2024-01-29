@@ -18,14 +18,14 @@ BoardingPass::~BoardingPass() = default;
 
 BoardingPass::TransitType BoardingPass::transitType() const
 {
-    const auto t = d->passData().value(QLatin1String("transitType")).toString();
-    if (t == QLatin1String("PKTransitTypeAir")) {
+    const auto t = d->passData().value(QLatin1StringView("transitType")).toString();
+    if (t == QLatin1StringView("PKTransitTypeAir")) {
         return Air;
-    } else if (t == QLatin1String("PKTransitTypeBoat")) {
+    } else if (t == QLatin1StringView("PKTransitTypeBoat")) {
         return Boat;
-    } else if (t == QLatin1String("PKTransitTypeBus")) {
+    } else if (t == QLatin1StringView("PKTransitTypeBus")) {
         return Bus;
-    } else if (t == QLatin1String("PKTransitTypeTrain")) {
+    } else if (t == QLatin1StringView("PKTransitTypeTrain")) {
         return Train;
     }
     return Generic;

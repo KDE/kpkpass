@@ -42,13 +42,13 @@ Field::Field(const QJsonObject &obj, const Pass *pass)
 
 QString Field::key() const
 {
-    return d->obj.value(QLatin1String("key")).toString();
+    return d->obj.value(QLatin1StringView("key")).toString();
 }
 
 QString Field::label() const
 {
     if (d->pass) {
-        return d->pass->d->message(d->obj.value(QLatin1String("label")).toString());
+        return d->pass->d->message(d->obj.value(QLatin1StringView("label")).toString());
     }
     return {};
 }
@@ -58,9 +58,9 @@ QVariant Field::value() const
     if (!d->pass) {
         return {};
     }
-    auto v = d->pass->d->message(d->obj.value(QLatin1String("attributedValue")).toString());
+    auto v = d->pass->d->message(d->obj.value(QLatin1StringView("attributedValue")).toString());
     if (v.isEmpty()) {
-        v = d->pass->d->message(d->obj.value(QLatin1String("value")).toString());
+        v = d->pass->d->message(d->obj.value(QLatin1StringView("value")).toString());
     }
 
     const auto dt = QDateTime::fromString(v, Qt::ISODate);
@@ -81,12 +81,12 @@ QString Field::valueDisplayString() const
     if (v.userType() == QMetaType::QDateTime) {
         const auto dt = v.toDateTime();
         auto fmt = QLocale::ShortFormat;
-        const auto dtStyle = d->obj.value(QLatin1String("dateStyle")).toString();
-        if (dtStyle == QLatin1String("PKDateStyleLong") || dtStyle == QLatin1String("PKDateStyleFull")) {
+        const auto dtStyle = d->obj.value(QLatin1StringView("dateStyle")).toString();
+        if (dtStyle == QLatin1StringView("PKDateStyleLong") || dtStyle == QLatin1String("PKDateStyleFull")) {
             fmt = QLocale::LongFormat;
         }
-        const auto timeStyle = d->obj.value(QLatin1String("timeStyle")).toString();
-        if (timeStyle == QLatin1String("PKDateStyleNone") || (timeStyle.isEmpty() && !dtStyle.isEmpty() && dt.time() == QTime(0, 0))) {
+        const auto timeStyle = d->obj.value(QLatin1StringView("timeStyle")).toString();
+        if (timeStyle == QLatin1StringView("PKDateStyleNone") || (timeStyle.isEmpty() && !dtStyle.isEmpty() && dt.time() == QTime(0, 0))) {
             return QLocale().toString(dt.date(), fmt);
         }
 
@@ -102,19 +102,19 @@ QString Field::changeMessage() const
     if (!d->pass) {
         return {};
     }
-    auto msg = d->pass->d->message(d->obj.value(QLatin1String("changeMessage")).toString());
-    msg.replace(QLatin1String("%@"), valueDisplayString());
+    auto msg = d->pass->d->message(d->obj.value(QLatin1StringView("changeMessage")).toString());
+    msg.replace(QLatin1StringView("%@"), valueDisplayString());
     return msg;
 }
 
 Qt::Alignment Field::textAlignment() const
 {
-    const auto alignStr = d->obj.value(QLatin1String("textAlignment")).toString();
-    if (alignStr == QLatin1String("PKTextAlignmentLeft")) {
+    const auto alignStr = d->obj.value(QLatin1StringView("textAlignment")).toString();
+    if (alignStr == QLatin1StringView("PKTextAlignmentLeft")) {
         return Qt::AlignLeft;
-    } else if (alignStr == QLatin1String("PKTextAlignmentCenter")) {
+    } else if (alignStr == QLatin1StringView("PKTextAlignmentCenter")) {
         return Qt::AlignHCenter;
-    } else if (alignStr == QLatin1String("PKTextAlignmentRight")) {
+    } else if (alignStr == QLatin1StringView("PKTextAlignmentRight")) {
         return Qt::AlignRight;
     }
     return QGuiApplication::layoutDirection() == Qt::LeftToRight ? Qt::AlignLeft : Qt::AlignRight;
