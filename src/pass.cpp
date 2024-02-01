@@ -281,7 +281,7 @@ QDateTime Pass::expirationDate() const
 
 bool Pass::isVoided() const
 {
-    return d->passObj.value(QLatin1StringView("voided")).toString() == QLatin1String("true");
+    return d->passObj.value(QLatin1StringView("voided")).toString() == QLatin1StringView("true");
 }
 
 QList<Location> Pass::locations() const

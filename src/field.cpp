@@ -82,7 +82,7 @@ QString Field::valueDisplayString() const
         const auto dt = v.toDateTime();
         auto fmt = QLocale::ShortFormat;
         const auto dtStyle = d->obj.value(QLatin1StringView("dateStyle")).toString();
-        if (dtStyle == QLatin1StringView("PKDateStyleLong") || dtStyle == QLatin1String("PKDateStyleFull")) {
+        if (dtStyle == QLatin1StringView("PKDateStyleLong") || dtStyle == QLatin1StringView("PKDateStyleFull")) {
             fmt = QLocale::LongFormat;
         }
         const auto timeStyle = d->obj.value(QLatin1StringView("timeStyle")).toString();
