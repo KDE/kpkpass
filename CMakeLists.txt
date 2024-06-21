@@ -42,7 +42,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
 
 find_package(Qt6 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
 find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive)
-if (NOT ANDROID)
+if(NOT ANDROID)
     find_package(SharedMimeInfo 1.3 REQUIRED)
 endif()
 
@@ -54,12 +54,12 @@ ecm_set_disabled_deprecation_versions(QT 6.7.0 KF 6.4.0)
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 
 set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
-if (USE_UNITY_CMAKE_SUPPORT)
+if(USE_UNITY_CMAKE_SUPPORT)
     set(COMPILE_WITH_UNITY_CMAKE_SUPPORT ON)
 endif()
 
 add_subdirectory(src)
-if (BUILD_TESTING)
+if(BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
 
@@ -68,13 +68,13 @@ ecm_feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PA
 
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6PkPass")
-if (BUILD_QCH)
+if(BUILD_QCH)
     ecm_install_qch_export(
         TARGETS KPim6PkPass_QCH
         FILE KPim6PkPassQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
-    )
+   )
     set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6PkPassQchTargets.cmake\")")
 endif()
 

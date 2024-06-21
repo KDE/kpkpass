@@ -47,7 +47,7 @@ target_link_libraries(KPim6PkPass
         KF6::Archive
 )
 
-if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KPim6PkPass PROPERTIES UNITY_BUILD ON)
 endif()
 
@@ -69,12 +69,12 @@ install(FILES
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_PIM}/KPkPass
 )
 
-if (NOT ANDROID AND SharedMimeInfo_VERSION_STRING VERSION_LESS 2.2)
+if(NOT ANDROID AND SharedMimeInfo_VERSION_STRING VERSION_LESS 2.2)
     install(FILES application-vnd-apple-pkpass.xml DESTINATION ${KDE_INSTALL_MIMEDIR})
     update_xdg_mimetypes(${KDE_INSTALL_MIMEDIR})
 endif()
 
-if (BUILD_QCH)
+if(BUILD_QCH)
     ecm_add_qch(
         KPim6PkPass_QCH
         NAME KPim6PkPass
@@ -96,7 +96,7 @@ if (BUILD_QCH)
         TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         COMPONENT Devel
-    )
+   )
 endif()
 
 ecm_qt_install_logging_categories(EXPORT KPKPASS FILE org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
