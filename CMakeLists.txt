@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2018-2020 Volker Krause <vkrause@kde.org>
+# SPDX-FileCopyrightText: 2017-2020 Volker Krause <vkrause@kde.org>
 # SPDX-FileCopyrightText: 2018-2024 Laurent Montel <montel@kde.org>
 # SPDX-License-Identifier: BSD-3-Clause
 
@@ -22,7 +22,12 @@ include(ECMSetupVersion)
 include(FeatureSummary)
 include(KDEGitCommitHooks)
 include(KDEClangFormat)
-file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES
+src/*.cpp
+src/*.h
+autotests/*.cpp
+autotests/*.h
+)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 include(KDEInstallDirs)
 include(KDECMakeSettings)
