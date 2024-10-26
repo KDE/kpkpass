@@ -32,7 +32,13 @@ class KPKPASS_EXPORT Barcode
     Q_PROPERTY(QString messageEncoding READ messageEncoding CONSTANT)
 
 public:
-    enum Format { Invalid, QR, PDF417, Aztec, Code128 };
+    enum Format {
+        Invalid,
+        QR,
+        PDF417,
+        Aztec,
+        Code128
+    };
     Q_ENUM(Format)
 
     Barcode();

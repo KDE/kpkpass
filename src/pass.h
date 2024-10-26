@@ -73,7 +73,13 @@ public:
     ~Pass() override;
 
     /** Type of the pass. */
-    enum Type { BoardingPass, Coupon, EventTicket, Generic, StoreCard };
+    enum Type {
+        BoardingPass,
+        Coupon,
+        EventTicket,
+        Generic,
+        StoreCard
+    };
     Q_ENUM(Type)
     [[nodiscard]] Type type() const;
 
