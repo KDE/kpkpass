@@ -86,7 +86,7 @@ QString Field::valueDisplayString() const
     // see
     // https://developer.apple.com/library/archive/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/FieldDictionary.html#//apple_ref/doc/uid/TP40012026-CH4-SW6
     // however, real-world data doesn't strictly follow that, so we have to guess a bit here...
-    if (v.userType() == QMetaType::QDateTime) {
+    if (v.typeId() == QMetaType::QDateTime) {
         const auto dt = v.toDateTime();
         auto fmt = QLocale::ShortFormat;
         const auto dtStyle = d->obj.value(QLatin1StringView("dateStyle")).toString();
@@ -100,9 +100,16 @@ QString Field::valueDisplayString() const
 
         return QLocale().toString(dt, fmt);
     }
+    if (v.typeId() == QMetaType::Double) {
+        if (const auto currency = currencyCode(); !currency.isEmpty()) {
+            return QLocale().toCurrencyString(v.toDouble(), currency);
+        }
 
-    // TODO respect number formatting options
-    return value().toString().trimmed();
+        // TODO respect number formatting options
+        return QString::number(v.toDouble());
+    }
+
+    return v.toString().trimmed();
 }
 
 QString Field::changeMessage() const
