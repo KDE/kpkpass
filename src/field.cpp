@@ -120,4 +120,9 @@ Qt::Alignment Field::textAlignment() const
     return QGuiApplication::layoutDirection() == Qt::LeftToRight ? Qt::AlignLeft : Qt::AlignRight;
 }
 
+QString Field::currencyCode() const
+{
+    return d->obj.value("currencyCode"_L1).toString();
+}
+
 #include "moc_field.cpp"
