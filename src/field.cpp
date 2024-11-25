@@ -12,6 +12,7 @@
 #include <QJsonObject>
 
 using namespace KPkPass;
+using namespace Qt::Literals;
 
 namespace KPkPass
 {
@@ -58,18 +59,25 @@ QVariant Field::value() const
     if (!d->pass) {
         return {};
     }
-    auto v = d->pass->d->message(d->obj.value(QLatin1StringView("attributedValue")).toString());
-    if (v.isEmpty()) {
-        v = d->pass->d->message(d->obj.value(QLatin1StringView("value")).toString());
+    auto v = d->obj.value("attributedValue"_L1);
+    if (v.isUndefined()) {
+        v = d->obj.value("value"_L1);
     }
 
-    const auto dt = QDateTime::fromString(v, Qt::ISODate);
-    if (dt.isValid()) {
-        return dt;
+    if (v.isString()) {
+        const auto s = d->pass->d->message(v.toString());
+        const auto dt = QDateTime::fromString(s, Qt::ISODate);
+        if (dt.isValid()) {
+            return dt;
+        }
+        return s;
     }
 
-    // TODO number detection
-    return v;
+    if (v.isDouble()) {
+        return v.toDouble();
+    }
+
+    return {};
 }
 
 QString Field::valueDisplayString() const
