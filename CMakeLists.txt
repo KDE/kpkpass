@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2017-2020 Volker Krause <vkrause@kde.org>
-# SPDX-FileCopyrightText: 2018-2024 Laurent Montel <montel@kde.org>
+# SPDX-FileCopyrightText: 2018-2025 Laurent Montel <montel@kde.org>
 # SPDX-License-Identifier: BSD-3-Clause
 
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
