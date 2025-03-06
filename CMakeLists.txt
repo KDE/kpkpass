@@ -61,7 +61,7 @@ if(NOT ANDROID)
 endif()
 
 add_definitions(-DQT_NO_CONTEXTLESS_CONNECT)
-ecm_set_disabled_deprecation_versions(QT 6.9.0 KF 6.11.0)
+ecm_set_disabled_deprecation_versions(QT 6.9.0 KF 6.12.0)
 
 
 
