@@ -57,7 +57,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
 find_package(Qt6 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
 find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive)
 if(NOT ANDROID)
-    find_package(SharedMimeInfo 1.3 REQUIRED)
+    find_package(SharedMimeInfo 1.10 REQUIRED)
 endif()
 
 add_definitions(-DQT_NO_CONTEXTLESS_CONNECT)
