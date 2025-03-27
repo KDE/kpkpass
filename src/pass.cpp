@@ -127,7 +127,7 @@ bool PassPrivate::parseMessages(const QString &lang)
     // so do a primitive auto-detection here. UTF-16's first byte would either be the BOM
     // or \0.
     QString catalog;
-    if (std::ispunct((unsigned char)rawData.at(0))) {
+    if (std::ispunct((unsigned char)rawData.at(0)) || rawData.at(0) == '\n') {
         catalog = QString::fromUtf8(rawData);
     } else {
         auto codec = QStringDecoder(QStringDecoder::Utf16BE);
