@@ -22,6 +22,8 @@ void initLocale()
 
 Q_CONSTRUCTOR_FUNCTION(initLocale)
 
+using namespace Qt::Literals;
+
 namespace KPkPass
 {
 class FieldTest : public QObject
@@ -57,6 +59,11 @@ private Q_SLOTS:
         QCOMPARE(f.value().userType(), QMetaType::QString);
         QCOMPARE(f.value(), QLatin1StringView("Freibad Killesberg\n"));
         QCOMPARE(f.valueDisplayString(), QLatin1StringView("Freibad Killesberg"));
+
+        obj = QJsonDocument::fromJson(R"({"key":"booking-number","label":"Buchungsnummer","value":1234567894})").object();
+        f = KPkPass::Field(obj, pass.get());
+        QCOMPARE(f.value().userType(), QMetaType::Double);
+        QCOMPARE(f.valueDisplayString(), "1234567894"_L1);
     }
 };
 }

@@ -101,12 +101,16 @@ QString Field::valueDisplayString() const
         return QLocale().toString(dt, fmt);
     }
     if (v.typeId() == QMetaType::Double) {
+        const auto f = v.toDouble();
         if (const auto currency = currencyCode(); !currency.isEmpty()) {
-            return QLocale().toCurrencyString(v.toDouble(), currency);
+            return QLocale().toCurrencyString(f, currency);
         }
 
         // TODO respect number formatting options
-        return QString::number(v.toDouble());
+        if (double i; std::modf(f, &i) == 0) {
+            return QString::number(static_cast<qint64>(f));
+        }
+        return QString::number(v.toDouble(), 'f');
     }
 
     return v.toString().trimmed();
