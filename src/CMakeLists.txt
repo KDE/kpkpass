@@ -6,6 +6,8 @@ set(KDE_INSTALL_INCLUDEDIR_PIM ${KDE_INSTALL_INCLUDEDIR}/KPim6)
 add_library(KPim6PkPass)
 add_library(KPim6::PkPass ALIAS KPim6PkPass)
 
+qt_extract_metatypes(KPim6PkPass)
+
 target_sources(
     KPim6PkPass
     PRIVATE
@@ -110,3 +112,5 @@ if(BUILD_QCH)
 endif()
 
 ecm_qt_install_logging_categories(EXPORT KPKPASS FILE org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
+
+add_subdirectory(quick)

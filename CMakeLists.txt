@@ -19,6 +19,7 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
 include(ECMFeatureSummary)
 include(ECMSetupVersion)
+include(ECMQmlModule)
 file(
     GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES
     src/*.cpp
@@ -74,7 +75,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
     SOVERSION 6
 )
 
-find_package(Qt6 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui)
+find_package(Qt6 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui Qml)
 find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive)
 if(NOT ANDROID)
     find_package(SharedMimeInfo 1.8 REQUIRED)
