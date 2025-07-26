@@ -20,17 +20,15 @@
         QML_FOREIGN_NAMESPACE(Class##Derived)                                                                                                                  \
     }
 
-class PassForeign : public QObject
-{
-    Q_OBJECT
+struct PassForeign {
+    Q_GADGET
     QML_NAMED_ELEMENT(Pass)
     QML_UNCREATABLE("")
     QML_FOREIGN(KPkPass::Pass);
 };
 
-class BoardingPassForeign : public QObject
-{
-    Q_OBJECT
+struct BoardingPassForeign {
+    Q_GADGET
     QML_NAMED_ELEMENT(BoardingPass)
     QML_UNCREATABLE("")
     QML_FOREIGN(KPkPass::BoardingPass)
