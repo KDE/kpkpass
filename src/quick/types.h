@@ -8,6 +8,18 @@
 #include <boardingpass.h>
 #include <field.h>
 
+#define FOREIGN_ENUM_GADGET(Class)                                                                                                                             \
+    class Class##Derived : public KPkPass::Class                                                                                                               \
+    {                                                                                                                                                          \
+        Q_GADGET                                                                                                                                               \
+    };                                                                                                                                                         \
+    namespace Class##DerivedForeign                                                                                                                            \
+    {                                                                                                                                                          \
+        Q_NAMESPACE                                                                                                                                            \
+        QML_NAMED_ELEMENT(Class)                                                                                                                               \
+        QML_FOREIGN_NAMESPACE(Class##Derived)                                                                                                                  \
+    }
+
 class PassForeign : public QObject
 {
     Q_OBJECT
@@ -37,3 +49,4 @@ class BarcodeForeign
     QML_VALUE_TYPE(barcode)
     QML_FOREIGN(KPkPass::Barcode)
 };
+FOREIGN_ENUM_GADGET(Barcode)
