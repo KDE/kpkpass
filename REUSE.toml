@@ -1,0 +1,10 @@
+version = 1
+SPDX-PackageName = "kpkpass"
+SPDX-PackageSupplier = "Volker Krause <vkrause@kde.org>"
+SPDX-PackageDownloadLocation = "https://invent.kde.org/pim/kpkpass"
+
+[[annotations]]
+path = [".gersemirc"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "none"
+SPDX-License-Identifier = "CC0-1.0"
