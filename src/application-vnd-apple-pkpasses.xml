@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: ⓒ 2024 Kai Uwe Broulik <kde@privat.broulik.de>
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/vnd.apple.pkpasses">
+    <sub-class-of type="application/zip"/>
+    <comment>Apple Wallet passes bundle</comment>
+    <glob pattern="*.pkpasses"/>
+      <magic priority="65">
+        <match type="string" value="PK\003\004" offset="0">
+        <match type="string" value=".pkpass" offset="30:256"/>
+      </match>
+    </magic>
+  </mime-type>
+</mime-info>

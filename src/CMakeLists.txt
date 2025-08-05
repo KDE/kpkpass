@@ -80,12 +80,21 @@ install(
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_PIM}/KPkPass
 )
 
-if(NOT ANDROID AND SharedMimeInfo_VERSION_STRING VERSION_LESS 2.2)
-    install(
-        FILES application-vnd-apple-pkpass.xml
-        DESTINATION ${KDE_INSTALL_MIMEDIR}
-    )
-    update_xdg_mimetypes(${KDE_INSTALL_MIMEDIR})
+if(NOT ANDROID)
+    if (SharedMimeInfo_VERSION_STRING VERSION_LESS 2.2)
+        install(
+            FILES application-vnd-apple-pkpass.xml
+            DESTINATION ${KDE_INSTALL_MIMEDIR}
+        )
+        update_xdg_mimetypes(${KDE_INSTALL_MIMEDIR})
+    endif()
+    if (SharedMimeInfo_VERSION_STRING VERSION_LESS 2.5)
+        install(
+            FILES application-vnd-apple-pkpasses.xml
+            DESTINATION ${KDE_INSTALL_MIMEDIR}
+        )
+        update_xdg_mimetypes(${KDE_INSTALL_MIMEDIR})
+    endif()
 endif()
 
 if(BUILD_QCH)
