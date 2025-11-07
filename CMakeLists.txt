@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
-set(PIM_VERSION "6.5.41")
+set(PIM_VERSION "6.6.40")
 project(KPkPass VERSION ${PIM_VERSION})
 
 set(KF_MIN_VERSION "6.13.0")
