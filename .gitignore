@@ -31,3 +31,4 @@ Testing/
 /.vscode/
 .qtcreator/
 .qmlls.ini
+.sentry-native/
