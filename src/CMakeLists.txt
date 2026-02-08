@@ -42,18 +42,23 @@ ecm_generate_export_header(KPim6PkPass
 set_target_properties(
     KPim6PkPass
     PROPERTIES
-        VERSION ${KPKPASS_VERSION}
-        SOVERSION ${KPKPASS_SOVERSION}
-        EXPORT_NAME PkPass
+        VERSION
+            ${KPKPASS_VERSION}
+        SOVERSION
+            ${KPKPASS_SOVERSION}
+        EXPORT_NAME
+            PkPass
 )
-target_include_directories(
-    KPim6PkPass
-    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_PIM}>"
-)
+target_include_directories(KPim6PkPass INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_PIM}>")
 target_link_libraries(KPim6PkPass PUBLIC Qt::Gui PRIVATE KF6::Archive)
 
 if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KPim6PkPass PROPERTIES UNITY_BUILD ON)
+    set_target_properties(
+        KPim6PkPass
+        PROPERTIES
+            UNITY_BUILD
+                ON
+    )
 endif()
 
 ecm_generate_headers(KPkPass_HEADERS
@@ -67,11 +72,7 @@ ecm_generate_headers(KPkPass_HEADERS
     REQUIRED_HEADERS KPkPass_HEADERS
 )
 
-install(
-    TARGETS KPim6PkPass
-    EXPORT KPim6PkPassTargets
-    ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
-)
+install(TARGETS KPim6PkPass EXPORT KPim6PkPassTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(
     FILES
         ${KPkPass_HEADERS}
@@ -81,18 +82,12 @@ install(
 )
 
 if(NOT ANDROID)
-    if (SharedMimeInfo_VERSION_STRING VERSION_LESS 2.2)
-        install(
-            FILES application-vnd-apple-pkpass.xml
-            DESTINATION ${KDE_INSTALL_MIMEDIR}
-        )
+    if(SharedMimeInfo_VERSION_STRING VERSION_LESS 2.2)
+        install(FILES application-vnd-apple-pkpass.xml DESTINATION ${KDE_INSTALL_MIMEDIR})
         update_xdg_mimetypes(${KDE_INSTALL_MIMEDIR})
     endif()
-    if (SharedMimeInfo_VERSION_STRING VERSION_LESS 2.5)
-        install(
-            FILES application-vnd-apple-pkpasses.xml
-            DESTINATION ${KDE_INSTALL_MIMEDIR}
-        )
+    if(SharedMimeInfo_VERSION_STRING VERSION_LESS 2.5)
+        install(FILES application-vnd-apple-pkpasses.xml DESTINATION ${KDE_INSTALL_MIMEDIR})
         update_xdg_mimetypes(${KDE_INSTALL_MIMEDIR})
     endif()
 endif()

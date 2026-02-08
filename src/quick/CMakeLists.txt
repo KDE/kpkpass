@@ -10,6 +10,11 @@ ecm_add_qml_module(kpkpassqmlplugin
         types.h
 )
 
-target_link_libraries(kpkpassqmlplugin PRIVATE Qt::Qml KPim6PkPass)
+target_link_libraries(
+    kpkpassqmlplugin
+    PRIVATE
+        Qt::Qml
+        KPim6PkPass
+)
 
 ecm_finalize_qml_module(kpkpassqmlplugin DESTINATION ${KDE_INSTALL_QMLDIR})

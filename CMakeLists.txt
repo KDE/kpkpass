@@ -82,11 +82,7 @@ ecm_check_outbound_license(LICENSES GPL-2.0-only  FILES ${ALL_SOURCE_FILES})
 
 include(ECMAddQch)
 
-option(
-    BUILD_QCH
-    "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)"
-    OFF
-)
+option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
 add_feature_info(
     QCH
     ${BUILD_QCH}
@@ -99,7 +95,14 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
     SOVERSION 6
 )
 
-find_package(Qt6 ${QT_REQUIRED_VERSION} REQUIRED COMPONENTS Gui Qml)
+find_package(
+    Qt6
+    ${QT_REQUIRED_VERSION}
+    REQUIRED
+    COMPONENTS
+        Gui
+        Qml
+)
 find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive)
 if(NOT ANDROID)
     find_package(SharedMimeInfo 1.8 REQUIRED)
@@ -113,11 +116,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 ecm_set_disabled_deprecation_versions(QT 6.11.0 KF 6.23.0)
 
-option(
-    USE_UNITY_CMAKE_SUPPORT
-    "Use UNITY cmake support (speedup compile time)"
-    OFF
-)
+option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 
 set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
 if(USE_UNITY_CMAKE_SUPPORT)
@@ -142,9 +141,7 @@ if(BUILD_QCH)
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    set(PACKAGE_INCLUDE_QCHTARGETS
-        "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6PkPassQchTargets.cmake\")"
-    )
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6PkPassQchTargets.cmake\")")
 endif()
 
 configure_package_config_file(
