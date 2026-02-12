@@ -20,9 +20,13 @@ namespace KPkPass
 
 class PassesPrivate;
 
-/*! Representes a .pkpasses multi-pass bundle file.
+/*!
  *  \sa https://developer.apple.com/documentation/walletpasses/distributing-and-updating-a-pass#Create-a-bundle-of-passes
  *  \since 25.12
+ * \class KPkPass::Passes
+ * \brief Representes a .pkpasses multi-pass bundle file.
+ * \inmodule KPkPass
+ * \inheaderfile KPkPass/Passes
  */
 class KPKPASS_EXPORT Passes
 {

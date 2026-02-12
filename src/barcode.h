@@ -20,8 +20,12 @@ namespace KPkPass
 class BarcodePrivate;
 class Pass;
 
-/*! A pass barcode element.
+/*!
  *  \sa https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/LowerLevel.html
+ * \class KPkPass::Barcode
+ * \brief A pass barcode element.
+ * \inmodule KPkPass
+ * \inheaderfile KPkPass/Barcode
  */
 class KPKPASS_EXPORT Barcode
 {

@@ -27,9 +27,13 @@ class Barcode;
 class Location;
 class PassPrivate;
 
-/*! Base class for a pkpass file.
- *  \sa https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/PassKit_PG/index.html
- *  \sa https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/TopLevel.html
+/*!
+ * \sa https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/PassKit_PG/index.html
+ * \sa https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/TopLevel.html
+ * \class KPkPass::Pass
+ * \brief Base class for a pkpass file.
+ * \inmodule KPkPass
+ * \inheaderfile KPkPass/Pass
  */
 class KPKPASS_EXPORT Pass : public QObject
 {

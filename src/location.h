@@ -18,8 +18,12 @@ namespace KPkPass
 {
 class LocationPrivate;
 
-/*! A pass location element.
+/*!
  *  \sa https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/LowerLevel.html
+ * \class KPkPass::Location
+ * \brief A pass location element.
+ * \inmodule KPkPass
+ * \inheaderfile KPkPass/Location
  */
 class KPKPASS_EXPORT Location
 {

@@ -10,7 +10,12 @@
 
 namespace KPkPass
 {
-/*! Boarding pass */
+/*!
+ * \class KPkPass::BoardingPass
+ * \brief Boarding pass
+ * \inmodule KPkPass
+ * \inheaderfile KPkPass/Boardingpass
+ */
 class KPKPASS_EXPORT BoardingPass : public Pass
 {
     Q_OBJECT

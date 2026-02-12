@@ -22,8 +22,12 @@ class PassPrivate;
 class FieldPrivate;
 class FieldTest;
 
-/*! Field element in a KPkPass::Pass.
+/*!
  * \sa https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/FieldDictionary.html
+ * \class KPkPass::Field
+ * \brief Field element in a KPkPass::Pass.
+ * \inmodule KPkPass
+ * \inheaderfile KPkPass/Field
  */
 class KPKPASS_EXPORT Field
 {
