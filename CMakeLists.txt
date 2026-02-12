@@ -21,6 +21,7 @@ include(ECMDeprecationSettings)
 include(ECMFeatureSummary)
 include(ECMSetupVersion)
 include(ECMQmlModule)
+include(ECMGenerateQDoc)
 file(
     GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES
     src/*.cpp
