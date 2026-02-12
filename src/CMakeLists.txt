@@ -95,3 +95,4 @@ endif()
 ecm_qt_install_logging_categories(EXPORT KPKPASS FILE org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 
 add_subdirectory(quick)
+ecm_generate_qdoc(KPim6PkPass kpkpass.qdocconf)

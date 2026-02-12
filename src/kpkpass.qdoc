@@ -1,0 +1,9 @@
+/*!
+    \module PkPass
+    \title PkPass C++ Classes
+    \ingroup modules
+    \cmakepackage KPim6
+    \cmakecomponent PkPass
+
+    \brief PkPass provides PkPass file support.
+*/
