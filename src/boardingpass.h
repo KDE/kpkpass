@@ -10,7 +10,7 @@
 
 namespace KPkPass
 {
-/** Boarding pass */
+/*! Boarding pass */
 class KPKPASS_EXPORT BoardingPass : public Pass
 {
     Q_OBJECT

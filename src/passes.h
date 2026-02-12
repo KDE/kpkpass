@@ -20,9 +20,9 @@ namespace KPkPass
 
 class PassesPrivate;
 
-/** Representes a .pkpasses multi-pass bundle file.
- *  @see https://developer.apple.com/documentation/walletpasses/distributing-and-updating-a-pass#Create-a-bundle-of-passes
- *  @since 25.12
+/*! Representes a .pkpasses multi-pass bundle file.
+ *  \sa https://developer.apple.com/documentation/walletpasses/distributing-and-updating-a-pass#Create-a-bundle-of-passes
+ *  \since 25.12
  */
 class KPKPASS_EXPORT Passes
 {
@@ -31,13 +31,13 @@ public:
     ~Passes();
     Passes &operator=(Passes &&) noexcept;
 
-    /** Lists the names of all contained passes. */
+    /*! Lists the names of all contained passes. */
     [[nodiscard]] QStringList entries() const;
 
-    /** Returns the raw data of a pass with @p name. */
+    /*! Returns the raw data of a pass with \a name. */
     [[nodiscard]] QByteArray passData(const QString &name) const;
 
-    /** Create a new passes bundle from @p data. */
+    /*! Create a new passes bundle from \a data. */
     [[nodiscard]] static Passes *fromData(const QByteArray &data);
 
 private:

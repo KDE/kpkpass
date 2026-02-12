@@ -20,8 +20,8 @@ namespace KPkPass
 class BarcodePrivate;
 class Pass;
 
-/** A pass barcode element.
- *  @see https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/LowerLevel.html
+/*! A pass barcode element.
+ *  \sa https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/LowerLevel.html
  */
 class KPKPASS_EXPORT Barcode
 {
@@ -44,13 +44,13 @@ public:
     Barcode();
     ~Barcode();
 
-    /** A human readable version of the barcode data. */
+    /*! A human readable version of the barcode data. */
     [[nodiscard]] QString alternativeText() const;
-    /** The barcode type. */
+    /*! The barcode type. */
     [[nodiscard]] Format format() const;
-    /** The message encoded in the barcode. */
+    /*! The message encoded in the barcode. */
     [[nodiscard]] QString message() const;
-    /** Encoding used for the message() content. */
+    /*! Encoding used for the message() content. */
     [[nodiscard]] QString messageEncoding() const;
 
 private:

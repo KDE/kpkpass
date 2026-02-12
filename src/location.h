@@ -18,8 +18,8 @@ namespace KPkPass
 {
 class LocationPrivate;
 
-/** A pass location element.
- *  @see https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/LowerLevel.html
+/*! A pass location element.
+ *  \sa https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/LowerLevel.html
  */
 class KPKPASS_EXPORT Location
 {
@@ -32,13 +32,13 @@ public:
     Location();
     ~Location();
 
-    /** Altitude in meters, NaN if not set. */
+    /*! Altitude in meters, NaN if not set. */
     [[nodiscard]] double altitude() const;
-    /** Latitude in degree. */
+    /*! Latitude in degree. */
     [[nodiscard]] double latitude() const;
-    /** Longitude in degree. */
+    /*! Longitude in degree. */
     [[nodiscard]] double longitude() const;
-    /** Text to display when location is reached. */
+    /*! Text to display when location is reached. */
     [[nodiscard]] QString relevantText() const;
 
 private:

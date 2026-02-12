@@ -22,8 +22,8 @@ class PassPrivate;
 class FieldPrivate;
 class FieldTest;
 
-/** Field element in a KPkPass::Pass.
- * @see https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/FieldDictionary.html
+/*! Field element in a KPkPass::Pass.
+ * \sa https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/FieldDictionary.html
  */
 class KPKPASS_EXPORT Field
 {
@@ -43,28 +43,28 @@ public:
     ~Field();
     Field &operator=(const Field &);
 
-    /** Field key, unique in the pass but not meant for display. */
+    /*! Field key, unique in the pass but not meant for display. */
     [[nodiscard]] QString key() const;
-    /** Localized label for display describing this field. */
+    /*! Localized label for display describing this field. */
     [[nodiscard]] QString label() const;
 
-    /** Value of this field.
+    /*! Value of this field.
      *  This can either be a localized string (most common), a date/time value or a number.
      *  Use this for data extraction, prefer valueDisplayString() for displaying data.
      */
     [[nodiscard]] QVariant value() const;
-    /** Value of this field, as a localized string for display.
+    /*! Value of this field, as a localized string for display.
      *  Use this rather than value() for display.
      */
     [[nodiscard]] QString valueDisplayString() const;
 
-    /** The localized change message for this value. */
+    /*! The localized change message for this value. */
     [[nodiscard]] QString changeMessage() const;
 
-    /** Text alignment. */
+    /*! Text alignment. */
     [[nodiscard]] Qt::Alignment textAlignment() const;
 
-    /** Currency code. */
+    /*! Currency code. */
     [[nodiscard]] QString currencyCode() const;
 
 private:

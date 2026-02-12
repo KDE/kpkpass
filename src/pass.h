@@ -27,9 +27,9 @@ class Barcode;
 class Location;
 class PassPrivate;
 
-/** Base class for a pkpass file.
- *  @see https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/PassKit_PG/index.html
- *  @see https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/TopLevel.html
+/*! Base class for a pkpass file.
+ *  \sa https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/PassKit_PG/index.html
+ *  \sa https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/TopLevel.html
  */
 class KPKPASS_EXPORT Pass : public QObject
 {
@@ -72,7 +72,7 @@ class KPKPASS_EXPORT Pass : public QObject
 public:
     ~Pass() override;
 
-    /** Type of the pass. */
+    /*! Type of the pass. */
     enum Type {
         BoardingPass,
         Coupon,
@@ -94,14 +94,14 @@ public:
     [[nodiscard]] bool isVoided() const;
 
     // relevance keys
-    /** Locations associated with this pass. */
+    /*! Locations associated with this pass. */
     [[nodiscard]] QList<Location> locations() const;
-    /** Distance in meters to any of the pass locations before this pass becomes relevant. */
+    /*! Distance in meters to any of the pass locations before this pass becomes relevant. */
     [[nodiscard]] int maximumDistance() const;
     [[nodiscard]] QDateTime relevantDate() const;
 
     // visual appearance keys
-    /** Returns all barcodes defined in the pass. */
+    /*! Returns all barcodes defined in the pass. */
     [[nodiscard]] QList<Barcode> barcodes() const;
     [[nodiscard]] QColor backgroundColor() const;
     [[nodiscard]] QColor foregroundColor() const;
@@ -109,9 +109,9 @@ public:
     [[nodiscard]] QColor labelColor() const;
     [[nodiscard]] QString logoText() const;
 
-    /** Returns @c true if an image asset with the given base name exists.
-     *  @param baseName The name of the asset, without the file type and high dpi extensions.
-     *  @since 5.20.41
+    /*! Returns true if an image asset with the given base name exists.
+     *  \a baseName The name of the asset, without the file type and high dpi extensions.
+     *  \since 5.20.41
      */
     bool hasImage(const QString &baseName) const;
     bool hasIcon() const;
@@ -121,29 +121,29 @@ public:
     bool hasFooter() const;
     bool hasThumbnail() const;
 
-    /** Returns an image asset of this pass.
-     *  @param baseName The name of the asset, without the file name extension.
-     *  @param devicePixelRatio The device pixel ration, for loading highdpi assets.
+    /*! Returns an image asset of this pass.
+     *  \a baseName The name of the asset, without the file name extension.
+     *  \a devicePixelRatio The device pixel ration, for loading highdpi assets.
      */
     [[nodiscard]] QImage image(const QString &baseName, unsigned int devicePixelRatio = 1) const;
-    /** Returns the pass icon. */
+    /*! Returns the pass icon. */
     Q_INVOKABLE [[nodiscard]] QImage icon(unsigned int devicePixelRatio = 1) const;
-    /** Returns the pass logo. */
+    /*! Returns the pass logo. */
     Q_INVOKABLE [[nodiscard]] QImage logo(unsigned int devicePixelRatio = 1) const;
-    /** Returns the strip image if present. */
+    /*! Returns the strip image if present. */
     Q_INVOKABLE [[nodiscard]] QImage strip(unsigned int devicePixelRatio = 1) const;
-    /** Returns the background image if present. */
+    /*! Returns the background image if present. */
     Q_INVOKABLE [[nodiscard]] QImage background(unsigned int devicePixelRatio = 1) const;
-    /** Returns the footer image if present. */
+    /*! Returns the footer image if present. */
     Q_INVOKABLE [[nodiscard]] QImage footer(unsigned int devicePixelRatio = 1) const;
-    /** Returns the thumbnail image if present. */
+    /*! Returns the thumbnail image if present. */
     Q_INVOKABLE [[nodiscard]] QImage thumbnail(unsigned int devicePixelRatio = 1) const;
 
     // web service keys
     [[nodiscard]] QString authenticationToken() const;
     [[nodiscard]] QUrl webServiceUrl() const;
-    /** Pass update URL.
-     * @see https://developer.apple.com/library/content/documentation/PassKit/Reference/PassKit_WebService/WebService.html
+    /*! Pass update URL.
+     * \sa https://developer.apple.com/library/content/documentation/PassKit/Reference/PassKit_WebService/WebService.html
      */
     [[nodiscard]] QUrl passUpdateUrl() const;
 
@@ -153,25 +153,25 @@ public:
     QList<Field> primaryFields() const;
     QList<Field> secondaryFields() const;
 
-    /** Returns the field with key @p key. */
+    /*! Returns the field with key \a key. */
     Field field(const QString &key) const;
-    /** Returns all fields found in this pass. */
+    /*! Returns all fields found in this pass. */
     QList<Field> fields() const;
 
-    /** Create a appropriate sub-class based on the pkpass file type. */
+    /*! Create a appropriate sub-class based on the pkpass file type. */
     static Pass *fromData(const QByteArray &data, QObject *parent = nullptr);
-    /** Create a appropriate sub-class based on the pkpass file type. */
+    /*! Create a appropriate sub-class based on the pkpass file type. */
     static Pass *fromFile(const QString &fileName, QObject *parent = nullptr);
 
-    /** The raw data of this pass.
+    /*! The raw data of this pass.
      *  That is the binary representation of the ZIP archive which contains
      *  all the pass data.
-     *  @since 5.20.41
+     *  \since 5.20.41
      */
     QByteArray rawData() const;
 
 protected:
-    ///@cond internal
+    ///\\ond internal
     friend class Barcode;
     friend class Field;
     friend class PassPrivate;
