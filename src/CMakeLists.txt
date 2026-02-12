@@ -92,31 +92,6 @@ if(NOT ANDROID)
     endif()
 endif()
 
-if(BUILD_QCH)
-    ecm_add_qch(
-        KPim6PkPass_QCH
-        NAME KPim6PkPass
-        BASE_NAME KPim6PkPass
-        VERSION ${PIM_VERSION}
-        ORG_DOMAIN org.kde
-        SOURCES # using only public headers, to cover only public API
-            ${KPkPass_HEADERS}
-        MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
-        #IMAGE_DIRS "${CMAKE_SOURCE_DIR}/docs/pics"
-        LINK_QCHS
-            Qt6Core_QCH
-            Qt6Gui_QCH
-            Qt6Widgets_QCH
-        INCLUDE_DIRS
-            ${CMAKE_CURRENT_BINARY_DIR}
-        BLANK_MACROS
-            KPKPASS_EXPORT
-        TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        COMPONENT Devel
-    )
-endif()
-
 ecm_qt_install_logging_categories(EXPORT KPKPASS FILE org_kde_kpkpass.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 
 add_subdirectory(quick)

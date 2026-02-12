@@ -84,15 +84,6 @@ file(
 )
 ecm_check_outbound_license(LICENSES GPL-2.0-only  FILES ${ALL_SOURCE_FILES})
 
-include(ECMAddQch)
-
-option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
-add_feature_info(
-    QCH
-    ${BUILD_QCH}
-    "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)"
-)
-
 ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
     VERSION_HEADER src/kpkpass_version.h
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim6PkPassConfigVersion.cmake"
@@ -138,15 +129,6 @@ endif()
 ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6PkPass")
-if(BUILD_QCH)
-    ecm_install_qch_export(
-        TARGETS KPim6PkPass_QCH
-        FILE KPim6PkPassQchTargets.cmake
-        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        COMPONENT Devel
-    )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6PkPassQchTargets.cmake\")")
-endif()
 
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KPimPkPassConfig.cmake.in"
