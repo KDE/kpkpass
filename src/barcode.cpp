@@ -10,6 +10,7 @@
 
 #include <QJsonObject>
 
+using namespace Qt::Literals;
 using namespace KPkPass;
 
 namespace KPkPass
@@ -44,19 +45,27 @@ QString Barcode::alternativeText() const
     return {};
 }
 
+struct {
+    const char *name;
+    KPkPass::Barcode::Format format;
+} static constexpr const barcode_formats[] = {
+    {"PKBarcodeFormatQR", Barcode::QR},
+    {"PKBarcodeFormatPDF417", Barcode::PDF417},
+    {"PKBarcodeFormatAztec", Barcode::Aztec},
+    {"PKBarcodeFormatCode128", Barcode::Code128},
+    {"PKBarcodeFormatCode39", Barcode::Code39},
+    {"PKBarcodeFormatCodabar", Barcode::Codabar},
+    {"PKBarcodeFormatEAN13", Barcode::EAN13},
+    {"PKBarcodeFormatI2of5", Barcode::I2of5},
+};
+
 Barcode::Format KPkPass::Barcode::format() const
 {
-    const auto format = d->obj.value(QLatin1StringView("format")).toString();
-    if (format == QLatin1StringView("PKBarcodeFormatQR")) {
-        return QR;
-    } else if (format == QLatin1StringView("PKBarcodeFormatPDF417")) {
-        return PDF417;
-    } else if (format == QLatin1StringView("PKBarcodeFormatAztec")) {
-        return Aztec;
-    } else if (format == QLatin1StringView("PKBarcodeFormatCode128")) {
-        return Code128;
-    }
-    return Invalid;
+    const auto format = d->obj.value("format"_L1);
+    const auto it = std::ranges::find_if(barcode_formats, [format](const auto &f) {
+        return QLatin1StringView(f.name) == format;
+    });
+    return it != std::end(barcode_formats) ? (*it).format : Invalid;
 }
 
 QString Barcode::message() const

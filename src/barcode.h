@@ -41,7 +41,11 @@ public:
         QR,
         PDF417,
         Aztec,
-        Code128
+        Code128,
+        Code39,
+        Codabar,
+        EAN13,
+        I2of5,
     };
     Q_ENUM(Format)
 

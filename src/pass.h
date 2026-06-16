@@ -58,12 +58,17 @@ class KPKPASS_EXPORT Pass : public QObject
 
     Q_PROPERTY(bool hasIcon READ hasIcon CONSTANT)
     Q_PROPERTY(bool hasLogo READ hasLogo CONSTANT)
+    Q_PROPERTY(bool hasPrimaryLogo READ hasPrimaryLogo CONSTANT)
+    Q_PROPERTY(bool hasSecondaryLogo READ hasSecondaryLogo CONSTANT)
     Q_PROPERTY(bool hasStrip READ hasStrip CONSTANT)
     Q_PROPERTY(bool hasBackground READ hasBackground CONSTANT)
+    Q_PROPERTY(bool hasArtwork READ hasArtwork CONSTANT)
     Q_PROPERTY(bool hasFooter READ hasFooter CONSTANT)
     Q_PROPERTY(bool hasThumbnail READ hasThumbnail CONSTANT)
 
-    // needs to be QVariantList just for QML (Grantlee would also work with QList<Field>
+    Q_PROPERTY(QStringList preferredStyleSchemes READ preferredStyleSchemes CONSTANT)
+
+    Q_PROPERTY(bool hasBarcode READ hasBarcode CONSTANT)
     Q_PROPERTY(QList<KPkPass::Barcode> barcodes READ barcodes CONSTANT)
     Q_PROPERTY(QList<KPkPass::Field> auxiliaryFields READ auxiliaryFields CONSTANT)
     Q_PROPERTY(QList<KPkPass::Field> backFields READ backFields CONSTANT)
@@ -106,6 +111,7 @@ public:
 
     // visual appearance keys
     /*! Returns all barcodes defined in the pass. */
+    [[nodiscard]] bool hasBarcode() const;
     [[nodiscard]] QList<Barcode> barcodes() const;
     [[nodiscard]] QColor backgroundColor() const;
     [[nodiscard]] QColor foregroundColor() const;
@@ -117,13 +123,16 @@ public:
      *  \a baseName The name of the asset, without the file type and high dpi extensions.
      *  \since 5.20.41
      */
-    bool hasImage(const QString &baseName) const;
-    bool hasIcon() const;
-    bool hasLogo() const;
-    bool hasStrip() const;
-    bool hasBackground() const;
-    bool hasFooter() const;
-    bool hasThumbnail() const;
+    [[nodiscard]] bool hasImage(const QString &baseName) const;
+    [[nodiscard]] bool hasIcon() const;
+    [[nodiscard]] bool hasLogo() const;
+    [[nodiscard]] bool hasPrimaryLogo() const;
+    [[nodiscard]] bool hasSecondaryLogo() const;
+    [[nodiscard]] bool hasStrip() const;
+    [[nodiscard]] bool hasBackground() const;
+    [[nodiscard]] bool hasArtwork() const;
+    [[nodiscard]] bool hasFooter() const;
+    [[nodiscard]] bool hasThumbnail() const;
 
     /*! Returns an image asset of this pass.
      *  \a baseName The name of the asset, without the file name extension.
@@ -134,14 +143,31 @@ public:
     Q_INVOKABLE [[nodiscard]] QImage icon(unsigned int devicePixelRatio = 1) const;
     /*! Returns the pass logo. */
     Q_INVOKABLE [[nodiscard]] QImage logo(unsigned int devicePixelRatio = 1) const;
+    /*! Returns the pass primary logo.
+     *  \since 26.08
+     */
+    Q_INVOKABLE [[nodiscard]] QImage primaryLogo(unsigned int devicePixelRatio = 1) const;
+    /*! Returns the pass secondary logo.
+     *  \since 26.08
+     */
+    Q_INVOKABLE [[nodiscard]] QImage secondaryLogo(unsigned int devicePixelRatio = 1) const;
     /*! Returns the strip image if present. */
     Q_INVOKABLE [[nodiscard]] QImage strip(unsigned int devicePixelRatio = 1) const;
     /*! Returns the background image if present. */
     Q_INVOKABLE [[nodiscard]] QImage background(unsigned int devicePixelRatio = 1) const;
+    /*! Returns the artwork background image if present.
+     *  \since 26.08
+     */
+    Q_INVOKABLE [[nodiscard]] QImage artwork(unsigned int devicePixelRatio = 1) const;
     /*! Returns the footer image if present. */
     Q_INVOKABLE [[nodiscard]] QImage footer(unsigned int devicePixelRatio = 1) const;
     /*! Returns the thumbnail image if present. */
     Q_INVOKABLE [[nodiscard]] QImage thumbnail(unsigned int devicePixelRatio = 1) const;
+
+    /*! Preferred style schemes.
+     *  \since 26.08
+     */
+    [[nodiscard]] QStringList preferredStyleSchemes() const;
 
     // web service keys
     [[nodiscard]] QString authenticationToken() const;
@@ -151,16 +177,29 @@ public:
      */
     [[nodiscard]] QUrl passUpdateUrl() const;
 
-    QList<Field> auxiliaryFields() const;
-    QList<Field> backFields() const;
-    QList<Field> headerFields() const;
-    QList<Field> primaryFields() const;
-    QList<Field> secondaryFields() const;
+    [[nodiscard]] QList<Field> auxiliaryFields() const;
+    [[nodiscard]] QList<Field> backFields() const;
+    [[nodiscard]] QList<Field> headerFields() const;
+    [[nodiscard]] QList<Field> primaryFields() const;
+    [[nodiscard]] QList<Field> secondaryFields() const;
 
     /*! Returns the field with key \a key. */
-    Field field(const QString &key) const;
+    [[nodiscard]] Field field(const QString &key) const;
     /*! Returns all fields found in this pass. */
-    QList<Field> fields() const;
+    [[nodiscard]] QList<Field> fields() const;
+
+    /*! Returns the semantic tags, if available.
+     *  \since 26.08
+     */
+    [[nodiscard]] QJsonObject semanticTags() const;
+
+    /*! Returns a raw entry from this pass' \c pass.json.
+     *  Useful e.g. for semi-standardized additional flight information values.
+     * \since 26.08
+     */
+    Q_INVOKABLE [[nodiscard]] QJsonValue rawValue(const QString &key) const;
+    [[nodiscard]] QJsonValue rawValue(QStringView key) const;
+    [[nodiscard]] QJsonValue rawValue(QLatin1StringView key) const;
 
     /*! Create a appropriate sub-class based on the pkpass file type. */
     static Pass *fromData(const QByteArray &data, QObject *parent = nullptr);
@@ -172,7 +211,7 @@ public:
      *  all the pass data.
      *  \since 5.20.41
      */
-    QByteArray rawData() const;
+    [[nodiscard]] QByteArray rawData() const;
 
 protected:
     ///\\ond internal

@@ -26,6 +26,7 @@
 
 #include <cctype>
 
+using namespace Qt::Literals;
 using namespace KPkPass;
 
 static const char *const passTypes[] = {"boardingPass", "coupon", "eventTicket", "generic", "storeCard"};
@@ -180,12 +181,14 @@ Pass *PassPrivate::fromData(std::unique_ptr<QIODevice> device, QObject *parent)
 {
     std::unique_ptr<KZip> zip(new KZip(device.get()));
     if (!zip->open(QIODevice::ReadOnly)) {
+        qCWarning(Log) << "Failed to open ZIP file";
         return nullptr;
     }
 
     // extract pass.json
     auto file = zip->directory()->file(QStringLiteral("pass.json"));
     if (!file) {
+        qCWarning(Log) << "Cannot find pass.json file";
         return nullptr;
     }
     std::unique_ptr<QIODevice> dev(file->createDevice());
@@ -369,6 +372,16 @@ bool Pass::hasLogo() const
     return hasImage(QStringLiteral("logo"));
 }
 
+bool Pass::hasPrimaryLogo() const
+{
+    return hasImage(u"primaryLogo"_s);
+}
+
+bool Pass::hasSecondaryLogo() const
+{
+    return hasImage(u"secondaryLogo"_s);
+}
+
 bool Pass::hasStrip() const
 {
     return hasImage(QStringLiteral("strip"));
@@ -377,6 +390,11 @@ bool Pass::hasStrip() const
 bool Pass::hasBackground() const
 {
     return hasImage(QStringLiteral("background"));
+}
+
+bool Pass::hasArtwork() const
+{
+    return hasImage(u"artwork"_s);
 }
 
 bool Pass::hasFooter() const
@@ -437,6 +455,16 @@ QImage Pass::logo(unsigned int devicePixelRatio) const
     return image(QStringLiteral("logo"), devicePixelRatio);
 }
 
+QImage Pass::primaryLogo(unsigned int devicePixelRatio) const
+{
+    return image(u"primaryLogo"_s, devicePixelRatio);
+}
+
+QImage Pass::secondaryLogo(unsigned int devicePixelRatio) const
+{
+    return image(u"secondaryLogo"_s, devicePixelRatio);
+}
+
 QImage Pass::strip(unsigned int devicePixelRatio) const
 {
     return image(QStringLiteral("strip"), devicePixelRatio);
@@ -445,6 +473,11 @@ QImage Pass::strip(unsigned int devicePixelRatio) const
 QImage Pass::background(unsigned int devicePixelRatio) const
 {
     return image(QStringLiteral("background"), devicePixelRatio);
+}
+
+QImage Pass::artwork(unsigned int devicePixelRatio) const
+{
+    return image(u"artwork"_s, devicePixelRatio);
 }
 
 QImage Pass::footer(unsigned int devicePixelRatio) const
@@ -462,6 +495,17 @@ QString Pass::authenticationToken() const
     return d->passObj.value(QLatin1StringView("authenticationToken")).toString();
 }
 
+QStringList Pass::preferredStyleSchemes() const
+{
+    const auto styleArray = d->passObj.value("preferredStyleSchemes"_L1).toArray();
+    QStringList l;
+    l.reserve(styleArray.size());
+    std::ranges::transform(styleArray, std::back_inserter(l), [](const auto &v) {
+        return v.toString();
+    });
+    return l;
+}
+
 QUrl Pass::webServiceUrl() const
 {
     return QUrl(d->passObj.value(QLatin1StringView("webServiceURL")).toString());
@@ -477,21 +521,28 @@ QUrl Pass::passUpdateUrl() const
     return url;
 }
 
+bool Pass::hasBarcode() const
+{
+    return !d->passObj.value("barcodes"_L1).toArray().isEmpty() || !d->passObj.value("barcode"_L1).toObject().isEmpty();
+}
+
 QList<Barcode> Pass::barcodes() const
 {
     QList<Barcode> codes;
 
     // barcodes array
-    const auto a = d->passObj.value(QLatin1StringView("barcodes")).toArray();
+    const auto a = d->passObj.value("barcodes"_L1).toArray();
     codes.reserve(a.size());
-    for (const auto &bc : a)
+    for (const auto &bc : a) {
         codes.push_back(Barcode(bc.toObject(), this));
+    }
 
     // just a single barcode
     if (codes.isEmpty()) {
-        const auto bc = d->passObj.value(QLatin1StringView("barcode")).toObject();
-        if (!bc.isEmpty())
+        const auto bc = d->passObj.value("barcode"_L1).toObject();
+        if (!bc.isEmpty()) {
             codes.push_back(Barcode(bc, this));
+        }
     }
 
     return codes;
@@ -545,6 +596,25 @@ QList<Field> Pass::fields() const
         fs += d->fields(QLatin1StringView(fieldNames[i]), this);
     }
     return fs;
+}
+
+QJsonObject Pass::semanticTags() const
+{
+    return d->passObj.value("semantics"_L1).toObject();
+}
+
+QJsonValue Pass::rawValue(const QString &key) const
+{
+    return d->passObj.value(key);
+}
+
+QJsonValue Pass::rawValue(QStringView key) const
+{
+    return d->passObj.value(key);
+}
+QJsonValue Pass::rawValue(QLatin1StringView key) const
+{
+    return d->passObj.value(key);
 }
 
 Pass *Pass::fromData(const QByteArray &data, QObject *parent)

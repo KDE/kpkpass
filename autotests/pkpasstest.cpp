@@ -8,11 +8,14 @@
 #include "boardingpass.h"
 #include "location.h"
 
+#include <QJsonObject>
 #include <QLocale>
 #include <QTest>
 #include <QTimeZone>
 
 #include <cmath>
+
+using namespace Qt::Literals;
 
 class PkPassTest : public QObject
 {
@@ -59,6 +62,7 @@ private Q_SLOTS:
         QVERIFY(boardingPass);
         QCOMPARE(boardingPass->transitType(), KPkPass::BoardingPass::Air);
 
+        QVERIFY(pass->hasBarcode());
         auto barcodes = pass->barcodes();
         QCOMPARE(barcodes.size(), 1);
         auto bc = barcodes.at(0);
@@ -88,9 +92,30 @@ private Q_SLOTS:
         img = pass->image(QStringLiteral("I don't exist"));
         QVERIFY(img.isNull());
 
+        QVERIFY(pass->preferredStyleSchemes().isEmpty());
+
         auto sourceFile = QFile(QStringLiteral(SOURCE_DIR "/data/boardingpass-v1.pkpass"));
         QVERIFY(sourceFile.open(QFile::ReadOnly));
         QCOMPARE(pass->rawData(), sourceFile.readAll());
+    }
+
+    static void testSemanticTags()
+    {
+        std::unique_ptr<KPkPass::Pass> pass(KPkPass::Pass::fromFile(u"" SOURCE_DIR "/data/apple-store-UA-sample-unsigned-scrubbed.pkpass"_s));
+        QVERIFY(pass);
+        const auto semanticTags = pass->semanticTags();
+        QVERIFY(!semanticTags.isEmpty());
+        QCOMPARE(semanticTags.value("departureAirportName"_L1).toString(), "O'Hare International Airport"_L1);
+
+        QCOMPARE(pass->rawValue("changeSeatURL"_L1).toString(), "https://www.united.com/en/us/fly/travel/trip-planning/seat-options-and-upgrades.html"_L1);
+
+        QVERIFY(pass->hasBarcode());
+        QCOMPARE(pass->barcodes().size(), 1);
+        QCOMPARE(pass->barcodes().front().format(), KPkPass::Barcode::Aztec);
+
+        const auto styles = pass->preferredStyleSchemes();
+        QCOMPARE(styles.size(), 2);
+        QCOMPARE(styles.front(), "semanticBoardingPass"_L1);
     }
 };
 
