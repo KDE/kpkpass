@@ -354,8 +354,8 @@ bool Pass::hasImage(const QString &baseName) const
     const auto entries = d->zip->directory()->entries();
     for (const auto &entry : entries) {
         if (entry.startsWith(baseName)
-            && (QStringView(entry).mid(baseName.size()).startsWith(QLatin1Char('@')) || QStringView(entry).mid(baseName.size()).startsWith(QLatin1Char('.')))
-            && entry.endsWith(QLatin1StringView(".png"))) {
+            && (QStringView(entry).mid(baseName.size()).startsWith('@'_L1) || QStringView(entry).mid(baseName.size()).startsWith('.'_L1))
+            && entry.endsWith(".png"_L1)) {
             return true;
         }
     }
@@ -420,15 +420,30 @@ QImage Pass::image(const QString &baseName, unsigned int devicePixelRatio) const
             break;
         }
         if (dpr > 1) {
-            file = d->zip->directory()->file(baseName + QLatin1Char('@') + QString::number(dpr) + QLatin1StringView("x.png"));
+            file = d->zip->directory()->file(baseName + '@'_L1 + QString::number(dpr) + "x.png"_L1);
         } else {
-            file = d->zip->directory()->file(baseName + QLatin1StringView(".png"));
+            file = d->zip->directory()->file(baseName + ".png"_L1);
         }
-        if (file)
+        if (file) {
             break;
+        }
     }
     if (!img.isNull()) { // cache hit
         return img;
+    }
+
+    // no hit, check if there is any variant at all (happens in passes only containing eg. a 3x variant)
+    // (matches what hasImage does)
+    if (!file) {
+        const auto entries = d->zip->directory()->entries();
+        for (const auto &entry : entries) {
+            if (entry.startsWith(baseName)
+                && (QStringView(entry).mid(baseName.size()).startsWith('@'_L1) || QStringView(entry).mid(baseName.size()).startsWith('.'_L1))
+                && entry.endsWith(".png"_L1)) {
+                file = d->zip->directory()->file(entry);
+                break;
+            }
+        }
     }
 
     if (!file) {
