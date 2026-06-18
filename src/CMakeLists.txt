@@ -6,7 +6,9 @@ set(KDE_INSTALL_INCLUDEDIR_PIM ${KDE_INSTALL_INCLUDEDIR}/KPim6)
 add_library(KPim6PkPass)
 add_library(KPim6::PkPass ALIAS KPim6PkPass)
 
-qt_extract_metatypes(KPim6PkPass)
+qt_extract_metatypes(KPim6PkPass OUTPUT_FILES METATYPES_FILE)
+get_filename_component(METATYPES_FILE_NAME ${METATYPES_FILE} NAME)
+target_sources(KPim6PkPass INTERFACE $<INSTALL_INTERFACE:${KDE_INSTALL_QTMETATYPESDIR}/${METATYPES_FILE_NAME}>)
 
 target_sources(
     KPim6PkPass
@@ -80,6 +82,9 @@ install(
         ${CMAKE_BINARY_DIR}/src/kpkpass_version.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_PIM}/KPkPass
 )
+if (KDE_INSTALL_QTMETATYPESDIR) # since 6.27
+    install(FILES ${METATYPES_FILE} DESTINATION ${KDE_INSTALL_QTMETATYPESDIR})
+endif()
 
 if(NOT ANDROID)
     if(SharedMimeInfo_VERSION_STRING VERSION_LESS 2.2)
