@@ -46,6 +46,7 @@ private Q_SLOTS:
         QCOMPARE(f.value().userType(), QMetaType::QDateTime);
         QCOMPARE(f.value(), QDateTime({2021, 6, 27}, {14, 30}, QTimeZone::fromSecondsAheadOfUtc(7200)));
         QCOMPARE(f.valueDisplayString(), QLatin1StringView("27/06/2021 14:30"));
+        QCOMPARE(f.row(), 0);
 
         obj = QJsonDocument::fromJson(R"({"key":"valid-date","label":"Datum","dateStyle":"PKDateStyleShort","value":"2021-06-27T00:00:00+02:00"})").object();
         f = KPkPass::Field(obj, pass.get());

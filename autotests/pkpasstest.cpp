@@ -61,6 +61,11 @@ private Q_SLOTS:
         QCOMPARE(field.value().toString(), QLatin1StringView("20:25"));
         QCOMPARE(field.textAlignment(), Qt::AlignLeft);
 
+        QCOMPARE(pass->auxiliaryFieldsRowCount(), 1);
+        QCOMPARE(pass->auxiliaryFields().size(), 4);
+        QCOMPARE(pass->auxiliaryFieldsInRow(0).size(), 4);
+        QCOMPARE(pass->auxiliaryFieldsInRow(1).size(), 0);
+
         auto boardingPass = dynamic_cast<KPkPass::BoardingPass *>(pass.get());
         QVERIFY(boardingPass);
         QCOMPARE(boardingPass->transitType(), KPkPass::BoardingPass::Air);

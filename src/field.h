@@ -39,6 +39,7 @@ class KPKPASS_EXPORT Field
     Q_PROPERTY(QString changeMessage READ changeMessage CONSTANT)
     Q_PROPERTY(Qt::Alignment textAlignment READ textAlignment CONSTANT)
     Q_PROPERTY(QString currencyCode READ currencyCode CONSTANT)
+    Q_PROPERTY(int row READ row CONSTANT)
 
 public:
     Field();
@@ -70,6 +71,9 @@ public:
 
     /*! Currency code. */
     [[nodiscard]] QString currencyCode() const;
+
+    /*! Row index of an (auxiliary) field. */
+    [[nodiscard]] int row() const;
 
 private:
     friend class PassPrivate;

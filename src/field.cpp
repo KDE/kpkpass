@@ -144,4 +144,9 @@ QString Field::currencyCode() const
     return d->obj.value("currencyCode"_L1).toString();
 }
 
+int Field::row() const
+{
+    return d->obj.value("row"_L1).toInt(0);
+}
+
 #include "moc_field.cpp"

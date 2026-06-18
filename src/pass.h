@@ -74,6 +74,8 @@ class KPKPASS_EXPORT Pass : public QObject
 
     Q_PROPERTY(bool hasBarcode READ hasBarcode CONSTANT)
     Q_PROPERTY(QList<KPkPass::Barcode> barcodes READ barcodes CONSTANT)
+
+    Q_PROPERTY(int auxiliaryFieldsRowCount READ auxiliaryFieldsRowCount CONSTANT)
     Q_PROPERTY(QList<KPkPass::Field> auxiliaryFields READ auxiliaryFields CONSTANT)
     Q_PROPERTY(QList<KPkPass::Field> backFields READ backFields CONSTANT)
     Q_PROPERTY(QList<KPkPass::Field> headerFields READ headerFields CONSTANT)
@@ -186,11 +188,21 @@ public:
      */
     [[nodiscard]] QUrl passUpdateUrl() const;
 
+    /*! Number of auxiliary field rows.
+     *  \since 26.08
+     */
+    [[nodiscard]] int auxiliaryFieldsRowCount() const;
+
     [[nodiscard]] QList<Field> auxiliaryFields() const;
     [[nodiscard]] QList<Field> backFields() const;
     [[nodiscard]] QList<Field> headerFields() const;
     [[nodiscard]] QList<Field> primaryFields() const;
     [[nodiscard]] QList<Field> secondaryFields() const;
+
+    /*! Returns only those auxiliary fields in \p row.
+     *  \since 26.08
+     */
+    Q_INVOKABLE [[nodiscard]] QList<Field> auxiliaryFieldsInRow(int row) const;
 
     /*! Returns the field with key \a key. */
     [[nodiscard]] Field field(const QString &key) const;

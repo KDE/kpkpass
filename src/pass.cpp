@@ -166,13 +166,17 @@ bool PassPrivate::parseMessages(const QString &lang)
     return !messages.isEmpty();
 }
 
-QList<Field> PassPrivate::fields(QLatin1StringView fieldType, const Pass *q) const
+QList<Field> PassPrivate::fields(QLatin1StringView fieldType, const Pass *q, int row) const
 {
     const auto a = passData().value(fieldType).toArray();
     QList<Field> f;
     f.reserve(a.size());
     for (const auto &v : a) {
-        f.push_back(Field{v.toObject(), q});
+        Field fld{v.toObject(), q};
+        if (row >= 0 && fld.row() != row) {
+            continue;
+        }
+        f.push_back(std::move(fld));
     }
     return f;
 }
@@ -589,6 +593,17 @@ QList<Barcode> Pass::barcodes() const
 static const char *const fieldNames[] = {"auxiliaryFields", "backFields", "headerFields", "primaryFields", "secondaryFields"};
 static const auto fieldNameCount = sizeof(fieldNames) / sizeof(fieldNames[0]);
 
+int Pass::auxiliaryFieldsRowCount() const
+{
+    int maxRow = 0;
+    const auto auxFields = d->passData().value(QLatin1StringView(fieldNames[0])).toArray();
+    for (const auto &v : auxFields) {
+        const auto auxField = v.toObject();
+        maxRow = std::max(maxRow, auxField.value("row"_L1).toInt(0));
+    }
+    return maxRow + 1;
+}
+
 QList<Field> Pass::auxiliaryFields() const
 {
     return d->fields(QLatin1StringView(fieldNames[0]), this);
@@ -612,6 +627,11 @@ QList<Field> Pass::primaryFields() const
 QList<Field> Pass::secondaryFields() const
 {
     return d->fields(QLatin1StringView(fieldNames[4]), this);
+}
+
+QList<Field> Pass::auxiliaryFieldsInRow(int row) const
+{
+    return d->fields(QLatin1StringView(fieldNames[0]), this, row);
 }
 
 Field Pass::field(const QString &key) const
