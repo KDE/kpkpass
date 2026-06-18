@@ -50,6 +50,10 @@ class KPKPASS_EXPORT Pass : public QObject
 
     Q_PROPERTY(QDateTime relevantDate READ relevantDate CONSTANT)
 
+    Q_PROPERTY(bool hasBackgroundColor READ hasBackgroundColor CONSTANT)
+    Q_PROPERTY(bool hasForegroundColor READ hasForegroundColor CONSTANT)
+    Q_PROPERTY(bool hasLabelColor READ hasLabelColor CONSTANT)
+
     Q_PROPERTY(QColor backgroundColor READ backgroundColor CONSTANT)
     Q_PROPERTY(QColor foregroundColor READ foregroundColor CONSTANT)
     Q_PROPERTY(QString groupingIdentifier READ groupingIdentifier CONSTANT)
@@ -113,6 +117,11 @@ public:
     /*! Returns all barcodes defined in the pass. */
     [[nodiscard]] bool hasBarcode() const;
     [[nodiscard]] QList<Barcode> barcodes() const;
+
+    [[nodiscard]] bool hasBackgroundColor() const;
+    [[nodiscard]] bool hasForegroundColor() const;
+    [[nodiscard]] bool hasLabelColor() const;
+
     [[nodiscard]] QColor backgroundColor() const;
     [[nodiscard]] QColor foregroundColor() const;
     [[nodiscard]] QString groupingIdentifier() const;

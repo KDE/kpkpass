@@ -37,7 +37,10 @@ private Q_SLOTS:
         QCOMPARE(pass->organizationName(), QLatin1StringView("KDE"));
 
         QCOMPARE(pass->logoText(), QLatin1StringView("Boarding Pass"));
+        QVERIFY(pass->hasBackgroundColor());
         QCOMPARE(pass->backgroundColor(), QColor(61, 174, 233));
+        QVERIFY(pass->hasForegroundColor());
+        QVERIFY(pass->hasLabelColor());
         QCOMPARE(pass->relevantDate(), QDateTime(QDate(2017, 9, 17), QTime(0, 4, 0), QTimeZone::UTC));
         QCOMPARE(pass->expirationDate(), QDateTime(QDate(2017, 9, 18), QTime(0, 0, 36), QTimeZone::UTC));
         QCOMPARE(pass->isVoided(), false);

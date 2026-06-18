@@ -328,14 +328,29 @@ static QColor parseColor(QStringView s)
     return QColor(s);
 }
 
+bool Pass::hasBackgroundColor() const
+{
+    return d->passObj.value("backgroundColor"_L1).isString();
+}
+
+bool Pass::hasForegroundColor() const
+{
+    return d->passObj.value("foregroundColor"_L1).isString();
+}
+
+bool Pass::hasLabelColor() const
+{
+    return d->passObj.value("labelColor"_L1).isString() || hasForegroundColor();
+}
+
 QColor Pass::backgroundColor() const
 {
-    return parseColor(d->passObj.value(QLatin1StringView("backgroundColor")).toString());
+    return parseColor(d->passObj.value("backgroundColor"_L1).toString());
 }
 
 QColor Pass::foregroundColor() const
 {
-    return parseColor(d->passObj.value(QLatin1StringView("foregroundColor")).toString());
+    return parseColor(d->passObj.value("foregroundColor"_L1).toString());
 }
 
 QString Pass::groupingIdentifier() const
@@ -345,7 +360,7 @@ QString Pass::groupingIdentifier() const
 
 QColor Pass::labelColor() const
 {
-    const auto c = parseColor(d->passObj.value(QLatin1StringView("labelColor")).toString());
+    const auto c = parseColor(d->passObj.value("labelColor"_L1).toString());
     if (c.isValid()) {
         return c;
     }
