@@ -309,13 +309,21 @@ QDateTime Pass::relevantDate() const
     return QDateTime::fromString(d->passObj.value(QLatin1StringView("relevantDate")).toString(), Qt::ISODate);
 }
 
-static QColor parseColor(const QString &s)
+static QColor parseColor(QStringView s)
 {
-    if (s.startsWith(QLatin1StringView("rgb("), Qt::CaseInsensitive)) {
-        const auto l = QStringView(s).mid(4, s.length() - 5).split(QLatin1Char(','));
-        if (l.size() != 3)
+    if (s.startsWith("rgb("_L1, Qt::CaseInsensitive)) {
+        const auto l = s.mid(4, s.length() - 5).split(','_L1);
+        if (l.size() != 3) {
             return {};
+        }
         return QColor(l[0].trimmed().toInt(), l[1].trimmed().toInt(), l[2].trimmed().toInt());
+    }
+    if (s.startsWith("rgba("_L1, Qt::CaseInsensitive)) {
+        const auto l = s.mid(5, s.length() - 6).split(','_L1);
+        if (l.size() != 4) {
+            return {};
+        }
+        return QColor(l[0].trimmed().toInt(), l[1].trimmed().toInt(), l[2].trimmed().toInt(), l[3].trimmed().toDouble() * 255.0);
     }
     return QColor(s);
 }
