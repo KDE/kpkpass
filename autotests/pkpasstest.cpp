@@ -33,7 +33,7 @@ private Q_SLOTS:
 
         QCOMPARE(pass->type(), KPkPass::Pass::BoardingPass);
         QCOMPARE(pass->serialNumber(), QLatin1StringView("1234"));
-        QCOMPARE(pass->description(), QLatin1StringView("description"));
+        QCOMPARE(pass->description(), "KDE Bordkarte"_L1);
         QCOMPARE(pass->organizationName(), QLatin1StringView("KDE"));
 
         QCOMPARE(pass->logoText(), QLatin1StringView("Boarding Pass"));

@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include "pass.h"
+
 #include <QHash>
 #include <QImage>
 #include <QJsonObject>
@@ -40,14 +42,14 @@ class PassPrivate
 {
 public:
     /** The pass data structure of the pass.json file. */
-    QJsonObject passData() const;
+    [[nodiscard]] QJsonObject passData() const;
     /** Localized message for the given key. */
-    QString message(const QString &key) const;
+    [[nodiscard]] QString message(const QString &key) const;
 
     void parse();
     bool parseMessages(const QString &lang);
 
-    QList<Field> fields(QLatin1StringView fieldType, const Pass *q, int row = -1) const;
+    [[nodiscard]] QList<Field> fields(QLatin1StringView fieldType, const Pass *q, int row = -1) const;
 
     static Pass *fromData(std::unique_ptr<QIODevice> device, QObject *parent);
 

@@ -263,12 +263,12 @@ Pass::Type Pass::type() const
 
 QString Pass::description() const
 {
-    return d->passObj.value(QLatin1StringView("description")).toString();
+    return d->message(d->passObj.value("description"_L1).toString());
 }
 
 QString Pass::organizationName() const
 {
-    return d->passObj.value(QLatin1StringView("organizationName")).toString();
+    return d->message(d->passObj.value("organizationName"_L1).toString());
 }
 
 QString Pass::passTypeIdentifier() const
