@@ -45,26 +45,52 @@ private Q_SLOTS:
         KPkPass::Field f(obj, pass.get());
         QCOMPARE(f.value().userType(), QMetaType::QDateTime);
         QCOMPARE(f.value(), QDateTime({2021, 6, 27}, {14, 30}, QTimeZone::fromSecondsAheadOfUtc(7200)));
-        QCOMPARE(f.valueDisplayString(), QLatin1StringView("27/06/2021 14:30"));
-        QCOMPARE(f.row(), 0);
-
-        obj = QJsonDocument::fromJson(R"({"key":"valid-date","label":"Datum","dateStyle":"PKDateStyleShort","value":"2021-06-27T00:00:00+02:00"})").object();
-        f = KPkPass::Field(obj, pass.get());
-        QCOMPARE(f.value().userType(), QMetaType::QDateTime);
-        QCOMPARE(f.value().toDateTime().date(), QDate({2021, 6, 27}));
-        QCOMPARE(f.valueDisplayString(), QLatin1StringView("27/06/2021"));
 
         obj = QJsonDocument::fromJson(R"({"key":"valid-locations","label":"Ort","value":"Freibad Killesberg\n"})").object();
         f = KPkPass::Field(obj, pass.get());
-
         QCOMPARE(f.value().userType(), QMetaType::QString);
         QCOMPARE(f.value(), QLatin1StringView("Freibad Killesberg\n"));
         QCOMPARE(f.valueDisplayString(), QLatin1StringView("Freibad Killesberg"));
+        QCOMPARE(f.row(), 0);
 
         obj = QJsonDocument::fromJson(R"({"key":"booking-number","label":"Buchungsnummer","value":1234567894})").object();
         f = KPkPass::Field(obj, pass.get());
         QCOMPARE(f.value().userType(), QMetaType::Double);
         QCOMPARE(f.valueDisplayString(), "1234567894"_L1);
+    }
+
+    static void testDateTimeFormat_data()
+    {
+        QTest::addColumn<QByteArray>("field");
+        QTest::addColumn<QString>("output");
+
+        QTest::newRow("implicit-short-date-only")
+            << R"({"key":"valid-date","label":"Datum","dateStyle":"PKDateStyleShort","value":"2021-06-27T00:00:00+02:00"})"_ba << u"27/06/2021"_s;
+        QTest::newRow("explicit-short-date-only")
+            << R"({"key":"valid-date","label":"Datum","dateStyle":"PKDateStyleShort","value":"2021-06-27T12:35:00+02:00","timeStyle":"PKDateStyleNone"})"_ba
+            << u"27/06/2021"_s;
+        QTest::newRow("implicit-time-only") << R"({"key":"valid-date","label":"Datum","timeStyle":"PKDateStyleShort","value":"2021-06-27T12:34:00+02:00"})"_ba
+                                            << u"12:34"_s;
+        QTest::newRow("explicit-time-only")
+            << R"({"key":"valid-date","label":"Datum","dateStyle":"PKDateStyleNone","timeStyle":"PKDateStyleShort","value":"2021-06-27T12:34:00+02:00"})"_ba
+            << u"12:34"_s;
+        QTest::newRow("implicit-all") << R"({"key":"valid-date","label":"Datum","value":"2021-06-27T12:34:00+02:00"})"_ba << u"27/06/2021 12:34"_s;
+        QTest::newRow("explicit-long-all")
+            << R"({"key":"valid-date","label":"Datum","value":"2021-06-27T12:34:00+02:00","dateStyle":"PKDateStyleFull","timeStyle":"PKDateStyleLong"})"_ba
+            << u"dimanche 27 juin 2021 12:34:00 UTC+02:00"_s;
+    }
+
+    static void testDateTimeFormat()
+    {
+        QFETCH(QByteArray, field);
+        QFETCH(QString, output);
+
+        std::unique_ptr<KPkPass::Pass> pass(KPkPass::Pass::fromFile(QStringLiteral(SOURCE_DIR "/data/boardingpass-v1.pkpass")));
+        QVERIFY(pass);
+        const auto obj = QJsonDocument::fromJson(field).object();
+        const auto f = KPkPass::Field(obj, pass.get());
+        QCOMPARE(f.value().userType(), QMetaType::QDateTime);
+        QCOMPARE(f.valueDisplayString(), output);
     }
 };
 }

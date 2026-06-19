@@ -80,6 +80,12 @@ QVariant Field::value() const
     return {};
 }
 
+constexpr inline const auto PKDateStyleNone = "PKDateStyleNone"_L1;
+constexpr inline const auto PKDateStyleShort = "PKDateStyleShort"_L1;
+constexpr inline const auto PKDateStyleMedium = "PKDateStyleMedium"_L1;
+constexpr inline const auto PKDateStyleLong = "PKDateStyleLong"_L1;
+constexpr inline const auto PKDateStyleFull = "PKDateStyleFull"_L1;
+
 QString Field::valueDisplayString() const
 {
     const auto v = value();
@@ -88,14 +94,20 @@ QString Field::valueDisplayString() const
     // however, real-world data doesn't strictly follow that, so we have to guess a bit here...
     if (v.typeId() == QMetaType::QDateTime) {
         const auto dt = v.toDateTime();
+        const auto dateStyle = d->obj.value("dateStyle"_L1);
+        const auto timeStyle = d->obj.value("timeStyle"_L1);
+
         auto fmt = QLocale::ShortFormat;
-        const auto dtStyle = d->obj.value(QLatin1StringView("dateStyle")).toString();
-        if (dtStyle == QLatin1StringView("PKDateStyleLong") || dtStyle == QLatin1StringView("PKDateStyleFull")) {
+        if (dateStyle == PKDateStyleLong || dateStyle == PKDateStyleFull) {
             fmt = QLocale::LongFormat;
         }
-        const auto timeStyle = d->obj.value(QLatin1StringView("timeStyle")).toString();
-        if (timeStyle == QLatin1StringView("PKDateStyleNone") || (timeStyle.isEmpty() && !dtStyle.isEmpty() && dt.time() == QTime(0, 0))) {
+        // time only
+        if (timeStyle == PKDateStyleNone || (timeStyle.isUndefined() && !dateStyle.isUndefined())) {
             return QLocale().toString(dt.date(), fmt);
+        }
+        // date only
+        if (dateStyle == PKDateStyleNone || (dateStyle.isUndefined() && !timeStyle.isUndefined())) {
+            return QLocale().toString(dt.time(), QLocale::ShortFormat);
         }
 
         return QLocale().toString(dt, fmt);
