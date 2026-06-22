@@ -161,4 +161,24 @@ int Field::row() const
     return d->obj.value("row"_L1).toInt(0);
 }
 
+bool Field::isRichText() const
+{
+    const auto v = value();
+    if (v.typeId() != QMetaType::QString) {
+        return false;
+    }
+    const auto text = v.toString();
+    auto idx = text.indexOf('<'_L1);
+    if (idx >= 0 && idx < text.size() - 2) {
+        return text[idx + 1].isLetter() || text[idx + 1] == '/'_L1;
+    }
+    idx = text.indexOf('&'_L1);
+    for (auto i = idx; idx >= 0 && idx - i < 5; ++i) {
+        if (text[i] == ';'_L1) {
+            return true;
+        }
+    }
+    return false;
+}
+
 #include "moc_field.cpp"

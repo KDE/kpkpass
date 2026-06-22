@@ -40,6 +40,7 @@ class KPKPASS_EXPORT Field
     Q_PROPERTY(Qt::Alignment textAlignment READ textAlignment CONSTANT)
     Q_PROPERTY(QString currencyCode READ currencyCode CONSTANT)
     Q_PROPERTY(int row READ row CONSTANT)
+    Q_PROPERTY(bool isRichText READ isRichText CONSTANT)
 
 public:
     Field();
@@ -74,6 +75,11 @@ public:
 
     /*! Row index of an (auxiliary) field. */
     [[nodiscard]] int row() const;
+
+    /*! Returns whether the field value contains rich text markup.
+     *  \since 26.08
+     */
+    [[nodiscard]] bool isRichText() const;
 
 private:
     friend class PassPrivate;
