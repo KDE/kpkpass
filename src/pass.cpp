@@ -661,6 +661,11 @@ QJsonObject Pass::semanticTags() const
     return d->passObj.value("semantics"_L1).toObject();
 }
 
+QString Pass::lookupMessage(const QString &msg) const
+{
+    return d->message(msg);
+}
+
 QJsonValue Pass::rawValue(const QString &key) const
 {
     return d->passObj.value(key);

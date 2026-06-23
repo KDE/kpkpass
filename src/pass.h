@@ -214,6 +214,13 @@ public:
      */
     [[nodiscard]] QJsonObject semanticTags() const;
 
+    /*! Lookup a message in the passes translation catalog.
+     *  This is mainly necessary for semantic tags or raw values of
+     *  type localized string, other properties already do this internally.
+     *  \since 26.08
+     */
+    [[nodiscard]] QString lookupMessage(const QString &msg) const;
+
     /*! Returns a raw entry from this pass' \c pass.json.
      *  Useful e.g. for semi-standardized additional flight information values.
      * \since 26.08
