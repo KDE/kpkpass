@@ -84,6 +84,8 @@ class KPKPASS_EXPORT Pass : public QObject
     Q_PROPERTY(QList<KPkPass::Location> locations READ locations CONSTANT)
     Q_PROPERTY(QVariantMap field READ fieldsVariantMap CONSTANT)
 
+    Q_PROPERTY(QJsonObject semanticTags READ semanticTags CONSTANT)
+
 public:
     ~Pass() override;
 
@@ -219,7 +221,7 @@ public:
      *  type localized string, other properties already do this internally.
      *  \since 26.08
      */
-    [[nodiscard]] QString lookupMessage(const QString &msg) const;
+    Q_INVOKABLE [[nodiscard]] QString lookupMessage(const QString &msg) const;
 
     /*! Returns a raw entry from this pass' \c pass.json.
      *  Useful e.g. for semi-standardized additional flight information values.
