@@ -185,7 +185,7 @@ Pass *PassPrivate::fromData(std::unique_ptr<QIODevice> device, QObject *parent)
 {
     std::unique_ptr<KZip> zip(new KZip(device.get()));
     if (!zip->open(QIODevice::ReadOnly)) {
-        qCWarning(Log) << "Failed to open ZIP file";
+        qCWarning(Log) << "Failed to open ZIP file" << zip->errorString();
         return nullptr;
     }
 
