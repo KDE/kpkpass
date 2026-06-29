@@ -7,6 +7,7 @@
 #include "barcode.h"
 #include "boardingpass.h"
 #include "location.h"
+#include "seat.h"
 
 #include <QJsonObject>
 #include <QLocale>
@@ -125,6 +126,12 @@ private Q_SLOTS:
         const auto styles = pass->preferredStyleSchemes();
         QCOMPARE(styles.size(), 2);
         QCOMPARE(styles.front(), "semanticBoardingPass"_L1);
+
+        const auto seats = pass->seats();
+        QCOMPARE(seats.size(), 1);
+        const auto &seat = seats[0];
+        QCOMPARE(seat.seatRow(), "52"_L1);
+        QCOMPARE(seat.seatNumber(), "C"_L1);
     }
 };
 

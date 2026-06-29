@@ -26,6 +26,7 @@ namespace KPkPass
 class Barcode;
 class Location;
 class PassPrivate;
+class Seat;
 
 /*!
  * \sa https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/PassKit_PG/index.html
@@ -83,6 +84,8 @@ class KPKPASS_EXPORT Pass : public QObject
     Q_PROPERTY(QList<KPkPass::Field> secondaryFields READ secondaryFields CONSTANT)
     Q_PROPERTY(QList<KPkPass::Location> locations READ locations CONSTANT)
     Q_PROPERTY(QVariantMap field READ fieldsVariantMap CONSTANT)
+
+    Q_PROPERTY(QList<KPkPass::Seat> seats READ seats CONSTANT)
 
     Q_PROPERTY(QJsonObject semanticTags READ semanticTags CONSTANT)
 
@@ -211,6 +214,11 @@ public:
     /*! Returns all fields found in this pass. */
     [[nodiscard]] QList<Field> fields() const;
 
+    /*! Returns seat information specified in semantic tag data.
+     *  \since 26.08
+     */
+    [[nodiscard]] QList<Seat> seats() const;
+
     /*! Returns the semantic tags, if available.
      *  \since 26.08
      */
@@ -248,6 +256,7 @@ protected:
     friend class Barcode;
     friend class Field;
     friend class PassPrivate;
+    friend class Seat;
     explicit Pass(Type passType, QObject *parent = nullptr);
     std::unique_ptr<PassPrivate> d;
     ///@endcond

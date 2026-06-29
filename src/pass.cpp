@@ -10,6 +10,7 @@
 #include "location.h"
 #include "logging.h"
 #include "pass_p.h"
+#include "seat.h"
 
 #include <KZip>
 
@@ -654,6 +655,17 @@ QList<Field> Pass::fields() const
         fs += d->fields(QLatin1StringView(fieldNames[i]), this);
     }
     return fs;
+}
+
+QList<Seat> Pass::seats() const
+{
+    const auto a = semanticTags().value("seats"_L1).toArray();
+    QList<Seat> seats;
+    seats.reserve(a.size());
+    std::ranges::transform(a, std::back_inserter(seats), [this](const QJsonValue &v) {
+        return Seat(v.toObject(), this);
+    });
+    return seats;
 }
 
 QJsonObject Pass::semanticTags() const

@@ -21,6 +21,7 @@ target_sources(
         pass.h
         pass_p.h
         passes.cpp
+        seat.cpp
         location.h
         field.h
         boardingpass.h
@@ -71,6 +72,7 @@ ecm_generate_headers(KPkPass_HEADERS
         Location
         Pass
         Passes
+        Seat
     REQUIRED_HEADERS KPkPass_HEADERS
 )
 
