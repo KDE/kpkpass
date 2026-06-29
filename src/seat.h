@@ -38,7 +38,8 @@ class KPKPASS_EXPORT Seat
 
 public:
     explicit Seat();
-    Seat(const Seat &), Seat(Seat &&) noexcept;
+    Seat(const Seat &);
+    Seat(Seat &&) noexcept;
     ~Seat();
     Seat &operator=(const Seat &);
     Seat &operator=(Seat &&) noexcept;
