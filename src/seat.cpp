@@ -40,6 +40,31 @@ Seat::Seat(const QJsonObject &obj, const Pass *pass)
     d->obj = obj;
 }
 
+bool Seat::hasSeatAisle() const
+{
+    return !seatAisle().isEmpty();
+}
+
+bool Seat::hasSeatLevel() const
+{
+    return !seatLevel().isEmpty();
+}
+
+bool Seat::hasSeatNumber() const
+{
+    return !seatNumber().isEmpty();
+}
+
+bool Seat::hasSeatRow() const
+{
+    return !seatRow().isEmpty();
+}
+
+bool Seat::hasSeatSection() const
+{
+    return !seatSection().isEmpty();
+}
+
 QString Seat::seatAisle() const
 {
     return d->pass->d->message(d->obj.value("seatAisle"_L1).toString());
@@ -63,6 +88,11 @@ QString Seat::seatRow() const
 QString Seat::seatSection() const
 {
     return d->pass->d->message(d->obj.value("seatSection"_L1).toString());
+}
+
+QString Seat::asAirplaneSeat() const
+{
+    return seatRow() + seatNumber();
 }
 
 #include "moc_seat.cpp"

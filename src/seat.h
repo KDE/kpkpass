@@ -30,6 +30,13 @@ class SeatPrivate;
 class KPKPASS_EXPORT Seat
 {
     Q_GADGET
+
+    Q_PROPERTY(bool hasSeatAisle READ hasSeatAisle)
+    Q_PROPERTY(bool hasSeatLevel READ hasSeatLevel)
+    Q_PROPERTY(bool hasSeatNumber READ hasSeatNumber)
+    Q_PROPERTY(bool hasSeatRow READ hasSeatRow)
+    Q_PROPERTY(bool hasSeatSection READ hasSeatSection)
+
     Q_PROPERTY(QString seatAisle READ seatAisle)
     Q_PROPERTY(QString seatLevel READ seatLevel)
     Q_PROPERTY(QString seatNumber READ seatNumber)
@@ -44,11 +51,20 @@ public:
     Seat &operator=(const Seat &);
     Seat &operator=(Seat &&) noexcept;
 
+    [[nodiscard]] bool hasSeatAisle() const;
+    [[nodiscard]] bool hasSeatLevel() const;
+    [[nodiscard]] bool hasSeatNumber() const;
+    [[nodiscard]] bool hasSeatRow() const;
+    [[nodiscard]] bool hasSeatSection() const;
+
     [[nodiscard]] QString seatAisle() const;
     [[nodiscard]] QString seatLevel() const;
     [[nodiscard]] QString seatNumber() const;
     [[nodiscard]] QString seatRow() const;
     [[nodiscard]] QString seatSection() const;
+
+    /*! Format seat information in the usual airplane seat format. */
+    Q_INVOKABLE [[nodiscard]] QString asAirplaneSeat() const;
 
 private:
     friend class Pass;

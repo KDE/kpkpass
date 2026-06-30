@@ -103,6 +103,7 @@ private Q_SLOTS:
         QVERIFY(img.isNull());
 
         QVERIFY(pass->preferredStyleSchemes().isEmpty());
+        QCOMPARE(pass->seats().size(), 0);
 
         auto sourceFile = QFile(QStringLiteral(SOURCE_DIR "/data/boardingpass-v1.pkpass"));
         QVERIFY(sourceFile.open(QFile::ReadOnly));
@@ -131,7 +132,10 @@ private Q_SLOTS:
         QCOMPARE(seats.size(), 1);
         const auto &seat = seats[0];
         QCOMPARE(seat.seatRow(), "52"_L1);
+        QCOMPARE(seat.hasSeatNumber(), true);
         QCOMPARE(seat.seatNumber(), "C"_L1);
+        QCOMPARE(seat.hasSeatSection(), false);
+        QCOMPARE(seat.asAirplaneSeat(), "52C"_L1);
     }
 };
 
