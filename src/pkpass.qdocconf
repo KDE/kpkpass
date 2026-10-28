@@ -18,10 +18,10 @@ navigation.landingpage = "PkPass"
 
 qhp.projects            = kpkpass
 
-qhp.kpkpass.file                = kpkpass.qhp
+qhp.kpkpass.file                = pkpass.qhp
 qhp.kpkpass.namespace           = org.kde.kpkpass.$QT_VERSION_TAG
 qhp.kpkpass.virtualFolder       = kpkpass
-qhp.kpkpass.indexTitle          = kpkpass
+qhp.kpkpass.indexTitle          = PkPass
 qhp.kpkpass.indexRoot           =
 
 qhp.kpkpass.subprojects         = classes
@@ -30,4 +30,4 @@ qhp.kpkpass.subprojects.classes.indexTitle = PkPass C++ Classes
 qhp.kpkpass.subprojects.classes.selectors = class fake:headerfile
 qhp.kpkpass.subprojects.classes.sortPages = true
 
-tagfile = kpkpass.tags
+tagfile = pkpass.tags
