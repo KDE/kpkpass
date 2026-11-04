@@ -5,6 +5,14 @@
 cmake_minimum_required(VERSION 3.29)
 set(PIM_VERSION "6.8.40")
 project(KPkPass VERSION ${PIM_VERSION})
+# use a different SOVERSION for each minor release because we don't guarantee any ABI stability;
+# bump the SOVERSION with the first development version, i.e. major.minor.40
+if(PROJECT_VERSION_PATCH VERSION_GREATER_EQUAL "40")
+    math(EXPR minorPlus1 "${PROJECT_VERSION_MINOR} + 1")
+    set(PROJECT_SOVERSION ${PROJECT_VERSION_MAJOR}.${minorPlus1})
+else()
+    set(PROJECT_SOVERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR})
+endif()
 
 set(KF_MIN_VERSION "6.13.0")
 set(QT_REQUIRED_VERSION "6.9.0")
@@ -102,7 +110,7 @@ ecm_check_outbound_license(LICENSES GPL-2.0-only  FILES ${ALL_SOURCE_FILES})
 ecm_setup_version(PROJECT VARIABLE_PREFIX KPKPASS
     VERSION_HEADER src/kpkpass_version.h
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim6PkPassConfigVersion.cmake"
-    SOVERSION 6
+    SOVERSION ${PROJECT_SOVERSION}
 )
 
 find_package(
