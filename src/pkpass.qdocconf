@@ -1,6 +1,7 @@
 include($KDE_DOCS/global/qt-module-defaults.qdocconf)
 
 project = PkPass
+moduleheader = pkpass_qdocmoduleheader.h
 description = PkPass provides PkPass file support.
 
 
