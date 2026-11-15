@@ -10,6 +10,9 @@ documentationinheaders = true
 headerdirs += .
 sourcedirs += .
 
+excludedirs += \
+    quick
+
 outputformats = HTML
 
 depends += \
