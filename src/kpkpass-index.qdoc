@@ -10,7 +10,7 @@
 
     \section2 Building with CMake
 
-    \include {module-use.qdocinc} {building with cmake} {KPim6} {PkPass} {KPim6::PkPass}
+    \include {module-use.qdocinc} {building with cmake nomodule} {KPim6PkPass} {KPim6::PkPass}
 
     \section1 API Reference
 
