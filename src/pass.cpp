@@ -21,6 +21,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLocale>
+#include <QMap>
 #include <QRegularExpression>
 #include <QStringDecoder>
 #include <QUrl>
